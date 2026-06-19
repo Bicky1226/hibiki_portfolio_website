@@ -1065,24 +1065,6 @@ html[lang="en"] .hero-author {
 
   .stat-item:last-child { border-bottom: none; }
 
-  .footer-inner {
-    grid-template-columns: 1fr;
-    gap: var(--space-5);
-    text-align: center;
-  }
-
-  .footer-links {
-    flex-wrap: wrap;
-    gap: var(--space-4);
-    justify-content: center;
-  }
-
-  .footer-lang {
-    justify-content: center;
-    margin-inline: auto;
-    width: fit-content;
-  }
-
   .section-header {
     flex-wrap: wrap;
   }

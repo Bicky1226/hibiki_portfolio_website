@@ -991,6 +991,25 @@ input, textarea, select {
   box-shadow: 2px 2px 0 rgba(33, 29, 23, 0.25);
 }
 
+/* footer — mobile: stack into one centred column */
+@media (max-width: 768px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    text-align: center;
+  }
+  .footer-links {
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: center;
+  }
+  .footer-lang {
+    justify-content: center;
+    margin-inline: auto;
+    width: fit-content;
+  }
+}
+
 /* scroll animations (gsap targets — initial state) */
 .reveal {
   opacity: 0;
