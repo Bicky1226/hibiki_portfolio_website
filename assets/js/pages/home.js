@@ -48,16 +48,17 @@ function initHeroAnimation() {
     '-=0.5'
   );
 
-  // 名前と印 — 印は「捺す」動き
+  // 著者署名 — タイトルと同じく「上から」静かにフェードイン(題字の刷り上がりと重ねる)
   tl.fromTo('.hero-identity',
-    { opacity: 0, y: 12 },
-    { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' },
-    '-=0.35'
+    { opacity: 0, y: -8 },
+    { opacity: 1, y: 0, duration: 0.95, ease: 'power3.inOut' },
+    '-=0.85'
   );
+  // 印 — 署名に続けて、弾けず静かに収まる
   tl.fromTo('.hero-hanko',
-    { opacity: 0, scale: 1.7, rotation: 6 },
-    { opacity: 1, scale: 1, rotation: -2.5, duration: 0.45, ease: 'power4.in' },
-    '-=0.2'
+    { opacity: 0, scale: 1.15, rotation: 3 },
+    { opacity: 1, scale: 1, rotation: -2.5, duration: 0.5, ease: 'power2.out' },
+    '-=0.55'
   );
 
   // CTA
