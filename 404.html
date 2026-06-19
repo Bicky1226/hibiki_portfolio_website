@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- GA4 loaded dynamically after cookie consent (see main.js) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page Not Found | hibikishimizu.com</title>
+  <meta name="robots" content="noindex, follow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 24px;
+    }
+
+    .error-num {
+      font-size: clamp(80px, 20vw, 180px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      font-family: var(--font-en);
+      color: var(--c-accent);
+      
+      
+      
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .error-title {
+      font-family: var(--font-display);
+      letter-spacing: 0.06em;
+      font-size: clamp(20px, 4vw, 32px);
+      font-weight: 600;
+      color: var(--c-text);
+      margin-bottom: 16px;
+    }
+
+    .error-desc {
+      font-size: var(--fs-base);
+      color: var(--c-text-muted);
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto 40px;
+    }
+
+    .error-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .error-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: var(--radius-md);
+      font-size: var(--fs-sm);
+      font-family: var(--font-en);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .error-link--primary {
+      background: var(--c-accent);
+      color: #F6F1E5;
+      font-weight: 600;
+    }
+
+    .error-link--primary:hover {
+      background: #A02E27;
+    }
+
+    .error-link--ghost {
+      border: 1px solid var(--c-border);
+      color: var(--c-text-muted);
+    }
+
+    .error-link--ghost:hover {
+      border-color: var(--c-accent);
+      color: var(--c-accent);
+    }
+
+    .error-logo {
+      font-family: var(--font-display);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--c-text-muted);
+      text-decoration: none;
+      margin-bottom: 48px;
+      display: block;
+      letter-spacing: 0.02em;
+    }
+
+    .error-logo:hover { color: var(--c-text); }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+  <a href="/" class="error-logo">響</a>
+
+  <span class="error-num">404</span>
+  <h1 class="error-title">Page Not Found</h1>
+  <p class="error-desc">
+    お探しのページが見つかりませんでした。<br>
+    URLをご確認いただくか、以下のリンクからお戻りください。<br>
+    <span style="font-size:var(--fs-sm);opacity:0.7;">The page you were looking for doesn't exist or may have moved.</span>
+  </p>
+
+  <div id="main-content"></div>
+  <div class="error-links">
+    <a href="/ja/" class="error-link error-link--primary">
+      <i class="ph ph-house"></i> ホームへ (JA)
+    </a>
+    <a href="/en/" class="error-link error-link--ghost">
+      <i class="ph ph-house"></i> Home (EN)
+    </a>
+    <a href="/ja/works/" class="error-link error-link--ghost">
+      <i class="ph ph-briefcase"></i> Works
+    </a>
+    <a href="/ja/contact/" class="error-link error-link--ghost">
+      <i class="ph ph-envelope"></i> Contact
+    </a>
+  </div>
+
+</body>
+</html>

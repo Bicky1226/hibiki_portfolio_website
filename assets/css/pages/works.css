@@ -1,0 +1,303 @@
+/* works.css — works list page「作品目録」 */
+
+.works-page {
+  padding-top: var(--nav-height);
+}
+
+/* hero — 目録の扉 */
+#works-hero {
+  padding: clamp(72px, 11vw, 130px) 0 clamp(40px, 5vw, 64px);
+  position: relative;
+  border-bottom: 1px solid var(--c-text);
+}
+
+/* 旧グローの無効化 */
+.works-hero-ambient { display: none; }
+
+.works-hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.works-hero-eyebrow {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #F6F1E5;
+  background: var(--c-accent);
+  font-family: var(--font-en);
+  padding: 4px 10px;
+  transform: rotate(-1.5deg);
+  box-shadow: 2px 2px 0 rgba(33, 29, 23, 0.2);
+  margin-bottom: 22px;
+}
+
+.works-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 8vw, 96px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  margin-bottom: 16px;
+  position: relative;
+  display: inline-block;
+}
+
+/* 題字の後ろに「作品目録」の縦書き朱字 */
+.works-hero-title::after {
+  content: '作品目録';
+  position: absolute;
+  top: 0;
+  right: -1.6em;
+  writing-mode: vertical-rl;
+  font-size: clamp(11px, 1.4vw, 14px);
+  font-weight: 600;
+  letter-spacing: 0.5em;
+  color: var(--c-accent);
+  border-left: 1px solid var(--c-border);
+  padding-left: 10px;
+}
+
+.works-hero-sub {
+  font-size: var(--fs-base);
+  color: var(--c-text-muted);
+  max-width: 560px;
+  line-height: 2;
+}
+
+/* controls (filter + view toggle) — 仕分けの活字 */
+.works-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 0 0 clamp(40px, 5vw, 64px);
+}
+
+.works-filter {
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+  border: 1px solid var(--c-border);
+  background: var(--c-bg-2);
+}
+
+.filter-btn {
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--c-border);
+  border-radius: 0;
+  color: var(--c-text-muted);
+  font-family: var(--font-en);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.filter-btn:last-child { border-right: none; }
+
+.filter-btn:hover {
+  color: var(--c-text);
+  background: var(--c-bg-3);
+}
+
+.filter-btn.active {
+  background: var(--c-text);
+  border-color: var(--c-text);
+  color: var(--c-bg);
+}
+
+/* works grid — full list */
+.works-list-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+  margin-bottom: clamp(80px, 10vw, 120px);
+  counter-reset: work;
+}
+
+/* 一覧では featured も同サイズ */
+.works-list-grid .work-card--featured {
+  grid-column: auto;
+  grid-row: auto;
+}
+
+.works-list-grid .work-card:not(.work-card--featured) {
+  grid-column: auto;
+}
+
+.works-list-grid .work-card--featured .work-card-thumb {
+  aspect-ratio: 16 / 9;
+}
+
+@media (max-width: 1024px) {
+  .works-list-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .works-list-grid { grid-template-columns: 1fr; }
+}
+
+/* confidential card styling */
+.work-card--confidential {
+  opacity: 0.6;
+  pointer-events: none;
+  position: relative;
+}
+
+.work-card--confidential::after {
+  content: '部外秘 — CONFIDENTIAL';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-accent);
+  color: var(--c-accent);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  padding: 4px 10px;
+  font-family: var(--font-en);
+  transform: rotate(-2deg);
+}
+
+/* empty state */
+.works-empty {
+  text-align: center;
+  padding: 80px 0;
+  color: var(--c-text-muted);
+  font-size: var(--fs-md);
+  font-family: var(--font-display);
+  letter-spacing: 0.1em;
+}
+
+/* view toggle */
+.view-toggle {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--c-border);
+  background: var(--c-bg-2);
+}
+
+.view-btn {
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--c-border);
+  border-radius: 0;
+  color: var(--c-text-muted);
+  font-size: var(--fs-lg);
+  width: 40px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.view-btn:last-child { border-right: none; }
+
+.view-btn:hover {
+  color: var(--c-text);
+  background: var(--c-bg-3);
+}
+
+.view-btn.active {
+  background: var(--c-text);
+  border-color: var(--c-text);
+  color: var(--c-bg);
+}
+
+/* timeline view — 年譜 */
+.works-list-grid.view-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 56px;
+  grid-template-columns: none;
+}
+
+.works-list-grid.view-timeline::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--c-text);
+}
+
+.works-list-grid.view-timeline .work-card {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.works-list-grid.view-timeline .work-card::after {
+  content: attr(data-year);
+  position: absolute;
+  left: -56px;
+  top: 14px;
+  width: 38px;
+  text-align: center;
+  font-family: var(--font-en);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--c-bg);
+  background: var(--c-accent);
+  padding: 2px 0;
+  letter-spacing: 0.04em;
+}
+
+.works-list-grid.view-timeline .work-card-link {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 24px;
+}
+
+.works-list-grid.view-timeline .work-card-thumb {
+  aspect-ratio: auto;
+  height: 100%;
+  border-bottom: none;
+  border-right: 1px solid var(--c-border);
+}
+
+.works-list-grid.view-timeline .work-card-thumb-inner {
+  height: 100%;
+  min-height: 140px;
+}
+
+.works-list-grid.view-timeline .work-card-year {
+  display: none;
+}
+
+.works-list-grid.view-timeline .thumb-label {
+  font-size: 16px;
+  padding: 10px 6px;
+}
+
+@media (max-width: 768px) {
+  .works-list-grid.view-timeline {
+    padding-left: 44px;
+  }
+  .works-list-grid.view-timeline::before {
+    left: 12px;
+  }
+  .works-list-grid.view-timeline .work-card::after {
+    left: -44px;
+    font-size: 9px;
+    width: 32px;
+  }
+  .works-list-grid.view-timeline .work-card-link {
+    grid-template-columns: 1fr;
+  }
+  .works-list-grid.view-timeline .work-card-thumb {
+    border-right: none;
+    border-bottom: 1px solid var(--c-border);
+  }
+}

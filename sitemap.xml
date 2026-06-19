@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- ===== Japanese ===== -->
+
+  <url>
+    <loc>https://hibikishimizu.com/ja/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/ja/works/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/works/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/works/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/ja/works/ohmatching/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/works/ohmatching/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/works/ohmatching/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/ja/works/lip-reading/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/works/lip-reading/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/works/lip-reading/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/ja/works/morse-gesture/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/works/morse-gesture/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/works/morse-gesture/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/ja/about/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/about/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/about/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/ja/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/contact/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/contact/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/ja/whats-new/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/whats-new/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/whats-new/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/ja/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/blog/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/blog/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/ja/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/privacy/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/ja/Islay/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/Islay/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/Islay/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/ja/Islay/history/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/Islay/history/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/Islay/history/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/ja/Islay/whisky-history/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/Islay/whisky-history/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/Islay/whisky-history/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/ja/Islay/process/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/Islay/process/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/Islay/process/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/ja/Islay/enjoy/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/Islay/enjoy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/Islay/enjoy/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/ja/Islay/appendix/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/Islay/appendix/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/Islay/appendix/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ===== English ===== -->
+
+  <url>
+    <loc>https://hibikishimizu.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/en/works/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/works/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/works/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/en/works/ohmatching/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/works/ohmatching/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/works/ohmatching/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/en/works/lip-reading/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/works/lip-reading/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/works/lip-reading/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/en/works/morse-gesture/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/works/morse-gesture/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/works/morse-gesture/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/en/about/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/about/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/about/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/en/contact/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/contact/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/contact/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/en/whats-new/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/whats-new/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/whats-new/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/en/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/blog/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/blog/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/en/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/privacy/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/en/Islay/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/Islay/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/Islay/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/en/Islay/history/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/Islay/history/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/Islay/history/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/en/Islay/whisky-history/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/Islay/whisky-history/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/Islay/whisky-history/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/en/Islay/process/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/Islay/process/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/Islay/process/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/en/Islay/enjoy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/Islay/enjoy/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/Islay/enjoy/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/en/Islay/appendix/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/Islay/appendix/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/Islay/appendix/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Patch Notes -->
+  <url>
+    <loc>https://hibikishimizu.com/ja/patch-notes/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/patch-notes/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/patch-notes/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/en/patch-notes/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/patch-notes/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/patch-notes/"/>
+    <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>

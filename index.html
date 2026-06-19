@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- GA4: not needed on redirect page -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>志水 響 | Hibiki Shimizu</title>
+  <script>
+    // Language detection & redirect
+    (function() {
+      var saved = localStorage.getItem('hibiki_lang');
+      var lang = saved || navigator.language.slice(0, 2).toLowerCase();
+      if (lang !== 'ja' && lang !== 'en') lang = 'ja';
+      window.location.replace('/' + lang + '/');
+    })();
+  </script>
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=/ja/">
+  </noscript>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+  <p>Redirecting...</p>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- GA4 loaded dynamically after cookie consent (see main.js) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What's New — Hibiki Shimizu</title>
+  <meta name="description" content="Site updates and new content from Hibiki Shimizu. Project updates, blog posts, and Islay guide additions.">
+  <link rel="canonical" href="https://hibikishimizu.com/en/whats-new/">
+  <link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/whats-new/">
+  <link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/whats-new/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <style>
+    .whats-new-page { padding-top: 80px; }
+
+    .wn-hero {
+      padding: clamp(60px,10vw,120px) 0 clamp(40px,6vw,80px);
+    }
+
+    .wn-hero-label {
+      font-size: var(--fs-xs);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+      font-family: var(--font-en);
+      margin-bottom: 16px;
+    }
+
+    .wn-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 7vw, 72px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: 0.04em;
+      background: linear-gradient(135deg, #211D17 0%, #211D17 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+    }
+
+    .wn-hero-sub {
+      font-size: var(--fs-lg);
+      color: var(--c-text-muted);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    .news-list {
+      max-width: 800px;
+      padding-bottom: clamp(80px, 10vw, 120px);
+    }
+
+    .news-item {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--c-border);
+      align-items: start;
+    }
+
+    @media (max-width: 560px) {
+      .news-item { grid-template-columns: 1fr; gap: 8px; }
+    }
+
+    .news-date {
+      font-size: var(--fs-xs);
+      color: var(--c-text-muted);
+      font-family: var(--font-en);
+      letter-spacing: 0.06em;
+      padding-top: 3px;
+    }
+
+    .news-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-family: var(--font-en);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .news-tag--site    { background: rgba(91,155,213,0.15); color: #2C4A6E; }
+    .news-tag--islay   { background: rgba(191,58,50,0.15); color: var(--c-accent); }
+    .news-tag--works   { background: rgba(91,213,155,0.15); color: #3E7A4E; }
+    .news-tag--blog    { background: rgba(213,155,91,0.15); color: #A4632B; }
+
+    .news-title {
+      font-size: var(--fs-base);
+      font-weight: 600;
+      color: var(--c-text);
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    .news-desc {
+      font-size: var(--fs-sm);
+      color: var(--c-text-muted);
+      line-height: 1.7;
+    }
+
+    .news-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: var(--fs-sm);
+      color: var(--c-accent);
+      text-decoration: none;
+      margin-top: 8px;
+      font-family: var(--font-en);
+    }
+
+    .news-link:hover { text-decoration: underline; }
+
+    .news-item[id] {
+      scroll-margin-top: calc(var(--nav-height) + 24px);
+    }
+  </style>
+</head>
+<body class="whats-new-page">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div id="cookie-banner" role="dialog" aria-label="Cookie notice">
+    <p class="cookie-text">This site may use cookies for analytics. See our <a href="/en/privacy/">Privacy Policy</a> for details.</p>
+    <div class="cookie-actions">
+      <button class="cookie-accept" id="cookie-accept">Accept</button>
+      <button class="cookie-reject" id="cookie-reject">Reject</button>
+    </div>
+  </div>
+
+  <nav id="main-nav" role="navigation" aria-label="Main navigation">
+    <a href="/en/" class="nav-logo" aria-label="Hibiki — Home">A nest of a banal engineer</a>
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-links" role="list">
+      <li><a href="/en/">Home</a></li>
+      <li><a href="/en/works/">Works</a></li>
+      <li><a href="/en/about/">About</a></li>
+      <li><a href="/en/blog/">Blog</a></li>
+      <li><a href="/en/contact/">Contact</a></li>
+    </ul>
+    <div class="nav-lang" aria-label="Language switcher">
+      <button class="lang-btn" data-lang="ja" aria-label="日本語">日</button>
+      <span class="lang-divider" aria-hidden="true">|</span>
+      <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+    </div>
+  </nav>
+
+  <section id="main-content" class="wn-hero">
+    <div class="container">
+      <p class="wn-hero-label reveal font-en">Updates &amp; News</p>
+      <h1 class="wn-hero-title reveal">What's New</h1>
+      <p class="wn-hero-sub reveal">A running log of site updates and new content.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="news-list reveal">
+
+      <div class="news-item" id="news-islay">
+        <div class="news-date">2026-03-21</div>
+        <div class="news-body">
+          <span class="news-tag news-tag--islay">Islay</span>
+          <p class="news-title">Islay Whisky Complete Guide — All Pages Published</p>
+          <p class="news-desc">Published the full 6-page Islay guide covering island history, Scotch whisky history, law &amp; production process, how to enjoy whisky, and an appendix with phenol levels for all 10 distilleries plus a glossary.</p>
+          <a href="/en/Islay/" class="news-link">View Islay Guide <i class="ph ph-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="news-item" id="news-ohmatching">
+        <div class="news-date">2026-03-21</div>
+        <div class="news-body">
+          <span class="news-tag news-tag--works">Works</span>
+          <p class="news-title">Works Page — ohmatching Project Detail Published</p>
+          <p class="news-desc">Published the portfolio Works page and a detailed case study for ohmatching.com — a full-stack recruitment matching platform. Covers tech stack, features, and development background.</p>
+          <a href="/en/works/ohmatching/" class="news-link">View ohmatching <i class="ph ph-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="news-item" id="news-launch">
+        <div class="news-date">2026-03-21</div>
+        <div class="news-body">
+          <span class="news-tag news-tag--site">Site</span>
+          <p class="news-title">Portfolio Site hibikishimizu.com Launched</p>
+          <p class="news-desc">Launched my personal portfolio site ahead of starting my MSc Computer Science at the University of Warwick. Built in vanilla HTML/CSS/JS with bilingual Japanese/English support.</p>
+          <a href="/en/" class="news-link">View Home <i class="ph ph-arrow-right"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand"></div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="/en/works/">Works</a>
+          <a href="/en/about/">About</a>
+          <a href="/en/blog/">Blog</a>
+          <a href="/en/contact/">Contact</a>
+          <a href="/en/privacy/">Privacy</a>
+          <a href="/en/patch-notes/">Patch Notes</a>
+        </nav>
+        <div class="footer-lang" aria-label="Language switcher">
+          <button class="lang-btn" data-lang="ja" aria-label="日本語">日</button>
+          <span class="lang-divider" aria-hidden="true">|</span>
+          <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy font-en">&copy; 2026 Hibiki Shimizu. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>

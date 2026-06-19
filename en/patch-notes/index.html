@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- GA4 loaded dynamically after cookie consent (see main.js) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patch Notes — Hibiki Shimizu</title>
+  <meta name="description" content="Version history and changelog for hibikishimizu.com. Tracks all site updates, fixes, and improvements.">
+  <link rel="canonical" href="https://hibikishimizu.com/en/patch-notes/">
+  <link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/patch-notes/">
+  <link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/patch-notes/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <style>
+    .patch-notes-page { padding-top: 80px; }
+
+    /* Hero */
+    .pn-hero {
+      padding: clamp(60px, 10vw, 120px) 0 clamp(40px, 6vw, 80px);
+    }
+    .pn-hero-label {
+      font-size: var(--fs-xs);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+      font-family: var(--font-en);
+      margin-bottom: 16px;
+    }
+    .pn-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 7vw, 72px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: 0.04em;
+      background: linear-gradient(135deg, #211D17 0%, #211D17 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding-bottom: 0.15em;
+      margin-bottom: 16px;
+    }
+    .pn-hero-sub {
+      font-size: var(--fs-lg);
+      color: var(--c-text-muted);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* Timeline */
+    .pn-timeline {
+      max-width: 800px;
+      padding-bottom: clamp(80px, 10vw, 120px);
+      position: relative;
+    }
+    .pn-timeline::before {
+      content: '';
+      position: absolute;
+      left: 88px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--c-border);
+    }
+
+    .pn-entry {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 0 32px;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--c-border);
+      position: relative;
+    }
+    .pn-entry:last-child { border-bottom: none; }
+
+    /* Version column */
+    .pn-ver-col {
+      padding-top: 4px;
+      position: relative;
+    }
+    .pn-ver-col::after {
+      content: '';
+      position: absolute;
+      right: -20px;
+      top: 10px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--c-accent);
+      border: 2px solid var(--c-bg);
+      box-shadow: 0 0 8px rgba(191,58,50,0.5);
+    }
+    .pn-version {
+      font-family: var(--font-en);
+      font-size: var(--fs-base);
+      font-weight: 700;
+      color: var(--c-accent);
+      letter-spacing: 0.02em;
+    }
+    .pn-date {
+      font-family: var(--font-en);
+      font-size: 11px;
+      color: var(--c-text-muted);
+      margin-top: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    /* Content column */
+    .pn-content { padding-top: 2px; }
+    .pn-release-title {
+      font-size: var(--fs-lg);
+      font-weight: 600;
+      color: var(--c-text);
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+
+    .pn-group { margin-bottom: 16px; }
+    .pn-group:last-child { margin-bottom: 0; }
+
+    .pn-group-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-family: var(--font-en);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .pn-label--added    { background: rgba(91, 213, 155, 0.12); color: #3E7A4E; }
+    .pn-label--fixed    { background: rgba(91, 155, 213, 0.12); color: #2C4A6E; }
+    .pn-label--changed  { background: rgba(191,58,50,0.12); color: var(--c-accent); }
+    .pn-label--security { background: rgba(213, 91, 91, 0.12);  color: #d55b5b; }
+
+    .pn-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .pn-items li {
+      font-size: var(--fs-sm);
+      color: var(--c-text-muted);
+      line-height: 1.6;
+      padding-left: 14px;
+      position: relative;
+    }
+    .pn-items li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--c-border);
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .pn-timeline::before { left: 0; display: none; }
+      .pn-entry { grid-template-columns: 1fr; gap: 8px; }
+      .pn-ver-col::after { display: none; }
+      .pn-ver-col { display: flex; gap: 12px; align-items: baseline; }
+      .pn-date { margin-top: 0; }
+    }
+  </style>
+</head>
+<body class="patch-notes-page">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <div id="cookie-banner" role="dialog" aria-label="Cookie notice">
+    <p class="cookie-text">This site may use cookies for analytics. See our <a href="/en/privacy/">Privacy Policy</a> for details.</p>
+    <div class="cookie-actions">
+      <button class="cookie-accept" id="cookie-accept">Accept</button>
+      <button class="cookie-reject" id="cookie-reject">Reject</button>
+    </div>
+  </div>
+
+  <nav id="main-nav" role="navigation" aria-label="Main navigation">
+    <a href="/en/" class="nav-logo" aria-label="Hibiki — Home">A nest of a banal engineer</a>
+    <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-links" role="list">
+      <li><a href="/en/">Home</a></li>
+      <li><a href="/en/works/">Works</a></li>
+      <li><a href="/en/about/">About</a></li>
+      <li><a href="/en/blog/">Blog</a></li>
+      <li><a href="/en/contact/">Contact</a></li>
+    </ul>
+    <div class="nav-lang" aria-label="Language switcher">
+      <button class="lang-btn" data-lang="ja" aria-label="日本語">日</button>
+      <span class="lang-divider" aria-hidden="true">|</span>
+      <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+    </div>
+  </nav>
+
+  <section id="main-content" class="pn-hero">
+    <div class="container">
+      <p class="pn-hero-label reveal font-en">Site Changelog</p>
+      <h1 class="pn-hero-title reveal">Patch Notes</h1>
+      <p class="pn-hero-sub reveal">Version history for hibikishimizu.com — every update, fix, and improvement recorded.</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="pn-timeline reveal">
+
+      <!-- v1.2 -->
+      <div class="pn-entry" id="v1-2">
+        <div class="pn-ver-col">
+          <div class="pn-version">v1.2</div>
+          <div class="pn-date">2026-03-25</div>
+        </div>
+        <div class="pn-content">
+          <p class="pn-release-title">Design uplift &amp; icon system</p>
+
+          <div class="pn-group">
+            <span class="pn-group-label pn-label--changed">Changed</span>
+            <ul class="pn-items">
+              <li>All emoji replaced with Phosphor Icons across every page — certifications, interests, contact cards, Islay facts, works thumbnails, ohmatching features, blog</li>
+              <li>Icon containers redesigned with accent-coloured rounded boxes for a premium, consistent look</li>
+              <li>Button system upgraded — primary buttons now have glow + scale hover effect, ghost buttons have inset highlight, both have active/pressed states</li>
+              <li>Footer redesigned with CSS Grid 3-column layout, gradient accent line, link hover underline animation, and social icon glow effect</li>
+              <li>Home hero enhanced — ambient glow animations now use 4-step keyframes for more organic movement, headline gradient slowly shifts via background-position animation</li>
+            </ul>
+          </div>
+
+          <div class="pn-group">
+            <span class="pn-group-label pn-label--fixed">Fixed</span>
+            <ul class="pn-items">
+              <li>Contact page: location corrected from Osaka to Hyogo</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.1 -->
+      <div class="pn-entry" id="v1-1">
+        <div class="pn-ver-col">
+          <div class="pn-version">v1.1</div>
+          <div class="pn-date">2026-03-23</div>
+        </div>
+        <div class="pn-content">
+          <p class="pn-release-title">Post-launch polish &amp; analytics</p>
+
+          <div class="pn-group">
+            <span class="pn-group-label pn-label--added">Added</span>
+            <ul class="pn-items">
+              <li>Home link added to all page navigation menus</li>
+              <li>LinkedIn profile added to Contact page</li>
+              <li>What's New items now link directly to their anchors</li>
+              <li>Google Analytics 4 (GA4) integrated across all pages</li>
+              <li>sitemap.xml and robots.txt created</li>
+            </ul>
+          </div>
+
+          <div class="pn-group">
+            <span class="pn-group-label pn-label--fixed">Fixed</span>
+            <ul class="pn-items">
+              <li>Footer language switcher was rendering vertically instead of horizontally</li>
+              <li>Mobile nav overlay now correctly covers hero content with blur backdrop</li>
+              <li>Mobile language selector converted to dropdown (select element)</li>
+              <li>Home nav link was always highlighted regardless of current page</li>
+              <li>Nav stutter on page transitions eliminated</li>
+              <li>Nav links disappearing on desktop page refresh</li>
+              <li>Contact page: email/github/location cards overlapping form on mobile scroll</li>
+              <li>Hamburger button visibility improved — darker background with glow</li>
+            </ul>
+          </div>
+
+          <div class="pn-group">
+            <span class="pn-group-label pn-label--changed">Changed</span>
+            <ul class="pn-items">
+              <li>About page section order: Skills → Languages → Certifications</li>
+              <li>Career timeline: removed non-work entry</li>
+              <li>Mobile nav redesigned with blur overlay, centred items, and X close button</li>
+            </ul>
+          </div>
+
+          <div class="pn-group">
+            <span class="pn-group-label pn-label--security">Security</span>
+            <ul class="pn-items">
+              <li>Text selection disabled site-wide</li>
+              <li>Image right-click saving and drag-to-save disabled</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.0 -->
+      <div class="pn-entry" id="v1-0">
+        <div class="pn-ver-col">
+          <div class="pn-version">v1.0</div>
+          <div class="pn-date">2026-03-21</div>
+        </div>
+        <div class="pn-content">
+          <p class="pn-release-title">Initial launch</p>
+
+          <div class="pn-group">
+            <span class="pn-group-label pn-label--added">Added</span>
+            <ul class="pn-items">
+              <li>Site launched at hibikishimizu.com</li>
+              <li>Full bilingual support — Japanese (/ja/) and English (/en/)</li>
+              <li>Home, Works, About, Contact, Privacy, What's New pages</li>
+              <li>Works detail page: ohmatching.com (full-stack recruitment platform)</li>
+              <li>Works stubs: Lip Reading CNN, Morse Gesture Input</li>
+              <li>Blog page (Coming Soon placeholder)</li>
+              <li>Islay Whisky Complete Guide — 6 chapters: Top, History, Whisky History, Process, Enjoy, Appendix</li>
+              <li>Interactive Leaflet map with 10 Islay distillery markers</li>
+              <li>GSAP scroll reveal animations (.reveal, .reveal-left, .reveal-right)</li>
+              <li>Lenis smooth scroll across all pages</li>
+              <li>Mobile hamburger navigation</li>
+              <li>Contact form with AJAX submission and PHP mailer (auto-reply)</li>
+              <li>Honeypot spam protection on contact form</li>
+              <li>Cookie consent banner with localStorage persistence</li>
+              <li>Language preference saved to localStorage</li>
+              <li>Mouse glow effect on desktop</li>
+              <li>404 error page</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand"></div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="/en/works/">Works</a>
+          <a href="/en/about/">About</a>
+          <a href="/en/blog/">Blog</a>
+          <a href="/en/contact/">Contact</a>
+          <a href="/en/privacy/">Privacy</a>
+          <a href="/en/patch-notes/">Patch Notes</a>
+        </nav>
+        <div class="footer-lang" aria-label="Language switcher">
+          <button class="lang-btn" data-lang="ja" aria-label="日本語">日</button>
+          <span class="lang-divider" aria-hidden="true">|</span>
+          <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy font-en">&copy; 2026 Hibiki Shimizu. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+  <script src="../../assets/js/main.js"></script>
+</body>
+</html>

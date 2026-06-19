@@ -1,0 +1,21 @@
+# ============================================================
+#  Secrets — never commit
+# ============================================================
+# Admin password hash lives here. Use auth.example.php as a template
+# and create your own auth.php locally / on the server.
+blog/api/auth.php
+
+# ============================================================
+#  OS / editor junk
+# ============================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# ============================================================
+#  Logs / archives / local build artifacts
+# ============================================================
+*.log
+*.zip

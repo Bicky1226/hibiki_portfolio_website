@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- GA4 loaded dynamically after cookie consent (see main.js) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Works — 志水 響 | Hibiki Shimizu</title>
+  <meta name="description" content="志水 響の制作物・プロジェクト一覧。Webアプリ・機械学習・旅行ガイドなど。">
+  <link rel="canonical" href="https://hibikishimizu.com/ja/works/">
+
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://hibikishimizu.com/ja/works/">
+  <meta property="og:title"       content="Works — 志水 響">
+  <meta property="og:description" content="制作物・プロジェクト一覧。Webアプリ、機械学習、旅行ガイドなど多様なプロジェクトを掲載。">
+  <meta property="og:image"       content="https://hibikishimizu.com/assets/images/og-home.jpg">
+  <meta property="og:locale"      content="ja_JP">
+
+  <link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/works/">
+  <link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/works/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/pages/home.css">
+  <link rel="stylesheet" href="../../assets/css/pages/works.css">
+</head>
+
+<body class="works-page">
+  <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+  <!-- Cookie Banner -->
+  <div id="cookie-banner" role="dialog" aria-label="Cookie利用についての通知">
+    <p class="cookie-text">
+      このサイトはアクセス解析のためCookieを使用することがあります。
+      詳しくは<a href="/ja/privacy/">プライバシーポリシー</a>をご覧ください。
+    </p>
+    <div class="cookie-actions">
+      <button class="cookie-accept" id="cookie-accept">同意する</button>
+      <button class="cookie-reject" id="cookie-reject">拒否する</button>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="main-nav" role="navigation" aria-label="メインナビゲーション">
+    <a href="/ja/" class="nav-logo" aria-label="響 — ホームへ">陳腐なエンジニアの巣</a>
+    <button class="nav-hamburger" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" role="list">
+      <li><a href="/ja/">Home</a></li>
+      <li><a href="/ja/works/" class="active">Works</a></li>
+      <li><a href="/ja/about/">About</a></li>
+      <li><a href="/ja/blog/">Blog</a></li>
+      <li><a href="/ja/contact/">Contact</a></li>
+    </ul>
+    <div class="nav-lang" aria-label="言語切替">
+      <button class="lang-btn active" data-lang="ja" aria-label="日本語">日</button>
+      <span class="lang-divider" aria-hidden="true">|</span>
+      <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+    </div>
+  </nav>
+
+  <!-- hero -->
+  <div id="main-content"></div>
+  <section id="works-hero" aria-labelledby="works-title">
+    <div class="works-hero-ambient" aria-hidden="true">
+      <div class="w-ambient w-ambient-1"></div>
+    </div>
+    <div class="container">
+      <div class="works-hero-content">
+        <p class="works-hero-eyebrow reveal">Portfolio</p>
+        <h1 class="works-hero-title reveal">Works</h1>
+        <p class="works-hero-sub reveal">
+          これまでに手がけたプロジェクト・制作物の一覧です。
+          Webアプリ・機械学習・ドキュメントサイトなど、ジャンルを問わず実装しています。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- works grid -->
+  <section id="works-list" class="section-pad" aria-labelledby="works-title">
+    <div class="container">
+
+      <!-- Filter tabs -->
+      <div class="works-controls">
+        <div class="works-filter" role="group" aria-label="カテゴリーフィルター">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="web">Web</button>
+          <button class="filter-btn" data-filter="research">Research</button>
+          <button class="filter-btn" data-filter="app">App</button>
+          <button class="filter-btn" data-filter="system">System</button>
+        </div>
+        <div class="view-toggle" role="group" aria-label="表示切替">
+          <button class="view-btn active" data-view="grid" aria-label="グリッド表示"><i class="ph ph-squares-four"></i></button>
+          <button class="view-btn" data-view="timeline" aria-label="タイムライン表示"><i class="ph ph-list-dashes"></i></button>
+        </div>
+      </div>
+
+      <div class="works-list-grid" id="works-grid" data-stagger>
+
+        <!-- Islay -->
+        <article class="work-card work-card--featured card" data-stagger-item data-category="web" data-year="2026">
+          <a href="/ja/Islay/" class="work-card-link" aria-label="アイラ島旅行のしおり — 詳細を見る">
+            <div class="work-card-thumb">
+              <div class="work-card-thumb-inner islay-thumb">
+                <div class="thumb-pattern islay-pattern" aria-hidden="true"></div>
+                <div class="thumb-label font-en">Islay Guide</div>
+              </div>
+              <div class="work-card-year font-en">2026</div>
+            </div>
+            <div class="work-card-body">
+              <div class="work-card-cat">
+                <span class="tech-badge">Web</span>
+                <span class="tech-badge">Travel Guide</span>
+              </div>
+              <h2 class="work-card-title">ウイスキー好きへのアイラ島旅行のしおり</h2>
+              <p class="work-card-title-en font-en">The Whisky Lover's Guide to Islay</p>
+              <p class="work-card-desc">ウイスキー好きのためのアイラ島完全ガイド。島の歴史、各蒸留所、飲み方まで網羅した没入感のある情報サイト。</p>
+              <div class="work-card-tech">
+                <span class="tech-badge">HTML</span>
+                <span class="tech-badge">CSS</span>
+                <span class="tech-badge">JavaScript</span>
+                <span class="tech-badge">Leaflet</span>
+              </div>
+            </div>
+            <div class="work-card-footer">
+              <span class="work-card-cta font-en">View Project <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+            </div>
+          </a>
+        </article>
+
+        <!-- ohmatching -->
+        <article class="work-card card" data-stagger-item data-category="app" data-year="2026">
+          <a href="/ja/works/ohmatching/" class="work-card-link" aria-label="ohmatching.com — 詳細を見る">
+            <div class="work-card-thumb">
+              <div class="work-card-thumb-inner ohmatching-thumb">
+                <img src="../../assets/images/ohmatching.jpeg" alt="ohmatching.com スクリーンショット" loading="lazy" class="ohmatching-screenshot">
+              </div>
+              <div class="work-card-year font-en">2026</div>
+            </div>
+            <div class="work-card-body">
+              <div class="work-card-cat">
+                <span class="tech-badge">Web App</span>
+                <span class="tech-badge">Full-Stack</span>
+              </div>
+              <h2 class="work-card-title">独立系産業医・保健師マッチングゲート</h2>
+              <p class="work-card-title-en font-en">Occupational Health Matching Platform</p>
+              <p class="work-card-desc">企業と独立系産業医・保健師をつなぐWebマッチングシステム。多条件検索・OTP認証・管理者機能を備えたフルスタックWebアプリ。</p>
+              <div class="work-card-tech">
+                <span class="tech-badge">PHP</span>
+                <span class="tech-badge">MySQL</span>
+                <span class="tech-badge">JavaScript</span>
+              </div>
+            </div>
+            <div class="work-card-footer">
+              <span class="work-card-cta font-en">View Project <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+            </div>
+          </a>
+        </article>
+
+        <!-- Blog -->
+        <article class="work-card card" data-stagger-item data-category="web" data-year="2026">
+          <a href="/ja/blog/" class="work-card-link" aria-label="エンジニアブログ — 読む">
+            <div class="work-card-thumb">
+              <div class="work-card-thumb-inner blog-thumb">
+                <div class="thumb-pattern blog-pattern" aria-hidden="true"></div>
+                <div class="thumb-label font-en">Blog</div>
+              </div>
+              <div class="work-card-year font-en">2026</div>
+            </div>
+            <div class="work-card-body">
+              <div class="work-card-cat">
+                <span class="tech-badge">Writing</span>
+                <span class="tech-badge">Engineering</span>
+              </div>
+              <h2 class="work-card-title">エンジニアブログ</h2>
+              <p class="work-card-title-en font-en">Engineer's Blog</p>
+              <p class="work-card-desc">技術・旅・日常をつづるエンジニアブログ。思考の記録と継続的なアウトプットの場。</p>
+              <div class="work-card-tech">
+                <span class="tech-badge">HTML</span>
+                <span class="tech-badge">CSS</span>
+                <span class="tech-badge">JavaScript</span>
+              </div>
+            </div>
+            <div class="work-card-footer">
+              <span class="work-card-cta font-en">Read Blog <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+            </div>
+          </a>
+        </article>
+
+        <!-- Lip Reading (ML) -->
+        <article class="work-card card" data-stagger-item data-category="research" data-year="2025">
+          <a href="/ja/works/lip-reading/" class="work-card-link" aria-label="読唇システム — 詳細を見る">
+            <div class="work-card-thumb">
+              <div class="work-card-thumb-inner" style="background: var(--c-bg-3); display:flex; align-items:center; justify-content:center;">
+                <div class="thumb-label font-en" style="font-size:var(--fs-3xl);"><i class="ph ph-eye"></i></div>
+              </div>
+              <div class="work-card-year font-en">2025</div>
+            </div>
+            <div class="work-card-body">
+              <div class="work-card-cat">
+                <span class="tech-badge">ML / CV</span>
+                <span class="tech-badge">Research</span>
+              </div>
+              <h2 class="work-card-title">読唇システム（卒業研究）</h2>
+              <p class="work-card-title-en font-en">Lip Reading System</p>
+              <p class="work-card-desc">唇の動きから話者の発言を推測するディープラーニングシステム。大阪工業大学卒業研究。</p>
+              <div class="work-card-tech">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">TensorFlow</span>
+                <span class="tech-badge">MediaPipe</span>
+                <span class="tech-badge">dlib</span>
+              </div>
+            </div>
+            <div class="work-card-footer">
+              <span class="work-card-cta font-en">View Project <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+            </div>
+          </a>
+        </article>
+
+        <!-- Morse / Gesture -->
+        <article class="work-card card" data-stagger-item data-category="research" data-year="2024">
+          <a href="/ja/works/morse-gesture/" class="work-card-link" aria-label="モールス・ジェスチャー入力 — 詳細を見る">
+            <div class="work-card-thumb">
+              <div class="work-card-thumb-inner" style="background: var(--c-bg-3); display:flex; align-items:center; justify-content:center;">
+                <div class="thumb-label font-en" style="font-size:var(--fs-3xl);"><i class="ph ph-hand-waving"></i></div>
+              </div>
+              <div class="work-card-year font-en">2024</div>
+            </div>
+            <div class="work-card-body">
+              <div class="work-card-cat">
+                <span class="tech-badge">ML / CV</span>
+              </div>
+              <h2 class="work-card-title">モールス符号ジェスチャー入力</h2>
+              <p class="work-card-title-en font-en">Morse Code Gesture Input</p>
+              <p class="work-card-desc">手のジェスチャーでモールス符号入力を実現するシステム。MediaPipeによる手検出を活用。</p>
+              <div class="work-card-tech">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">MediaPipe</span>
+                <span class="tech-badge">OpenCV</span>
+              </div>
+            </div>
+            <div class="work-card-footer">
+              <span class="work-card-cta font-en">View Project <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+            </div>
+          </a>
+        </article>
+
+        <!-- Portfolio site itself -->
+        <article class="work-card card" data-stagger-item data-category="web" data-year="2026">
+          <a href="/ja/" class="work-card-link" aria-label="本サイト（ポートフォリオ）— 見る">
+            <div class="work-card-thumb">
+              <div class="work-card-thumb-inner" style="background: var(--c-bg-3); display:flex; align-items:center; justify-content:center;">
+                <span style="font-size:clamp(48px,8vw,72px);font-weight:700;background:var(--grad-warm);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">響</span>
+              </div>
+              <div class="work-card-year font-en">2026</div>
+            </div>
+            <div class="work-card-body">
+              <div class="work-card-cat">
+                <span class="tech-badge">Web</span>
+                <span class="tech-badge">Design</span>
+              </div>
+              <h2 class="work-card-title">本サイト — hibikishimizu.com</h2>
+              <p class="work-card-title-en font-en">This Portfolio Site</p>
+              <p class="work-card-desc">ゼロからデザイン・実装したポートフォリオサイト。Vanilla HTML/CSS/JSで構築。GSAP + Lenis アニメーション。</p>
+              <div class="work-card-tech">
+                <span class="tech-badge">HTML</span>
+                <span class="tech-badge">CSS</span>
+                <span class="tech-badge">JavaScript</span>
+                <span class="tech-badge">GSAP</span>
+              </div>
+            </div>
+            <div class="work-card-footer">
+              <span class="work-card-cta font-en">View Site <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+            </div>
+          </a>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <p class="footer-tagline text-muted" style="font-size:var(--fs-xs);margin-top:4px;">
+            陳腐なエンジニアの巣 — hibikishimizu.com
+          </p>
+        </div>
+        <nav class="footer-links" aria-label="フッターナビゲーション">
+          <a href="/ja/works/">Works</a>
+          <a href="/ja/about/">About</a>
+          <a href="/ja/blog/">Blog</a>
+          <a href="/ja/contact/">Contact</a>
+          <a href="/ja/privacy/">Privacy</a>
+          <a href="/ja/patch-notes/">Patch Notes</a>
+        </nav>
+        <div class="footer-lang" aria-label="言語切替">
+          <button class="lang-btn active" data-lang="ja" aria-label="日本語">日</button>
+          <span class="lang-divider" aria-hidden="true">|</span>
+          <button class="lang-btn" data-lang="en" aria-label="English">EN</button>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy font-en">&copy; 2026 Hibiki Shimizu. All rights reserved.</p>
+        <a href="https://github.com/HibikiShimizu" target="_blank" rel="noopener" class="footer-social" aria-label="GitHub">
+          <i class="ph ph-github-logo" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script src="../../assets/js/pages/works.js"></script>
+</body>
+</html>

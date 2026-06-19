@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Blog Admin — hibikishimizu.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- login view -->
+  <div id="login-view" class="login-view">
+    <div class="login-card">
+      <h1>Blog Admin</h1>
+      <p>hibikishimizu.com</p>
+      <div id="login-error" class="login-error"></div>
+      <form id="login-form">
+        <input type="password" class="input" id="login-password" placeholder="Password" autocomplete="current-password" required>
+        <div style="height:16px"></div>
+        <button type="submit" class="btn btn-primary btn-full">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- post list view -->
+  <div id="list-view" class="admin-view">
+    <header class="admin-header">
+      <h1>Blog Admin</h1>
+      <div class="admin-header-actions">
+        <button class="btn btn-primary btn-sm" id="btn-new-post">+ New Post</button>
+        <button class="btn btn-ghost btn-sm" id="btn-logout">Logout</button>
+      </div>
+    </header>
+    <div class="post-list-container">
+      <div class="post-list-header">
+        <h2>All Posts</h2>
+      </div>
+      <table class="post-table" id="post-table">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Title</th>
+            <th>Tags</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="post-table-body"></tbody>
+      </table>
+      <div id="empty-state" class="empty-state" style="display:none">
+        <p>No posts yet. Click <strong>+ New Post</strong> to create your first article.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- editor view -->
+  <div id="editor-view" class="admin-view">
+    <header class="admin-header">
+      <h1>Blog Admin</h1>
+      <div class="admin-header-actions">
+        <button class="btn btn-ghost btn-sm" id="btn-back-to-list">&larr; Back</button>
+        <button class="btn btn-secondary btn-sm" id="btn-save-draft">Save Draft</button>
+        <button class="btn btn-primary btn-sm" id="btn-publish">Publish</button>
+        <button class="btn btn-warning btn-sm" id="btn-suspend" style="display:none">Suspend</button>
+        <button class="btn btn-danger btn-sm" id="btn-delete" style="display:none">Delete</button>
+      </div>
+    </header>
+
+    <div class="editor-container">
+      <!-- Top bar -->
+      <div class="editor-topbar">
+        <span style="font-size:13px;color:var(--text-muted)" id="editor-status-text"></span>
+      </div>
+
+      <!-- Metadata -->
+      <div class="editor-meta">
+        <div>
+          <label class="label" for="edit-slug">Slug (URL)</label>
+          <input type="text" class="input" id="edit-slug" placeholder="my-first-post" pattern="[a-z0-9]+(-[a-z0-9]+)*">
+          <div class="slug-preview">https://hibikishimizu.com/ja/blog/<span id="slug-display">...</span>/</div>
+        </div>
+        <div>
+          <label class="label">Tags</label>
+          <div class="tag-input-wrap" id="tag-input-wrap">
+            <input type="text" id="tag-input" placeholder="Type and press Enter">
+          </div>
+          <div class="tag-suggestions" id="tag-suggestions"></div>
+        </div>
+        <div>
+          <label class="label">Thumbnail</label>
+          <div class="thumb-upload-area">
+            <div class="thumb-preview" id="thumb-preview">No image</div>
+            <div>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-thumb-upload">Upload</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="btn-thumb-clear" style="display:none">Clear</button>
+              <input type="file" id="thumb-file" accept="image/*" style="display:none">
+            </div>
+          </div>
+        </div>
+        <div>
+          <label class="checkbox-row">
+            <input type="checkbox" id="edit-toc">
+            Enable Table of Contents
+          </label>
+        </div>
+      </div>
+
+      <!-- Content area -->
+      <div class="editor-content-layout">
+        <div class="editor-main">
+          <!-- Language tabs -->
+          <div class="lang-tabs">
+            <button class="lang-tab active" data-lang="ja">Japanese</button>
+            <button class="lang-tab" data-lang="en">English</button>
+          </div>
+
+          <!-- JA Panel -->
+          <div class="lang-panel active" data-lang="ja">
+            <div class="field-group">
+              <label class="label" for="edit-title-ja">Title (JA)</label>
+              <input type="text" class="input" id="edit-title-ja" placeholder="Japanese title">
+            </div>
+            <div class="field-group">
+              <label class="label" for="edit-excerpt-ja">Excerpt (JA)</label>
+              <textarea class="textarea" id="edit-excerpt-ja" rows="2" placeholder="Short description for the list page"></textarea>
+            </div>
+            <div class="field-group">
+              <label class="label">
+                Body (JA) — Markdown
+                <button type="button" class="btn btn-ghost btn-sm" style="margin-left:8px;font-size:11px" id="btn-preview-ja">Preview</button>
+                <button type="button" class="btn btn-ghost btn-sm" style="margin-left:4px;font-size:11px" id="btn-upload-img-ja">Insert Image</button>
+              </label>
+              <textarea class="textarea textarea-mono" id="edit-body-ja" rows="20" placeholder="Write in Markdown..."></textarea>
+              <div class="preview-panel" id="preview-ja"></div>
+            </div>
+            <div class="toc-section" id="toc-section-ja" style="display:none">
+              <label class="label" for="edit-toc-ja">Custom TOC (JA) — optional HTML override</label>
+              <textarea class="textarea textarea-mono" id="edit-toc-ja" rows="5" placeholder="Leave empty for auto-generated TOC"></textarea>
+            </div>
+          </div>
+
+          <!-- EN Panel -->
+          <div class="lang-panel" data-lang="en">
+            <div class="field-group">
+              <label class="label" for="edit-title-en">Title (EN)</label>
+              <input type="text" class="input" id="edit-title-en" placeholder="English title">
+            </div>
+            <div class="field-group">
+              <label class="label" for="edit-excerpt-en">Excerpt (EN)</label>
+              <textarea class="textarea" id="edit-excerpt-en" rows="2" placeholder="Short description for the list page"></textarea>
+            </div>
+            <div class="field-group">
+              <label class="label">
+                Body (EN) — Markdown
+                <button type="button" class="btn btn-ghost btn-sm" style="margin-left:8px;font-size:11px" id="btn-preview-en">Preview</button>
+                <button type="button" class="btn btn-ghost btn-sm" style="margin-left:4px;font-size:11px" id="btn-upload-img-en">Insert Image</button>
+              </label>
+              <textarea class="textarea textarea-mono" id="edit-body-en" rows="20" placeholder="Write in Markdown..."></textarea>
+              <div class="preview-panel" id="preview-en"></div>
+            </div>
+            <div class="toc-section" id="toc-section-en" style="display:none">
+              <label class="label" for="edit-toc-en">Custom TOC (EN) — optional HTML override</label>
+              <textarea class="textarea textarea-mono" id="edit-toc-en" rows="5" placeholder="Leave empty for auto-generated TOC"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cheatsheet Sidebar -->
+        <aside class="cheatsheet">
+          <h3>Markdown Cheatsheet</h3>
+
+          <div class="cheatsheet-section">
+            <h4>Headings</h4>
+            <code># Heading 1</code>
+            <code>## Heading 2</code>
+            <code>### Heading 3</code>
+          </div>
+
+          <div class="cheatsheet-section">
+            <h4>Text Formatting</h4>
+            <code>**bold text**</code>
+            <code>*italic text*</code>
+            <code>~~strikethrough~~</code>
+            <code>`inline code`</code>
+          </div>
+
+          <div class="cheatsheet-section">
+            <h4>Links & Images</h4>
+            <code>[link text](https://url.com)</code>
+            <code>![alt text](/blog/uploads/img.jpg)</code>
+          </div>
+
+          <div class="cheatsheet-section">
+            <h4>Lists</h4>
+            <code>- Unordered item
+- Another item
+  - Nested item</code>
+            <code>1. Ordered item
+2. Another item</code>
+          </div>
+
+          <div class="cheatsheet-section">
+            <h4>Code Block</h4>
+            <code>```python
+def hello():
+    print("Hello!")
+```</code>
+            <div class="result">Languages: python, javascript, php, bash, css, html, java, go, rust, sql, etc.</div>
+          </div>
+
+          <div class="cheatsheet-section">
+            <h4>Blockquote</h4>
+            <code>> This is a quote.
+> It can span multiple lines.</code>
+          </div>
+
+          <div class="cheatsheet-section">
+            <h4>Table</h4>
+            <code>| Header | Header |
+|--------|--------|
+| Cell   | Cell   |
+| Cell   | Cell   |</code>
+          </div>
+
+          <div class="cheatsheet-section">
+            <h4>Horizontal Rule</h4>
+            <code>---</code>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <!-- marked.js for client-side preview -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
