@@ -1,0 +1,944 @@
+/* islay.css — islay guide page styles */
+
+/* light theme — css variable overrides on body.islay-page */
+.islay-page {
+  --c-bg:         #faf9f6;
+  --c-bg-2:       #ffffff;
+  --c-bg-3:       #f2f0ea;
+  --c-bg-4:       #e8e2d4;
+  --c-border:     rgba(0, 0, 0, 0.09);
+  --c-border-2:   rgba(0, 0, 0, 0.05);
+  --c-text:       #1c1814;
+  --c-text-muted: #6b6358;
+  --c-text-faint: #a8a090;
+  --c-accent:     #9a7240;
+  --glass-bg:     rgba(0, 0, 0, 0.02);
+  --glass-bg-2:   rgba(0, 0, 0, 0.04);
+  --glass-border: rgba(0, 0, 0, 0.08);
+
+  background-color: var(--c-bg);
+  color: var(--c-text);
+  padding-top: 64px;
+}
+
+/* islay top navigation */
+#islay-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  z-index: 100;
+  background: rgba(250, 249, 246, 0.96);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid rgba(154, 114, 64, 0.14);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.islay-top-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.islay-wordmark {
+  font-family: var(--font-en);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.islay-wordmark:hover {
+  color: var(--c-accent);
+}
+
+.islay-top-right {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.islay-by-link {
+  font-family: var(--font-en);
+  font-size: 11px;
+  color: var(--c-text-muted);
+  text-decoration: none;
+  letter-spacing: 0.07em;
+  border-bottom: 1px solid rgba(154, 114, 64, 0.25);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.islay-by-link:hover {
+  color: var(--c-accent);
+  border-color: var(--c-accent);
+}
+
+/* Lang buttons override for light nav */
+.islay-page .nav-lang {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.islay-page .nav-lang .lang-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.35;
+  transition: opacity 0.2s;
+  padding: 2px;
+  line-height: 1;
+}
+
+.islay-page .nav-lang .lang-btn.active {
+  opacity: 1;
+}
+
+.islay-page .nav-lang .lang-btn:hover {
+  opacity: 0.75;
+}
+
+.islay-page .nav-lang .lang-divider {
+  color: rgba(0, 0, 0, 0.2);
+  font-size: 11px;
+  user-select: none;
+}
+
+/* Cookie banner override */
+.islay-page #cookie-banner {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-md);
+  color: var(--c-text);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.islay-page #cookie-banner a {
+  color: var(--c-accent);
+}
+
+.islay-page .cookie-accept {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: #faf9f6;
+}
+
+.islay-page .cookie-accept:hover {
+  filter: brightness(1.1);
+}
+
+.islay-page .cookie-reject {
+  background: var(--c-text);
+  color: #faf9f6;
+}
+
+.islay-page .cookie-reject:hover {
+  background: var(--c-accent);
+}
+
+/* islay sub-nav */
+.islay-subnav {
+  position: sticky;
+  top: 64px;
+  z-index: 90;
+  background: rgba(250, 249, 246, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  padding: 0;
+}
+
+.islay-subnav-inner {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.islay-subnav-inner::-webkit-scrollbar {
+  display: none;
+}
+
+.islay-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 18px;
+  font-size: var(--fs-sm);
+  color: var(--c-text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  font-family: var(--font-en);
+  letter-spacing: 0.02em;
+}
+
+.islay-nav-link:hover {
+  color: var(--c-text);
+}
+
+.islay-nav-link.active {
+  color: var(--c-accent);
+  border-bottom-color: var(--c-accent);
+}
+
+.islay-nav-link .ph {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* hero */
+#islay-hero {
+  position: relative;
+  padding: clamp(80px, 12vw, 140px) 0 clamp(64px, 9vw, 110px);
+  /* visible so the tall North+South map stack can spill below the hero
+     (body has overflow-x:hidden, so no horizontal scrollbar) */
+  overflow: visible;
+}
+
+.islay-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.islay-ocean-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 5%  60%, rgba(154, 114, 64, 0.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 95% 20%, rgba(91, 155, 213, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(200, 169, 110, 0.04) 0%, transparent 60%);
+}
+
+/* Hand-illustrated maps — North Islay stacked over South Islay — set large
+   behind the hero title. Tall enough to spill below the hero; feathered into
+   the cream on every edge so the spill melts away rather than hard-cutting. */
+.islay-hero-map {
+  position: absolute;
+  top: 0;
+  right: 0;               /* flush to the right edge — no gap */
+  width: min(50%, 720px); /* half width */
+  height: auto;
+  opacity: 0.52;
+  pointer-events: none;
+  /* Light fade on the left under the text; soften top; let the southern
+     coast run almost all the way down before a soft feather. */
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.14) 18%, rgba(0,0,0,0.5) 40%, #000 60%),
+    linear-gradient(180deg, transparent 0%, #000 4%, #000 92%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-image:
+    linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.14) 18%, rgba(0,0,0,0.5) 40%, #000 60%),
+    linear-gradient(180deg, transparent 0%, #000 4%, #000 92%, transparent 100%);
+          mask-composite: intersect;
+}
+
+/* Keep the section below painting above the map's soft spill. */
+#about-islay {
+  position: relative;
+  z-index: 1;
+}
+
+/* Cream wash over the map so the title, subtitle and stats stay legible
+   on the left. No bottom fade — it used to land a cream band on the join. */
+.islay-hero-scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, var(--c-bg) 0%, rgba(250,249,246,0.72) 30%, rgba(250,249,246,0) 64%);
+}
+
+/* sub-pages (history / whisky-history / process / enjoy): */
+.islay-sub > .container,
+.islay-sub > .islay-footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* Decorative top rule */
+#islay-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--container-padding);
+  right: var(--container-padding);
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(154, 114, 64, 0.4) 30%, rgba(154, 114, 64, 0.4) 70%, transparent 100%);
+}
+
+.islay-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+}
+
+.islay-hero-label {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+  font-family: var(--font-en);
+  margin-bottom: 20px;
+}
+
+.islay-hero-title {
+  font-size: clamp(56px, 12vw, 112px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #1c1814 0%, #9a7240 55%, #c8a96e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: 0.2em;
+}
+
+.islay-hero-sub {
+  font-size: var(--fs-lg);
+  color: var(--c-text-muted);
+  line-height: 1.8;
+  max-width: 600px;
+  margin-bottom: 40px;
+}
+
+.islay-hero-stats {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding-top: 32px;
+  border-top: 1px solid rgba(154, 114, 64, 0.15);
+}
+
+.islay-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.islay-stat-num {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--c-accent);
+  font-family: var(--font-en);
+  letter-spacing: -0.02em;
+}
+
+.islay-stat-label {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  font-family: var(--font-en);
+}
+
+/* section headers */
+.islay-page .section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.islay-page .section-num {
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--c-accent);
+  border: 1px solid rgba(154, 114, 64, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.islay-page .section-title {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--c-text);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.islay-page .section-title-ja {
+  display: block;
+  font-size: var(--fs-sm);
+  color: var(--c-text-muted);
+  margin-top: 4px;
+  font-weight: 400;
+}
+
+/* island overview grid */
+.islay-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 0;
+}
+
+.islay-fact-card {
+  background: var(--c-bg-2);
+  border: 1px solid rgba(154, 114, 64, 0.12);
+  border-radius: var(--radius-md);
+  padding: 22px 20px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.islay-fact-card:hover {
+  border-color: rgba(154, 114, 64, 0.35);
+  box-shadow: 0 6px 20px rgba(154, 114, 64, 0.09);
+}
+
+.fact-icon {
+  font-size: 20px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: rgba(154, 114, 64, 0.1);
+  border: 1px solid rgba(154, 114, 64, 0.2);
+  color: #c8a96e;
+}
+
+.fact-label {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-family: var(--font-en);
+}
+
+.fact-value {
+  font-size: var(--fs-md);
+  color: var(--c-text);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* distillery grid */
+.distillery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+  margin-top: 48px;
+  margin-bottom: clamp(60px, 8vw, 100px);
+}
+
+@media (max-width: 640px) {
+  .distillery-grid { grid-template-columns: 1fr; }
+}
+
+.distillery-card {
+  background: var(--c-bg-2);
+  border: 1px solid rgba(154, 114, 64, 0.12);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+  display: flex;
+  flex-direction: column;
+}
+
+.distillery-card:hover {
+  border-color: rgba(154, 114, 64, 0.35);
+  box-shadow: 0 10px 32px rgba(154, 114, 64, 0.11);
+  transform: translateY(-3px);
+}
+
+.distillery-card-header {
+  padding: 24px 24px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  border-bottom: 1px solid rgba(154, 114, 64, 0.08);
+}
+
+.distillery-name {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  color: var(--c-text);
+  line-height: 1.2;
+}
+
+.distillery-name-jp {
+  font-size: var(--fs-sm);
+  color: var(--c-text-muted);
+  margin-top: 2px;
+}
+
+.distillery-founded {
+  font-size: var(--fs-xs);
+  color: var(--c-accent);
+  font-family: var(--font-en);
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+  padding-top: 4px;
+}
+
+.distillery-card-body {
+  padding: 16px 24px 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.distillery-phenol {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.phenol-label {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  font-family: var(--font-en);
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+  width: 68px;
+}
+
+.phenol-bar-wrap {
+  flex: 1;
+  height: 4px;
+  background: var(--c-bg-3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.phenol-bar {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #b8900a 0%, #c8a96e 60%, #d4b87a 100%);
+}
+
+.phenol-value {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  font-family: var(--font-en);
+  flex-shrink: 0;
+  width: 80px;
+  text-align: right;
+}
+
+.distillery-desc {
+  font-size: var(--fs-sm);
+  color: var(--c-text-muted);
+  line-height: 1.75;
+  flex: 1;
+}
+
+.distillery-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+/* Tech badges (light) */
+.islay-page .tech-badge {
+  background: rgba(154, 114, 64, 0.07);
+  border: 1px solid rgba(154, 114, 64, 0.2);
+  color: #7a5830;
+  font-size: var(--fs-xs);
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  font-family: var(--font-en);
+  letter-spacing: 0.03em;
+}
+
+/* section content (sub-pages) */
+.islay-content {
+  max-width: 800px;
+  padding-bottom: clamp(80px, 10vw, 120px);
+}
+
+.islay-content h2 {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  margin: 56px 0 20px;
+  color: var(--c-text);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.islay-content h2:first-child {
+  margin-top: 0;
+}
+
+.islay-content h3 {
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  margin: 40px 0 14px;
+  color: var(--c-text);
+}
+
+.islay-content p {
+  font-size: var(--fs-base);
+  color: var(--c-text-muted);
+  line-height: 1.95;
+  margin-bottom: 16px;
+}
+
+.islay-content ul, .islay-content ol {
+  padding-left: 1.5em;
+  margin: 12px 0 20px;
+}
+
+.islay-content li {
+  font-size: var(--fs-base);
+  color: var(--c-text-muted);
+  line-height: 1.8;
+  margin-bottom: 6px;
+}
+
+.islay-content strong {
+  color: var(--c-text);
+  font-weight: 600;
+}
+
+/* Highlight boxes */
+.islay-content .highlight-box,
+.islay-page .highlight-box {
+  background: rgba(154, 114, 64, 0.05);
+  border: 1px solid rgba(154, 114, 64, 0.18);
+  border-left: 3px solid var(--c-accent);
+  border-radius: var(--radius-sm);
+  padding: 18px 22px;
+  margin: 28px 0;
+}
+
+.islay-content .highlight-box p,
+.islay-page .highlight-box p {
+  margin: 0;
+  color: var(--c-text-muted);
+}
+
+/* timeline */
+.islay-timeline {
+  position: relative;
+  margin: 32px 0;
+  padding-left: 24px;
+  border-left: 1px solid rgba(154, 114, 64, 0.25);
+}
+
+.islay-timeline-item {
+  position: relative;
+  margin-bottom: 32px;
+  padding-left: 24px;
+}
+
+.islay-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -28px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--c-accent);
+  box-shadow: 0 0 0 3px rgba(154, 114, 64, 0.15);
+}
+
+.islay-timeline-year {
+  font-size: var(--fs-sm);
+  color: var(--c-accent);
+  font-family: var(--font-en);
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  margin-bottom: 4px;
+}
+
+.islay-timeline-text {
+  font-size: var(--fs-base);
+  color: var(--c-text-muted);
+  line-height: 1.75;
+}
+
+/* process steps */
+.process-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 32px 0;
+}
+
+.process-step {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 20px;
+  background: var(--c-bg-2);
+  border: 1px solid rgba(154, 114, 64, 0.12);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.process-step:hover {
+  border-color: rgba(154, 114, 64, 0.3);
+  box-shadow: 0 4px 16px rgba(154, 114, 64, 0.08);
+}
+
+.step-num {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(154, 114, 64, 0.09);
+  border: 1px solid rgba(154, 114, 64, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--c-accent);
+  font-family: var(--font-en);
+  flex-shrink: 0;
+}
+
+.step-title {
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--c-text);
+  margin-bottom: 4px;
+}
+
+.step-title-en {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  font-family: var(--font-en);
+  margin-bottom: 10px;
+  letter-spacing: 0.04em;
+}
+
+.step-desc {
+  font-size: var(--fs-sm);
+  color: var(--c-text-muted);
+  line-height: 1.8;
+}
+
+/* phenol table */
+.phenol-table-wrap {
+  overflow-x: auto;
+  margin: 28px 0;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(154, 114, 64, 0.15);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+table.phenol-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+}
+
+table.phenol-table th {
+  background: var(--c-bg-3);
+  padding: 12px 16px;
+  text-align: left;
+  color: var(--c-text-muted);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  font-family: var(--font-en);
+}
+
+table.phenol-table td {
+  padding: 12px 16px;
+  color: var(--c-text-muted);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  vertical-align: top;
+}
+
+table.phenol-table tr:hover td {
+  background: rgba(154, 114, 64, 0.03);
+}
+
+/* map */
+#distillery-map {
+  height: 400px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(154, 114, 64, 0.18);
+  overflow: hidden;
+  margin: 40px 0;
+  background: var(--c-bg-3);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  position: relative;
+  z-index: 1;
+}
+
+.leaflet-container {
+  background: #e8dfc8 !important;
+}
+
+/* Leaflet popup — light theme */
+.islay-page .leaflet-popup-content-wrapper {
+  background: #ffffff;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(154, 114, 64, 0.14);
+}
+
+.islay-page .leaflet-popup-tip {
+  background: #ffffff;
+}
+
+/* islay footer */
+.islay-footer {
+  background: var(--c-bg-3);
+  border-top: 1px solid rgba(154, 114, 64, 0.14);
+  padding: clamp(32px, 4vw, 48px) 0 clamp(24px, 3vw, 36px);
+  margin-top: clamp(48px, 6vw, 80px);
+}
+
+.islay-footer > .container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.islay-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  margin-bottom: 18px;
+}
+
+.islay-footer-brand {
+  font-family: var(--font-en);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--c-text);
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.islay-footer-lang {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.islay-footer-lang .lang-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.35;
+  transition: opacity 0.2s;
+  padding: 2px;
+  line-height: 1;
+}
+
+.islay-footer-lang .lang-btn.active {
+  opacity: 1;
+}
+
+.islay-footer-lang .lang-btn:hover {
+  opacity: 0.75;
+}
+
+.islay-footer-lang .lang-divider {
+  color: rgba(0, 0, 0, 0.2);
+  font-size: 11px;
+}
+
+.islay-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.islay-footer-copy {
+  font-size: var(--fs-xs);
+  color: var(--c-text-faint);
+  font-family: var(--font-en);
+  margin: 0;
+}
+
+.islay-footer-credit {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  font-family: var(--font-en);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(154, 114, 64, 0.25);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.islay-footer-credit:hover {
+  color: var(--c-accent);
+  border-color: var(--c-accent);
+}
+
+/* journal / coming soon (light theme) */
+#journal {
+  border-top: 1px solid rgba(154, 114, 64, 0.12) !important;
+}
+
+/* responsive */
+@media (max-width: 640px) {
+  .islay-top-inner {
+    padding: 0 20px;
+  }
+
+  .islay-by-link {
+    display: none;
+  }
+
+  .islay-hero-stats {
+    gap: 24px;
+  }
+
+  /* Quieter map on small screens; flush to the right edge */
+  .islay-hero-map {
+    opacity: 0.32;
+    width: 100%;
+    right: 0;
+  }
+
+  .islay-hero-scrim {
+    background:
+      linear-gradient(90deg, var(--c-bg) 0%, rgba(250,249,246,0.7) 38%, rgba(250,249,246,0.15) 100%),
+      linear-gradient(0deg,  var(--c-bg) 0%, rgba(250,249,246,0) 34%);
+  }
+
+  .islay-footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}

@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- GA4 loaded dynamically after cookie consent (see main.js) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Isle of Islay — Complete Scotch Whisky Guide</title>
+  <meta name="description" content="Complete guide to Islay whisky. Island overview, all 11 distilleries, history, production process, and how to enjoy Scotch whisky.">
+  <link rel="canonical" href="https://hibikishimizu.com/en/Islay/">
+
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://hibikishimizu.com/en/Islay/">
+  <meta property="og:title"       content="Isle of Islay — Complete Scotch Whisky Guide">
+  <meta property="og:description" content="A whisky lover's complete guide to Islay. History, distilleries, production process, and tasting guides.">
+  <meta property="og:image"       content="https://hibikishimizu.com/assets/images/og-home.jpg">
+  <meta property="og:locale"      content="en_GB">
+
+  <link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/Islay/">
+  <link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/Islay/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+
+  <!-- Leaflet map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <link rel="stylesheet" href="../../assets/css/global.css">
+  <link rel="stylesheet" href="../../assets/css/pages/islay.css">
+</head>
+
+<body class="islay-page">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Cookie Banner -->
+  <div id="cookie-banner" role="dialog" aria-label="Cookie notice">
+    <p class="cookie-text">
+      This site may use cookies for analytics. See our <a href="/en/privacy/">Privacy Policy</a> for details.
+    </p>
+    <div class="cookie-actions">
+      <button class="cookie-accept" id="cookie-accept">Accept</button>
+      <button class="cookie-reject" id="cookie-reject">Reject</button>
+    </div>
+  </div>
+
+  <!-- Main Navigation -->
+  <nav id="islay-top" role="navigation" aria-label="Islay guide navigation">
+    <div class="container islay-top-inner">
+      <a href="/en/Islay/" class="islay-wordmark">Isle of Islay</a>
+      <div class="islay-top-right">
+        <a href="/" class="islay-by-link">by Hibiki Shimizu</a>
+        <div class="nav-lang" aria-label="Language switcher">
+          <button class="lang-btn" data-lang="ja" aria-label="日本語">🇯🇵</button>
+          <span class="lang-divider" aria-hidden="true">|</span>
+          <button class="lang-btn active" data-lang="en" aria-label="English">🇺🇸<span style="font-size:12px;opacity:0.5;margin-left:1px">🇬🇧</span></button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Islay Sub-Navigation -->
+  <nav class="islay-subnav" aria-label="Islay guide navigation">
+    <div class="islay-subnav-inner">
+      <a href="/en/Islay/" class="islay-nav-link active">
+        <i class="ph ph-map-pin"></i> Overview &amp; Distilleries
+      </a>
+      <a href="/en/Islay/history/" class="islay-nav-link">
+        <i class="ph ph-castle-turret"></i> History of Islay
+      </a>
+      <a href="/en/Islay/whisky-history/" class="islay-nav-link">
+        <i class="ph ph-scroll"></i> Whisky History
+      </a>
+      <a href="/en/Islay/process/" class="islay-nav-link">
+        <i class="ph ph-flask"></i> Law &amp; Process
+      </a>
+      <a href="/en/Islay/enjoy/" class="islay-nav-link">
+        <i class="ph ph-wine"></i> How to Enjoy
+      </a>
+      <a href="/en/Islay/appendix/" class="islay-nav-link">
+        <i class="ph ph-book-open"></i> Appendix
+      </a>
+    </div>
+  </nav>
+
+  <!-- hero -->
+  <div id="main-content"></div>
+  <section id="islay-hero" aria-labelledby="islay-title">
+    <div class="islay-hero-bg" aria-hidden="true">
+      <img class="islay-hero-map" src="../../assets/images/islay-hero-maps.webp" alt="" decoding="async" loading="eager">
+      <div class="islay-hero-scrim"></div>
+      <div class="islay-ocean-gradient"></div>
+    </div>
+    <div class="container">
+      <div class="islay-hero-content">
+        <p class="islay-hero-label reveal font-en">Isle of Islay — Scotch Whisky Guide</p>
+        <h1 class="islay-hero-title reveal" id="islay-title">Islay</h1>
+        <p class="islay-hero-sub reveal">
+          A small island off Scotland's west coast. Just 3,300 people call it home —
+          yet it harbours 11 world-class single malt distilleries.
+          Peat smoke and Atlantic sea air create a flavour unlike anywhere else on Earth.
+        </p>
+
+        <div class="islay-hero-stats reveal" data-stagger>
+          <div class="islay-stat" data-stagger-item>
+            <span class="islay-stat-num">11</span>
+            <span class="islay-stat-label">Distilleries</span>
+          </div>
+          <div class="islay-stat" data-stagger-item>
+            <span class="islay-stat-num">620</span>
+            <span class="islay-stat-label">km² Area</span>
+          </div>
+          <div class="islay-stat" data-stagger-item>
+            <span class="islay-stat-num">3,300</span>
+            <span class="islay-stat-label">Population</span>
+          </div>
+          <div class="islay-stat" data-stagger-item>
+            <span class="islay-stat-num">1779</span>
+            <span class="islay-stat-label">Oldest Distillery</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- about islay -->
+  <section id="about-islay" class="section-pad" aria-labelledby="about-islay-heading">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <span class="section-num">01</span>
+        <div>
+          <h2 class="section-title font-en" id="about-islay-heading">About Islay</h2>
+        </div>
+      </div>
+
+      <div class="islay-overview-grid" data-stagger>
+
+        <div class="islay-fact-card" data-stagger-item>
+          <span class="fact-icon" aria-hidden="true"><i class="ph ph-map-pin"></i></span>
+          <div class="fact-label">Location</div>
+          <div class="fact-value">West coast of Scotland<br>Southernmost Inner Hebrides</div>
+        </div>
+
+        <div class="islay-fact-card" data-stagger-item>
+          <span class="fact-icon" aria-hidden="true"><i class="ph ph-ruler"></i></span>
+          <div class="fact-label">Area</div>
+          <div class="fact-value">~620 km²<br><span style="font-size:var(--fs-xs)">(similar to Shropshire)</span></div>
+        </div>
+
+        <div class="islay-fact-card" data-stagger-item>
+          <span class="fact-icon" aria-hidden="true"><i class="ph ph-users"></i></span>
+          <div class="fact-label">Population</div>
+          <div class="fact-value">~3,300<br><span style="font-size:var(--fs-xs)">Main town: Bowmore</span></div>
+        </div>
+
+        <div class="islay-fact-card" data-stagger-item>
+          <span class="fact-icon" aria-hidden="true"><i class="ph ph-airplane"></i></span>
+          <div class="fact-label">Access</div>
+          <div class="fact-value">~45 min flight from Glasgow<br>or ~2 hr ferry</div>
+        </div>
+
+        <div class="islay-fact-card" data-stagger-item>
+          <span class="fact-icon" aria-hidden="true"><i class="ph ph-leaf"></i></span>
+          <div class="fact-label">Peat</div>
+          <div class="fact-value">80%+ of island is peat bog<br>Seaweed &amp; marine flora adds iodine</div>
+        </div>
+
+        <div class="islay-fact-card" data-stagger-item>
+          <span class="fact-icon" aria-hidden="true"><i class="ph ph-waves"></i></span>
+          <div class="fact-label">Climate</div>
+          <div class="fact-value">Mild &amp; wet (Atlantic westerlies)<br>~1,200mm annual rainfall</div>
+        </div>
+
+        <div class="islay-fact-card" data-stagger-item>
+          <span class="fact-icon" aria-hidden="true"><i class="ph ph-music-notes"></i></span>
+          <div class="fact-label">Festival</div>
+          <div class="fact-value">Fèis Ìle<br>Late May each year</div>
+        </div>
+
+        <div class="islay-fact-card" data-stagger-item>
+          <span class="fact-icon" aria-hidden="true"><i class="ph ph-beer-stein"></i></span>
+          <div class="fact-label">Toast</div>
+          <div class="fact-value">Slàinte mhath<br>("Good health" in Scottish Gaelic)</div>
+        </div>
+
+      </div>
+
+      <div class="islay-content reveal" style="margin-top:40px;">
+        <p>
+          The Isle of Islay (Gaelic: Ìle) sits at the southern tip of the Inner Hebrides, off Scotland's west coast.
+          This small island — just 620 km² and 3,300 residents — is home to an extraordinary concentration of world-renowned single malt distilleries.
+        </p>
+        <p>
+          Islay's defining characteristic is its peat. More than 80% of the island is covered in peat bog,
+          and unlike mainland Scottish peat, Islay's contains decomposed seaweed and marine vegetation — giving it
+          a distinctive iodine and briny quality. When used to dry malted barley, this peat imparts the signature
+          smoky, maritime flavour unique to Islay whiskies.
+        </p>
+        <div class="highlight-box">
+          <p>
+            <strong>Peat accumulates at roughly 1mm per year.</strong> A 1-metre-deep peat bog took around 1,000 years to form.
+            The southern part of the island (around Laphroaig and Ardbeg) has the oldest, densest peat layers — and the highest phenol levels.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- map -->
+  <section id="map-section" class="section-pad" style="padding-top:0;" aria-label="Islay distillery map">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <span class="section-num">02</span>
+        <div>
+          <h2 class="section-title font-en">Distillery Map</h2>
+        </div>
+      </div>
+
+      <div id="distillery-map" aria-label="Map of Islay distillery locations"></div>
+
+    </div>
+  </section>
+
+  <!-- distilleries -->
+  <section id="distilleries" class="section-pad" aria-labelledby="distilleries-heading">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <span class="section-num">03</span>
+        <div>
+          <h2 class="section-title font-en" id="distilleries-heading">Distilleries</h2>
+        </div>
+      </div>
+
+      <div class="distillery-grid" data-stagger>
+
+        <!-- Bowmore -->
+        <article class="distillery-card" data-stagger-item>
+          <div class="distillery-card-header">
+            <div>
+              <h3 class="distillery-name font-en">Bowmore</h3>
+            </div>
+            <span class="distillery-founded font-en">Est. 1779</span>
+          </div>
+          <div class="distillery-card-body">
+            <div class="distillery-phenol">
+              <span class="phenol-label font-en">Phenol</span>
+              <div class="phenol-bar-wrap">
+                <div class="phenol-bar" style="width:45%"></div>
+              </div>
+              <span class="phenol-value font-en">~25 ppm</span>
+            </div>
+            <p class="distillery-desc">
+              Islay's oldest distillery, known as the "Queen of Islay." Located in Bowmore village, it has one of Scotland's
+              few maturation warehouses below sea level (No.1 Vaults). Floor malting continues today.
+              Balanced fruity smokiness from a mix of bourbon and sherry casks.
+            </p>
+            <div class="distillery-tags">
+              <span class="tech-badge">Beam Suntory</span>
+              <span class="tech-badge">Floor Malting</span>
+              <span class="tech-badge">Medium Peat</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Laphroaig -->
+        <article class="distillery-card" data-stagger-item>
+          <div class="distillery-card-header">
+            <div>
+              <h3 class="distillery-name font-en">Laphroaig</h3>
+            </div>
+            <span class="distillery-founded font-en">Est. 1815</span>
+          </div>
+          <div class="distillery-card-body">
+            <div class="distillery-phenol">
+              <span class="phenol-label font-en">Phenol</span>
+              <div class="phenol-bar-wrap">
+                <div class="phenol-bar" style="width:65%"></div>
+              </div>
+              <span class="phenol-value font-en">~40–45 ppm</span>
+            </div>
+            <p class="distillery-desc">
+              The "King of Islay." Its famously medicinal, iodine-heavy character is one of the most distinctive in all of Scotch.
+              Holds a Royal Warrant (King Charles III). Floor malting continues for ~25% of production.
+              Friends of Laphroaig members receive a square foot of land on the island.
+            </p>
+            <div class="distillery-tags">
+              <span class="tech-badge">Beam Suntory</span>
+              <span class="tech-badge">Floor Malting</span>
+              <span class="tech-badge">Royal Warrant</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ardbeg -->
+        <article class="distillery-card" data-stagger-item>
+          <div class="distillery-card-header">
+            <div>
+              <h3 class="distillery-name font-en">Ardbeg</h3>
+            </div>
+            <span class="distillery-founded font-en">Est. 1815</span>
+          </div>
+          <div class="distillery-card-body">
+            <div class="distillery-phenol">
+              <span class="phenol-label font-en">Phenol</span>
+              <div class="phenol-bar-wrap">
+                <div class="phenol-bar" style="width:78%"></div>
+              </div>
+              <span class="phenol-value font-en">~50–55 ppm</span>
+            </div>
+            <p class="distillery-desc">
+              Among Islay's heaviest peat expressions. Closed 1981–1997, its comeback story is legendary.
+              Now under LVMH. Celebrated for complexity within its smokiness.
+              The Ardbeg Committee fan club has hundreds of thousands of members worldwide.
+            </p>
+            <div class="distillery-tags">
+              <span class="tech-badge">LVMH</span>
+              <span class="tech-badge">Heavy Peat</span>
+              <span class="tech-badge">Revival Story</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Lagavulin -->
+        <article class="distillery-card" data-stagger-item>
+          <div class="distillery-card-header">
+            <div>
+              <h3 class="distillery-name font-en">Lagavulin</h3>
+            </div>
+            <span class="distillery-founded font-en">Est. 1816</span>
+          </div>
+          <div class="distillery-card-body">
+            <div class="distillery-phenol">
+              <span class="phenol-label font-en">Phenol</span>
+              <div class="phenol-bar-wrap">
+                <div class="phenol-bar" style="width:60%"></div>
+              </div>
+              <span class="phenol-value font-en">~35–40 ppm</span>
+            </div>
+            <p class="distillery-desc">
+              Gaelic: "hollow by the mill." One of Diageo's Classic Malts six. Known for exceptionally long distillation runs
+              and extended fermentation. The Lagavulin 16 Year is sherry-forward. Gained US popularity after appearing in Parks &amp; Recreation.
+            </p>
+            <div class="distillery-tags">
+              <span class="tech-badge">Diageo</span>
+              <span class="tech-badge">Long Distillation</span>
+              <span class="tech-badge">Sherry Forward</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Port Ellen -->
+        <article class="distillery-card" data-stagger-item>
+          <div class="distillery-card-header">
+            <div>
+              <h3 class="distillery-name font-en">Port Ellen</h3>
+            </div>
+            <span class="distillery-founded font-en">Est. 1825</span>
+          </div>
+          <div class="distillery-card-body">
+            <div class="distillery-phenol">
+              <span class="phenol-label font-en">Phenol</span>
+              <div class="phenol-bar-wrap">
+                <div class="phenol-bar" style="width:55%"></div>
+              </div>
+              <span class="phenol-value font-en">~35 ppm (historic)</span>
+            </div>
+            <p class="distillery-desc">
+              Closed in 1983, reopened in 2023 after a £100m Diageo investment.
+              As a "ghost distillery," annual releases fetched six-figure sums.
+              The adjacent Port Ellen Maltings supplied malt to Ardbeg and Lagavulin throughout the closure.
+            </p>
+            <div class="distillery-tags">
+              <span class="tech-badge">Diageo</span>
+              <span class="tech-badge">Reopened 2023</span>
+              <span class="tech-badge">Rare &amp; Collectible</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Caol Ila -->
+        <article class="distillery-card" data-stagger-item>
+          <div class="distillery-card-header">
+            <div>
+              <h3 class="distillery-name font-en">Caol Ila</h3>
+            </div>
+            <span class="distillery-founded font-en">Est. 1846</span>
+          </div>
+          <div class="distillery-card-body">
+            <div class="distillery-phenol">
+              <span class="phenol-label font-en">Phenol</span>
+              <div class="phenol-bar-wrap">
+                <div class="phenol-bar" style="width:55%"></div>
+              </div>
+              <span class="phenol-value font-en">~35 ppm</span>
+            </div>
+            <p class="distillery-desc">
+              Gaelic: "Sound of Islay." Islay's highest-volume distillery. Much of the output feeds Johnnie Walker blends.
+              Also produces unpeated spirit. Spectacular views across to Jura.
+              Considered a hidden gem by whisky enthusiasts.
+            </p>
+            <div class="distillery-tags">
+              <span class="tech-badge">Diageo</span>
+              <span class="tech-badge">Highest Volume</span>
+              <span class="tech-badge">Scenic Views</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Bruichladdich -->
+        <article class="distillery-card" data-stagger-item>
+          <div class="distillery-card-header">
+            <div>
+              <h3 class="distillery-name font-en">Bruichladdich</h3>
+            </div>
+            <span class="distillery-founded font-en">Est. 1881</span>
+          </div>
+          <div class="distillery-card-body">
+            <div class="distillery-phenol">
+              <span class="phenol-label font-en">Phenol</span>
+              <div class="phenol-bar-wrap">
+                <div class="phenol-bar" style="width:5%"></div>
+              </div>
+              <span class="phenol-value font-en">0–5 ppm (Classic)</span>
+            </div>
+            <p class="distillery-desc">
+              Gaelic: "shore on the slope." Three distinct lines: Bruichladdich (unpeated), Port Charlotte (~40ppm),
+              and Octomore (world's most heavily peated, 100–300+ ppm).
+              Under Rémy Cointreau. Committed to using 100% Scottish barley.
+            </p>
+            <div class="distillery-tags">
+              <span class="tech-badge">Rémy Cointreau</span>
+              <span class="tech-badge">Octomore</span>
+              <span class="tech-badge">Unpeated → Ultra Heavy</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Bunnahabhain -->
+        <article class="distillery-card" data-stagger-item>
+          <div class="distillery-card-header">
+            <div>
+              <h3 class="distillery-name font-en">Bunnahabhain</h3>
+            </div>
+            <span class="distillery-founded font-en">Est. 1881</span>
+          </div>
+          <div class="distillery-card-body">
+            <div class="distillery-phenol">
+              <span class="phenol-label font-en">Phenol</span>
+              <div class="phenol-bar-wrap">
+                <div class="phenol-bar" style="width:5%"></div>
+              </div>
+              <span class="phenol-value font-en">~2–3 ppm (main)</span>
+            </div>
+            <p class="distillery-desc">
+              Gaelic: "mouth of the river." Islay's most remote distillery, at the north-east tip.
+              Primarily unpeated with sherry maturation — the "gentle Islay." Tallest pot stills on the island.
+              The remote setting is a large part of its appeal.
+            </p>
+            <div class="distillery-tags">
+              <span class="tech-badge">Distell</span>
+              <span class="tech-badge">Unpeated</span>
+              <span class="tech-badge">Sherry Matured</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Kilchoman -->
+        <article class="distillery-card" data-stagger-item>
+          <div class="distillery-card-header">
+            <div>
+              <h3 class="distillery-name font-en">Kilchoman</h3>
+            </div>
+            <span class="distillery-founded font-en">Est. 2005</span>
+          </div>
+          <div class="distillery-card-body">
+            <div class="distillery-phenol">
+              <span class="phenol-label font-en">Phenol</span>
+              <div class="phenol-bar-wrap">
+                <div class="phenol-bar" style="width:78%"></div>
+              </div>
+              <span class="phenol-value font-en">~50 ppm</span>
+            </div>
+            <p class="distillery-desc">
+              Islay's first new distillery in 124 years. Family-owned farm distillery — barley grown, malted,
+              distilled, matured and bottled all on site. Maintains floor malting. Known for Machir Bay and Sanaig expressions.
+            </p>
+            <div class="distillery-tags">
+              <span class="tech-badge">Family Owned</span>
+              <span class="tech-badge">Farm Distillery</span>
+              <span class="tech-badge">Floor Malting</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Ardnahoe -->
+        <article class="distillery-card" data-stagger-item>
+          <div class="distillery-card-header">
+            <div>
+              <h3 class="distillery-name font-en">Ardnahoe</h3>
+            </div>
+            <span class="distillery-founded font-en">Est. 2019</span>
+          </div>
+          <div class="distillery-card-body">
+            <div class="distillery-phenol">
+              <span class="phenol-label font-en">Phenol</span>
+              <div class="phenol-bar-wrap">
+                <div class="phenol-bar" style="width:62%"></div>
+              </div>
+              <span class="phenol-value font-en">~40 ppm</span>
+            </div>
+            <p class="distillery-desc">
+              Islay's newest distillery, perched on a hilltop near the north-east coast with panoramic views of Jura.
+              Employs worm tub condensers (rare today) and extended 65–70hr fermentation for meaty, spicy complexity.
+              Wooden washbacks. Owned by Hunter Laing &amp; Co.
+            </p>
+            <div class="distillery-tags">
+              <span class="tech-badge">Hunter Laing</span>
+              <span class="tech-badge">Long Fermentation</span>
+              <span class="tech-badge">Worm Tub</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Laggan Bay -->
+        <article class="distillery-card" data-stagger-item>
+          <div class="distillery-card-header">
+            <div>
+              <h3 class="distillery-name font-en">Laggan Bay</h3>
+            </div>
+            <span class="distillery-founded font-en">Est. 2026</span>
+          </div>
+          <div class="distillery-card-body">
+            <div class="distillery-phenol">
+              <span class="phenol-label font-en">Phenol</span>
+              <div class="phenol-bar-wrap">
+                <div class="phenol-bar" style="width:100%;background:repeating-linear-gradient(45deg,rgba(176,184,200,0.55) 0 5px,transparent 5px 10px);"></div>
+              </div>
+              <span class="phenol-value font-en">Undisclosed</span>
+            </div>
+            <p class="distillery-desc">
+              Islay's 11th distillery, which filled its first cask on 2 April 2026. It sits beside Islay Airport in Glenegedale,
+              overlooking Laggan Bay midway between Bowmore and Port Ellen.
+              Built by Ian Macleod Distillers — the Russell family behind Glengoyne, Tamdhu and Rosebank.
+              Under Islay-born manager Malcolm Rennie it makes a heavily peated malt at up to 1 million litres of pure alcohol a year,
+              aiming "not to replicate what Islay already has, but to add to it."
+            </p>
+            <div class="distillery-tags">
+              <span class="tech-badge">Ian Macleod</span>
+              <span class="tech-badge">Heavy Peat</span>
+              <span class="tech-badge">Est. 2026</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- 12th distillery note -->
+      <div class="reveal" style="margin-top:8px;margin-bottom:clamp(48px,6vw,72px);padding:16px 20px;background:rgba(176,184,200,0.07);border:1px solid rgba(176,184,200,0.22);border-left:3px solid #b0b8c8;border-radius:var(--radius-sm);max-width:640px;">
+        <p style="margin:0;font-size:var(--fs-sm);color:var(--c-text-muted);line-height:1.75;">
+          <strong style="color:var(--c-text);">Portintruan</strong>
+          <span style="font-size:var(--fs-xs);background:rgba(176,184,200,0.18);color:#8890a0;border-radius:3px;padding:1px 6px;margin-left:6px;font-family:var(--font-en);letter-spacing:0.04em;">Under construction</span><br>
+          A 12th distillery taking shape near Port Ellen.
+          Led by Elixir Distillers — the independent bottler behind <em>Elements of Islay</em> and <em>Port Askaig</em> —
+          the project signals that Islay's distillery story is far from over.
+          Still under construction as of 2026; production details and a confirmed opening date are yet to be announced.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- journal placeholder -->
+  <section id="journal" class="section-pad" aria-labelledby="journal-heading" style="border-top:1px solid var(--c-border);">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-num">04</span>
+        <div>
+          <h2 class="section-title font-en" id="journal-heading">Travel Journal</h2>
+        </div>
+      </div>
+      <div style="text-align:center;padding:clamp(48px,6vw,80px) 0;" class="reveal">
+        <span style="font-size:48px;display:block;margin-bottom:16px;" aria-hidden="true">🧳</span>
+        <h3 style="font-size:var(--fs-xl);font-weight:600;margin-bottom:12px;">Travel Journal — Coming Soon</h3>
+        <p style="color:var(--c-text-muted);max-width:440px;margin:0 auto;line-height:1.7;">
+          My trip to Islay is still ahead. After visiting, I'll share distillery reports,
+          travel notes, and tasting journal entries here.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="islay-footer" role="contentinfo">
+    <div class="container">
+      <div class="islay-footer-inner">
+        <p class="islay-footer-brand">Isle of Islay — Scotch Whisky Guide</p>
+        <div class="islay-footer-lang" aria-label="Language switcher">
+          <button class="lang-btn" data-lang="ja" aria-label="日本語">🇯🇵</button>
+          <span class="lang-divider" aria-hidden="true">|</span>
+          <button class="lang-btn active" data-lang="en" aria-label="English">🇺🇸<span style="font-size:11px;opacity:0.5;margin-left:1px">🇬🇧</span></button>
+        </div>
+      </div>
+      <div class="islay-footer-bottom">
+        <p class="islay-footer-copy">&copy; 2026 Hibiki Shimizu. All rights reserved.</p>
+        <a href="https://hibikishimizu.com" target="_blank" rel="noopener" class="islay-footer-credit">hibikishimizu.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="../../assets/js/main.js"></script>
+  <script src="../../assets/js/pages/islay.js"></script>
+</body>
+</html>

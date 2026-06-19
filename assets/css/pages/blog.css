@@ -1,0 +1,309 @@
+/* blog.css — blog list page「雑記帖・目次」 */
+
+.blog-page {
+  padding-top: var(--nav-height);
+}
+
+/* hero — 雑誌の扉 */
+#blog-hero {
+  padding: clamp(72px, 11vw, 130px) 0 clamp(40px, 5vw, 64px);
+  position: relative;
+  border-bottom: 1px solid var(--c-text);
+}
+
+.blog-hero-ambient { display: none; }
+
+.blog-hero-content { position: relative; z-index: 1; }
+
+.blog-hero-eyebrow {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #F6F1E5;
+  background: var(--c-accent);
+  font-family: var(--font-en);
+  padding: 4px 10px;
+  transform: rotate(-1.5deg);
+  box-shadow: 2px 2px 0 rgba(33, 29, 23, 0.2);
+  margin-bottom: 22px;
+}
+
+.blog-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 8vw, 96px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  margin-bottom: 16px;
+  position: relative;
+  display: inline-block;
+}
+
+/* 題字脇の縦書き朱字 */
+.blog-hero-title::after {
+  content: '雑記帖';
+  position: absolute;
+  top: 0;
+  right: -1.6em;
+  writing-mode: vertical-rl;
+  font-size: clamp(11px, 1.4vw, 14px);
+  font-weight: 600;
+  letter-spacing: 0.5em;
+  color: var(--c-accent);
+  border-left: 1px solid var(--c-border);
+  padding-left: 10px;
+}
+
+.blog-hero-sub {
+  font-size: var(--fs-base);
+  color: var(--c-text-muted);
+  max-width: 560px;
+  line-height: 2;
+}
+
+/* tag filter — 仕分けの活字 */
+.blog-tags-filter {
+  display: flex;
+  gap: 0;
+  flex-wrap: wrap;
+  margin: 0 0 clamp(40px, 5vw, 60px);
+  border: 1px solid var(--c-border);
+  background: var(--c-bg-2);
+  width: fit-content;
+}
+
+.tag-filter-btn {
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--c-border);
+  border-radius: 0;
+  color: var(--c-text-muted);
+  font-family: var(--font-en);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.tag-filter-btn:last-child { border-right: none; }
+
+.tag-filter-btn:hover {
+  color: var(--c-text);
+  background: var(--c-bg-3);
+}
+
+.tag-filter-btn.active {
+  background: var(--c-text);
+  border-color: var(--c-text);
+  color: var(--c-bg);
+}
+
+/* blog list — 目次組み */
+.blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: clamp(80px, 10vw, 120px);
+  border-top: 1px solid var(--c-text);
+}
+
+.blog-post-item {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  gap: 24px;
+  align-items: start;
+  padding: 26px 8px;
+  border-bottom: 1px solid var(--c-border);
+  text-decoration: none;
+  transition: background 0.2s;
+  position: relative;
+}
+
+.blog-post-item:hover {
+  background: var(--c-bg-2);
+  padding-left: 8px;
+  padding-right: 8px;
+  margin: 0;
+}
+
+.blog-post-item:hover .post-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 640px) {
+  .blog-post-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+.post-date {
+  font-size: var(--fs-xs);
+  color: var(--c-text-faint);
+  font-family: var(--font-en);
+  letter-spacing: 0.06em;
+  padding-top: 5px;
+  white-space: nowrap;
+}
+
+.post-body {
+  flex: 1;
+}
+
+.post-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.post-tag {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+  background: transparent;
+  border: 1px solid var(--c-accent);
+  border-radius: 0;
+  padding: 2px 8px;
+  font-family: var(--font-en);
+  transform: rotate(-1deg);
+}
+
+.post-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--c-text);
+  line-height: 1.6;
+  margin-bottom: 6px;
+  transition: color 0.2s;
+}
+
+.blog-post-item:hover .post-title {
+  color: var(--c-accent);
+}
+
+.post-excerpt {
+  font-size: var(--fs-sm);
+  color: var(--c-text-muted);
+  line-height: 1.9;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-arrow {
+  font-size: 18px;
+  color: var(--c-accent);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.2s, transform 0.2s;
+  align-self: center;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .post-arrow { display: none; }
+}
+
+/* empty state / coming soon — 「近日刊行」 */
+.blog-coming-soon {
+  text-align: center;
+  padding: clamp(60px, 8vw, 100px) 24px;
+  border: 1px solid var(--c-border);
+  background: var(--c-bg-2);
+  position: relative;
+}
+
+.blog-coming-soon::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid var(--c-border-2);
+  pointer-events: none;
+}
+
+.blog-coming-icon {
+  font-size: 30px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  margin-inline: auto;
+  background: transparent;
+  border: 1px solid var(--c-accent);
+  color: var(--c-accent);
+  transform: rotate(45deg);
+}
+
+.blog-coming-icon i {
+  transform: rotate(-45deg);
+}
+
+.blog-coming-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--c-text);
+  margin-bottom: 12px;
+}
+
+.blog-coming-sub {
+  font-size: var(--fs-sm);
+  color: var(--c-text-muted);
+  max-width: 440px;
+  margin: 0 auto;
+  line-height: 2;
+}
+
+/* pagination — ノンブル */
+.blog-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  padding: clamp(32px, 4vw, 48px) 0 clamp(80px, 10vw, 120px);
+}
+
+.page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 0;
+  border: 1px solid var(--c-border);
+  margin-left: -1px;
+  background: var(--c-bg-2);
+  color: var(--c-text-muted);
+  font-family: var(--font-en);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.page-btn:hover {
+  background: var(--c-bg-3);
+  color: var(--c-text);
+}
+
+.page-btn.active {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: #F6F1E5;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+}
