@@ -1,9 +1,7 @@
 # 響 — Hibiki Shimizu · Portfolio
 
 The source of my personal portfolio site, live at **[hibikishimizu.com](https://hibikishimizu.com)**.
-A bilingual (日本語 / English), hand-built site with no framework — just vanilla HTML, CSS and JavaScript, with a small PHP backend for the contact form and blog.
-
-> 志水 響のポートフォリオサイトのソースです。フレームワークを使わず、HTML / CSS / JavaScript と少量の PHP で構築しています。
+A bilingual (日本語 / English), hand-built site with no framework, but with vanilla HTML, CSS and JavaScript, with a small PHP backend for the contact form and blog.
 
 ---
 
@@ -88,5 +86,3 @@ php -r "echo password_hash('your-password', PASSWORD_BCRYPT), PHP_EOL;"
 Code is shared for reference. Site content, text, photographs and design are © Hibiki Shimizu — please don't reuse them without permission.
 
 ---
-
-*Built by hand. 洗練は、実装に宿る。*
