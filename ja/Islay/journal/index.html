@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- GA4 loaded dynamically after cookie consent (see main.js) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アイラ島 旅行記 — アイラウイスキー完全ガイド</title>
+  <meta name="description" content="ウイスキーに溺れた3泊4日。志水響が11の蒸留所を巡ったアイラ島旅行記。ラガヴーリン・ボウモア・キルホーマンからラガンベイまで、写真とともに綴る島の記録。">
+  <link rel="canonical" href="https://hibikishimizu.com/ja/Islay/journal/">
+  <link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/Islay/journal/">
+  <link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/Islay/journal/">
+
+  <meta property="og:type"        content="article">
+  <meta property="og:url"         content="https://hibikishimizu.com/ja/Islay/journal/">
+  <meta property="og:title"       content="アイラ島 旅行記 — ウイスキーに溺れた4日間">
+  <meta property="og:description" content="11の蒸留所を巡った、3泊4日のアイラ島旅行記。写真とともに。">
+  <meta property="og:image"       content="https://hibikishimizu.com/assets/images/islay-journal/lagavulin.jpg">
+  <meta property="og:locale"      content="ja_JP">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
+  <link rel="stylesheet" href="../../../assets/css/global.css">
+  <link rel="stylesheet" href="../../../assets/css/pages/islay.css">
+</head>
+<body class="islay-page islay-sub">
+  <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
+
+  <div id="cookie-banner" role="dialog" aria-label="Cookie利用についての通知">
+    <p class="cookie-text">このサイトはアクセス解析のためCookieを使用することがあります。詳しくは<a href="/ja/privacy/">プライバシーポリシー</a>をご覧ください。</p>
+    <div class="cookie-actions">
+      <button class="cookie-accept" id="cookie-accept">同意する</button>
+      <button class="cookie-reject" id="cookie-reject">拒否する</button>
+    </div>
+  </div>
+
+  <nav id="islay-top" role="navigation" aria-label="アイラガイドナビゲーション">
+    <div class="container islay-top-inner">
+      <a href="/ja/Islay/" class="islay-wordmark">Isle of Islay</a>
+      <div class="islay-top-right">
+        <a href="/ja/" class="islay-by-link">志水 響 著</a>
+        <div class="nav-lang" aria-label="言語切替">
+          <button class="lang-btn active" data-lang="ja" aria-label="日本語">🇯🇵</button>
+          <span class="lang-divider" aria-hidden="true">|</span>
+          <button class="lang-btn" data-lang="en" aria-label="English">🇺🇸<span style="font-size:12px;opacity:0.5;margin-left:1px">🇬🇧</span></button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="islay-subnav" aria-label="アイラガイドナビゲーション">
+    <div class="islay-subnav-inner">
+      <a href="/ja/Islay/" class="islay-nav-link"><i class="ph ph-map-pin"></i> 概要・蒸留所</a>
+      <a href="/ja/Islay/history/" class="islay-nav-link"><i class="ph ph-castle-turret"></i> アイラ島の歴史</a>
+      <a href="/ja/Islay/whisky-history/" class="islay-nav-link"><i class="ph ph-scroll"></i> ウイスキーの歴史</a>
+      <a href="/ja/Islay/process/" class="islay-nav-link"><i class="ph ph-flask"></i> 法律と製造プロセス</a>
+      <a href="/ja/Islay/enjoy/" class="islay-nav-link"><i class="ph ph-wine"></i> 飲み方と楽しみ方</a>
+      <a href="/ja/Islay/journal/" class="islay-nav-link active"><i class="ph ph-camera"></i> 旅行記</a>
+      <a href="/ja/Islay/appendix/" class="islay-nav-link"><i class="ph ph-book-open"></i> 付録</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div id="main-content"></div>
+  <section id="islay-hero" aria-labelledby="page-title" style="padding-bottom:clamp(40px,5vw,60px);">
+    <div class="islay-hero-bg" aria-hidden="true">
+      <img class="islay-hero-map" src="../../../assets/images/islay-hero-maps.webp" alt="" decoding="async" loading="eager">
+      <div class="islay-hero-scrim"></div>
+      <div class="islay-ocean-gradient"></div>
+    </div>
+    <div class="container">
+      <div class="islay-hero-content">
+        <p class="islay-hero-label reveal font-en">Isle of Islay — Travel Journal</p>
+        <h1 class="islay-hero-title reveal" id="page-title" style="font-size:clamp(36px,6vw,64px);">アイラ島 旅行記</h1>
+        <p class="islay-hero-sub reveal">ウイスキーに溺れた、3泊4日。<br>11の蒸留所が点在する小さな島を巡った記録。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <div class="container">
+    <div class="islay-content journal-content reveal">
+
+      <!-- table of contents -->
+      <nav class="j-toc" aria-label="目次">
+        <p class="j-toc-title">目次</p>
+        <ul class="j-toc-list">
+          <li><a href="#j-intro"><span class="j-toc-label">はじめに</span></a></li>
+          <li><a href="#j-day1"><span class="j-toc-label">1日目</span><span class="j-toc-spots">ラガヴーリン、アードベッグ、ラフロイグ</span></a></li>
+          <li><a href="#j-day2"><span class="j-toc-label">2日目</span><span class="j-toc-spots">ボウモア、キルホーマン、ブルックラディー</span></a></li>
+          <li><a href="#j-day3"><span class="j-toc-label">3日目</span><span class="j-toc-spots">ブナハーブン、アードナッホー、カリラ</span></a></li>
+          <li><a href="#j-day4"><span class="j-toc-label">4日目</span><span class="j-toc-spots">ポートエレン、ラガンベイ</span></a></li>
+          <li><a href="#j-outro"><span class="j-toc-label">おわりに</span></a></li>
+        </ul>
+      </nav>
+
+      <h2 id="j-intro">はじめに</h2>
+      <p>
+        お酒を飲み始めた頃から、ずっとウイスキーに惹かれていました。行きつけのバーで、一本のボトルの裏側に広がる奥深い世界を教わり、「酒を飲むことは情報を飲むことだ」という言葉に出会ってから、すっかりこの世界に夢中になりました。テイスティング会に通い、バーを巡り、いつしか「自分もこういう店で働きたい」という思いが募って、イギリス留学前の1年半は大阪のアイリッシュパブで働いていました。
+      </p>
+      <p>
+        スコッチとビールを中心に出す店で、マスターはアイルランド、そしてアイラ島を何度も訪れた人でした。彼の話を聞くうちに、「留学したら、絶対に自分もアイラへ行く」と心に決めていたのです。
+      </p>
+      <p>
+        そんな折、ウォーリック大学で集まった日本人の仲間たちとの会話で、ふとアイラ島の蒸留所巡りの話が持ち上がりました。迷わずその波に乗り、結果として総勢7人でのアイラ島旅行が実現。これが、僕が旅に出ることになった経緯です。たくさんの経験を詰め込んだので少し長い旅行記になりますが、お付き合いいただけると嬉しいです。
+      </p>
+
+      <h2>島へ、そして島での歩き方</h2>
+      <p>
+        アイラ島へ渡るには、フェリーか飛行機（プロペラ機）の二択です。フェリーはスコットランド本土からポートエレン、またはポートアスケイグへ1日数本出ていますが、それなりに時間がかかります。飛行機はグラスゴーから1日2便（朝7時頃と夕方19時頃の往復）、片道およそ50分で着きます。
+      </p>
+      <p>
+        島内の移動手段は、バス・個人タクシー・Uber（ボウモア以外ではほぼ当てになりません）。バスは1日8本ほどあって安く、意外と便利です。ただし、ボウモア〜ポートエレン間は本数があるものの、ポートアスケイグ〜アードベッグ間となると1日4本ほどしかありません。おすすめは、少し値は張るけれど融通の利く個人タクシー。島には個人タクシーを営む人が多いので、ネットで探して予約しておくと安心です。僕は <strong>Bodachs Islay Taxi</strong> を利用しました。アーサー（Arthur）という運転手さんが対応してくれて、とにかくサービスが最高でした。
+      </p>
+      <div class="highlight-box">
+        <p>
+          島の経済は、その9割以上がウイスキー産業です。それほどまでに島の人々の暮らしはウイスキーと一体で、聞くところによると、70歳以上の島民はみな、かつてどこかの蒸留所で働いていたのだとか。ちなみにタクシーのアーサーも、昔はポートエレンで働いていたそうです。
+        </p>
+      </div>
+      <p>
+        スコットランドには酒類に関する法律があり、その一つに「酒の販売は午前10時から」という決まりがあります。提供されるウイスキーは基本的にストレートで、その一杯を「ドラム（dram）」と呼びます。1ドラムは25mlか45mlで出されることがほとんどです。
+      </p>
+
+      <!-- ===== Day 1 ===== -->
+      <div class="j-day first" id="j-day1">
+        <span class="j-day-num">Day 1</span>
+        <h2 class="j-day-title">キルダルトンの三兄弟</h2>
+        <span class="j-day-date">2026.04.07 — Tue</span>
+      </div>
+      <p class="j-route"><b>Route</b>空港 → ラフロイグのコテージ → ラガヴーリン（ツアー）→ アードベッグ（ランチ・テイスティング）→ ラフロイグ（ショップ）→ ポートエレン（Sea Saltで夕食）</p>
+
+      <p>
+        朝、グラスゴーからプロペラ機に乗り込み、フライトはおよそ40分で島へ到着しました。空港に降り立つと、予約していたタクシーのアーサーがすでに迎えに来てくれています。車に乗り込み、まずは荷物を置きに、宿泊先であるラフロイグのコテージ（Airbnbで予約）へ。道中、やけに道がデコボコしているなと思ったら、アイラ島の土壌は8割以上がピートでできていて地盤が緩く、そのせいで路面が波打ってしまうのだそうです。
+      </p>
+
+      <figure class="j-fig center">
+        <img src="../../../assets/images/islay-journal/lagavulin.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="The walk up to Lagavulin">
+        <figcaption class="j-cap">The walk up to Lagavulin</figcaption>
+      </figure>
+      <p>
+        荷物を置いたあとは、ラガヴーリン蒸留所まで歩いて向かいます。アードベッグ・ラガヴーリン・ラフロイグはアイラ島南部に一列で並び、「キルダルトンの三兄弟」とも呼ばれています。ラフロイグから東へ30分ほど歩くと、ラガヴーリンに到着しました。
+      </p>
+      <p>
+        参加したのはテイスティングツアー。撮影禁止で、しかも動画をずっと回していたので、中の様子を紹介できないのが残念です。唯一撮影を許されたのが、テイスティング会場となるウェアハウス3番の入り口でした。
+      </p>
+
+      <div class="j-grid">
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/lagavulin_warehouse.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="Warehouse No.3, the one spot we could photograph">
+          <figcaption class="j-cap">Warehouse No.3 — the one spot we could photograph</figcaption>
+        </figure>
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/lagavulin_tasting.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="The tour's tasting line-up">
+          <figcaption class="j-cap">The tour's tasting line-up</figcaption>
+        </figure>
+      </div>
+
+      <p>
+        この樽の奥にテイスティングスペースがあり、ツアー専用の、まだボトリングされていない樽が4つ。それぞれを飲み比べていきます。ラインナップは上の写真の通りです。
+      </p>
+      <p>
+        10時半ごろ、いよいよツアーが始まりました。まずストレートグラスと缶入りの水が配られます。樽からヴァリンチ（原酒を直接抜き取るための、銅製で細長い筒状の道具）でウイスキーをビーカーに取り出し、自分のグラスに注いで味わう仕組みです。それがまあ、かなりのペースでかなりの量を飲まされるもので、誰も予期していなかったアルハラ（？）に、一同びっくりしました。
+      </p>
+
+      <div class="j-grid">
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/lagavulin_shop.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="Inside the Lagavulin shop">
+          <figcaption class="j-cap">Inside the Lagavulin shop</figcaption>
+        </figure>
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/lagavulin_from_outside.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="Lagavulin from afar, the sign under repair">
+          <figcaption class="j-cap">Lagavulin from afar (the sign was under repair)</figcaption>
+        </figure>
+      </div>
+      <p>
+        ツアーのあとはショップでお土産を物色。自分で詰められる限定のハンドボトリングに、限定ボトル、バーグッズ、グラス、コーヒー、さらにはパーカーやキャラメルまで、ありとあらゆるグッズが揃っていました。
+      </p>
+      <p>
+        蒸留所といえばお決まりの、海岸に面した大きな蒸留所名のサイン。写真を撮ろうと意気込んでいたら、まさかの工事中で「2週間ほど入れない」と言われてしまいました。タイミングが悪い……。とはいえ、アードベッグからの帰り道に少し離れた場所から撮れたので、その一枚を載せておきます。
+      </p>      
+
+      <p>
+        ラガヴーリンを出て、続いて歩いてアードベッグ蒸留所へ。
+      </p>
+      <figure class="j-fig center">
+        <img src="../../../assets/images/islay-journal/ardbeg.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="Ardbeg distillery">
+        <figcaption class="j-cap">Ardbeg</figcaption>
+      </figure>
+      <p>
+        アードベッグではツアーには参加しませんでしたが、フードバンでランチをとりました。鹿肉のサンドと、パイ生地に包まれたシチューです。イギリスではいろんな料理に玉ねぎの酢漬けが添えられるのですが、このサンドにもたっぷり入っていて、その玉ねぎが全体の9割を占めていました。おかげで、正直「玉ねぎを食べた」記憶しか残っていません。
+      </p>
+      <div class="j-grid">
+        <figure class="j-fig sq">
+          <img src="../../../assets/images/islay-journal/ardbeg_lunch.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="Lunch from the Ardbeg food van">
+          <figcaption class="j-cap">Lunch from the Ardbeg food van</figcaption>
+        </figure>
+        <figure class="j-fig sq">
+          <img src="../../../assets/images/islay-journal/ardbeg_tasting.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="A flight of rare Ardbegs">
+          <figcaption class="j-cap">A flight of rare Ardbegs</figcaption>
+        </figure>
+      </div>
+      <p>
+        ランチのあとは、ショップと同じ部屋にあるバーカウンターでテイスティングセットを注文。10種類ほど、珍しいアードベッグたちをじっくり堪能しました。
+      </p>
+      
+      <p>
+        飲んでいると、陽気な店員さんが特別にアードベッグ23年のテイスティングをお裾分けしてくれました。アードベッグもやはり工事中で、海岸側からの景色は撮れず（反対岸もなかったので、こちらは写真なし）。それからまた、1時間かけてラフロイグまで歩いて戻ります。
+      </p>
+
+      <div class="j-grid">
+        <figure class="j-fig sq">
+          <img src="../../../assets/images/islay-journal/laphroaig.jpg" width="1400" height="788" loading="lazy" decoding="async" alt="Laphroaig">
+          <figcaption class="j-cap">Laphroaig</figcaption>
+        </figure>
+        <figure class="j-fig sq">
+          <img src="../../../assets/images/islay-journal/laphroaig_shop.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="The Laphroaig shop">
+          <figcaption class="j-cap">The Laphroaig shop</figcaption>
+        </figure>
+      </div>
+      <p>
+        ラフロイグではまず外観を撮影し、それからショップへ。バッグ、真冬用のコート（コートにしては約£65とめちゃくちゃ安かったので即購入）、Tシャツを買いました。
+      </p>
+      
+      <p>
+        コテージに戻って少し休んだあと、ポートエレン（島で2番目に大きい町）の <strong>Sea Salt</strong> へ夕食をとりに、また1時間歩きます。アイラ島のビールと、スコットランド産のタラで作った最強に旨いフィッシュ＆チップスを味わいました。
+      </p>
+      <figure class="j-fig center tall sq">
+        <img src="../../../assets/images/islay-journal/sea_salt_fish_and_chips.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="Fish and chips at Sea Salt, Port Ellen">
+        <figcaption class="j-cap">Fish &amp; chips at Sea Salt, Port Ellen</figcaption>
+      </figure>
+      <p>
+        食後は近くのスーパー「Co-op」で翌日以降の朝食などを買い込み、帰りはたまたま通りかかったアーサーがコテージまで送ってくれて、1日目が終了しました。
+      </p>
+
+      <!-- ===== Day 2 ===== -->
+      <div class="j-day" id="j-day2">
+        <span class="j-day-num">Day 2</span>
+        <h2 class="j-day-title">海抜0mの樽と、牢屋のテイスティングルーム</h2>
+        <span class="j-day-date">2026.04.08 — Wed</span>
+      </div>
+      <p class="j-route"><b>Route</b>朝食 → ボウモア（ツアー・テイスティング）→ マキヤーベイ → キルホーマン（ランチ）→ ブルックラディー → ウーレンミル → ボウモアで買い物 → コテージでディナー</p>
+
+      <figure class="j-fig center">
+        <img src="../../../assets/images/islay-journal/bowmore_entrance.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="The entrance to Bowmore">
+        <figcaption class="j-cap">The entrance to Bowmore</figcaption>
+      </figure>
+      <p>
+        2日目。朝食を済ませると、アーサーが迎えに来てくれてボウモア蒸留所へ。着くやいなや、すぐにツアーが始まりました。ここも動画撮影は禁止ですが写真はOKとのことだったので、動画が作れそうなくらい撮りまくりました。本来ならモルティングルームを見られるはずが、なぜか扉が閉まっていて、代わりにキルンルームへ案内されました。
+      </p>
+
+      <div class="j-grid">
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/bowmore_kiln.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="The Bowmore kiln">
+          <figcaption class="j-cap">The Bowmore kiln</figcaption>
+        </figure>
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/bowmore_inside_kiln.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="Inside the kiln">
+          <figcaption class="j-cap">Inside the kiln</figcaption>
+        </figure>
+      </div>
+      <p>
+        キルンの中にはピートを焚く場所が2か所あり、1日3回、モルトを乾燥させるために使われるそうです。ここはYouTuberのちゃんぽんちからさんのアイラ島訪問動画にも映っていた場所で、勝手に興奮してしまいました。
+      </p>
+
+      <div class="j-grid">
+        <figure class="j-fig sq">
+          <img src="../../../assets/images/islay-journal/bowmore_vaults.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="The No.1 Vaults, at sea level">
+          <figcaption class="j-cap">The No.1 Vaults, at sea level</figcaption>
+        </figure>
+        <figure class="j-fig sq">
+          <img src="../../../assets/images/islay-journal/bowmore_inside_vault.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="Endless casks in the vaults">
+          <figcaption class="j-cap">Endless casks in the vaults</figcaption>
+        </figure>
+      </div>
+      <p>
+        次に向かったのは、海抜0mのウェアハウス「No.1 Vaults」。樽が無限に並ぶ光景の中には、試作用に寝かされた、かつて山崎が入っていた日本のミズナラ樽で熟成させているボウモアまでありました。将来的に発売されたら、ぜひ飲んでみたいものです。
+      </p>
+
+      <div class="j-grid">
+        <figure class="j-fig sq">
+          <img src="../../../assets/images/islay-journal/bowmore_tour.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="The caged tasting room">
+          <figcaption class="j-cap">The caged tasting room</figcaption>
+        </figure>
+        <figure class="j-fig sq">
+          <img src="../../../assets/images/islay-journal/bowmore_tasting.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="Three drams: bourbon, red wine, sherry">
+          <figcaption class="j-cap">Three drams — bourbon, red wine, sherry</figcaption>
+        </figure>
+      </div>
+      <p>
+        いよいよテイスティングルームへ。ここは牢屋のように格子で囲われていて、この区画でしかお酒を飲むことが許されていないそうです。スコットランドでは酒の扱いが非常に厳しく、樽の中の原酒はまだ販売用の税が課されていないため、決められたエリア以外では飲めないのです。
+      </p>
+      <p>
+        用意されたのは3種類。1種ずつ、原酒の説明から樽の説明までを受けながら味わい、最後には一番気に入った樽のウイスキーを、自分でボトリングまでさせてもらえました。
+      </p>
+      
+      <p>
+        左からバーボン樽、レッドワイン樽、シェリー樽。色の違いがわかると思います。ちなみに僕が選んだのは、右のシェリー樽のウイスキーでした。
+      </p>
+      <figure class="j-fig center">
+        <img src="../../../assets/images/islay-journal/bowmore_bottled.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="Our hand-filled little bottles">
+        <figcaption class="j-cap">Our hand-filled wee bottles</figcaption>
+      </figure>
+      <p>
+        テイスティングルームからボウモアのバーへ移動すると、そこでさらに2種類、市販されているウイスキー（高すぎてとても買えないようなやつ）も試飲できました。テイスティングルームとバーで飲み切れなかった分は、小瓶にボトリングして持ち帰れるという太っ腹ぶり。もちろん外観の撮影もして、ボウモアをあとにしました。
+      </p>
+      <div class="j-grid">
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/bowmore.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="Bowmore distillery">
+          <figcaption class="j-cap">Bowmore</figcaption>
+        </figure>
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/machirbay.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="Machir Bay">
+          <figcaption class="j-cap">Machir Bay</figcaption>
+        </figure>
+      </div>
+
+      <p>
+        昼ごろボウモアを出発し、次はキルホーマン蒸留所へ。その前に、アーサーがマキヤーベイ（Machir Bay）に寄ってくれました。
+      </p>
+      
+      <p>
+        キルホーマンの代名詞ともいえるボトル「Machir Bay」は、このビーチの名前から取られています。ビーチとはいえ風が強すぎて波も荒く、泳ぐ人はまずいないのだとか。
+      </p>
+      <div class="j-grid">
+        <figure class="j-fig sq">
+          <img src="../../../assets/images/islay-journal/kilchoman.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="Kilchoman">
+          <figcaption class="j-cap">Kilchoman</figcaption>
+        </figure>
+        <figure class="j-fig sq">
+          <img src="../../../assets/images/islay-journal/kilchoman_lunch.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="Kilchoman's famous panini">
+          <figcaption class="j-cap">Kilchoman's famous panini</figcaption>
+        </figure>
+      </div>
+      <p>
+        そして蒸留所へ。中のショップとテイスティングを少し楽しみ、ランチもいただきました。ここはパニーニが有名らしく、これがめちゃくちゃ旨かったです。
+      </p>
+      
+      <p>
+        キルホーマンを出て、続いてブルックラディー蒸留所へ。
+      </p>
+      <div class="j-grid">
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/bruichladdich.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="Bruichladdich">
+          <figcaption class="j-cap">Bruichladdich</figcaption>
+        </figure>
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/woollenmill.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="The Islay Woollen Mill">
+          <figcaption class="j-cap">The Islay Woollen Mill</figcaption>
+        </figure>
+      </div>
+      <p>
+        ブルックラディーは、アイラ島で毎年5月に開かれる、島最大の年に一度のイベント「Fèis Ìle（フェイシュ・イーラ）」の会場にもなっているそうです。バーでたっぷりテイスティング。どの蒸留所もテイスティングには驚くほど寛容で、1か所だけでべろべろになれるくらい無料で飲ませてくれます。なかでもブルックラディーは、とにかくどんどん注いでくれて量も多く、一番たくさん飲めた蒸留所でした。
+      </p>
+      
+      <p>
+        そのあとは、ウーレンミル（Woollen Mill＝羊毛加工の工房）へ。ニットの服や手袋など、羊毛を加工した製品がずらりと並び、ショップの2階は、羊毛を編む機械が動く工場になっていました。帰りにボウモアのCo-opで買い物をして、この日はコテージでディナーとしました。
+      </p>
+
+      <!-- ===== Day 3 ===== -->
+      <div class="j-day" id="j-day3">
+        <span class="j-day-num">Day 3</span>
+        <h2 class="j-day-title">島の北を巡り、思いがけない再会</h2>
+        <span class="j-day-date">2026.04.09 — Thu</span>
+      </div>
+      <p class="j-route"><b>Route</b>（朝、3人が帰国）→ The Machrie → ブナハーブン → アードナッホー → ポートアスケイグ → カリラ（ランチ・再会）→ ウィスキーヴォルト → ボウモアのショップ巡り → コテージでディナー</p>
+
+      <p>
+        3日目。朝、メンバーのうち3人がひと足先に本土へ帰り、残った4人でこの日は観光することに。今日もアーサーが運転手として、あちこちへ連れて行ってくれました。
+      </p>
+      <div class="j-grid">
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/machrie_hotel.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="The Machrie, Islay's finest hotel">
+          <figcaption class="j-cap">The Machrie — Islay's finest hotel</figcaption>
+        </figure>
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/bunnahabhain.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="Bunnahabhain">
+          <figcaption class="j-cap">Bunnahabhain</figcaption>
+        </figure>
+      </div>
+      <p>
+        まず向かったのは、島で一番格式の高いホテル「The Machrie」。1泊1人8万円〜という高級ホテルです。宿泊客でもない、ただの部外者ですが、アーサーの顔のおかげで中を少し散策させてもらえました。
+      </p>
+      
+      <p>
+        次は、ブナハーブンへ。ここでも同じようにショップとバーでテイスティングをし、外観を撮影しました。ブナハーブンのウイスキーは基本的にノンピートで作られているのですが、初めてスモーキーなブナハーブンを体験できて、これは貴重でした。これから日本でも、見かける機会が増えるかもしれません。
+      </p>
+      <div class="j-grid">
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/ardnahoe.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="Ardnahoe">
+          <figcaption class="j-cap">Ardnahoe</figcaption>
+        </figure>
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/port_askeig.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="Port Askaig, looking out to Jura">
+          <figcaption class="j-cap">Port Askaig, looking out to Jura</figcaption>
+        </figure>
+      </div>
+      <p>
+        続いて、アードナッホーへ。ここでもテイスティングを満喫しました。各蒸留所は毎年Fèis Ìleのための限定ボトルを出すのですが、その去年モデルがあまりに美味しく、買う予定のなかったボトルを、アードナッホーで思わず即買いしてしまいました。
+      </p>
+      <p>
+        その次に、アーサーが港へ連れて行ってくれました。ポートアスケイグです。
+      </p>
+      
+      <p>
+        ここはポートエレンと並ぶアイラ島有数の大きな港で、対岸にジュラ島を望むことができます。
+      </p>
+      <figure class="j-fig center">
+        <img src="../../../assets/images/islay-journal/caolila.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="Caol Ila">
+        <figcaption class="j-cap">Caol Ila</figcaption>
+      </figure>
+      <p>
+        さらに、カリラへ。ここでは昼食をとり、ショッピングを楽しみました。実は、僕が働いていたパブのオーナーが、アイラ島でも日本でもお世話になったという、クリスティーヌ（Christine）という女性がカリラの近くに住んでいる——という情報を事前に得ていたのです。「ぜひ会いたい」とアーサーに伝えると、なんとその場で連絡を取ってくれて、カリラでの再会が叶いました。
+      </p>
+      <div class="j-grid">
+        <figure class="j-fig sq">
+          <img src="../../../assets/images/islay-journal/whisky_vault.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="The Whisky Vault">
+          <figcaption class="j-cap">The Whisky Vault</figcaption>
+        </figure>
+        <figure class="j-fig sq">
+          <img src="../../../assets/images/islay-journal/whisky_vault_tasting.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="Tasting at the Whisky Vault">
+          <figcaption class="j-cap">Tasting at the Whisky Vault</figcaption>
+        </figure>
+      </div>
+      <p>
+        カリラのあと、帰り道にあった「ウィスキーヴォルト（Whisky Vault）」へ。ここはボトラーズも手がけるウイスキーショップで、もともとウイスキーコレクターだった人が創業した店だけあって、珍しいボトルが何百本と並んでいました。
+      </p>
+      
+      <p>
+        ボウモアの町に戻り、「The Islay Shop」というお店へ。何かアイラ島らしいお土産があるかと期待して入りましたが、ここは普通の雑貨屋さんで、アイラの風を感じられるようなものは置いていませんでした。すぐ近くの別の店「The Celtic House」に行ってみると、カフェとお土産屋がつながったような店で、こちらのほうがずっとアイラ島らしさを感じられました。この日も帰ってコテージでディナーをとり、3日目を終えました。
+      </p>
+
+      <!-- ===== Day 4 ===== -->
+      <div class="j-day" id="j-day4">
+        <span class="j-day-num">Day 4</span>
+        <h2 class="j-day-title">一人旅、クソ重い荷物と最後の一日</h2>
+        <span class="j-day-date">2026.04.10 — Fri</span>
+      </div>
+      <p class="j-route"><b>Route</b>（朝、僕以外が帰国）→ ポートエレンで解散 → 郵便局 → ポートイントルーアン（建設中）→ ポートエレン蒸留所 → Sea Saltで牡蠣 → ボウモア（ピート・ホテルでランチ）→ 川で水を汲む → 空港 → ラガンベイ → 夕方の便で本土へ → 深夜バスで帰宅</p>
+
+      <p>
+        4日目、最終日。僕以外のメンバーは全員、朝の便で飛び立ち、ついに一人旅となりました。空港へ向かうアーサーの車にみんなと一緒に乗せてもらい、僕だけ途中のポートエレンで降ろしてもらいます。
+      </p>
+      <div class="j-grid">
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/postoffice.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="Port Ellen post office">
+          <figcaption class="j-cap">Port Ellen post office</figcaption>
+        </figure>
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/portellen.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="Port Ellen distillery">
+          <figcaption class="j-cap">Port Ellen distillery</figcaption>
+        </figure>
+      </div>
+      <p>
+        最終日のプランはこうでした——お土産とウイスキーを買い込みすぎて、さすがに持ち歩くのがつらいので、郵便局から本土の大学の寮へ送ってしまおう、と。3日目にアーサーからも「送れるよ」と聞いていたので、すっかりその気でいました。そのはずだったのです。
+      </p>
+      <p>
+        ところが、「ウイスキーは2本までしか送れない」と言われてしまいます。すでに6本抱えていた僕は、結局この日一日、荷物を持ち運ぶ羽目に。カバンを2つ、背中とお腹の両側にかけて。とりあえず荷物だけは郵便局に預かってもらい、建設中のアイラ島12番目の蒸留所、ポートイントルーアン（Portintruan）を見に行きました。が、やはり工事中で、近くまでは寄れず。2026年末に蒸留開始予定だそうです。
+      </p>
+      
+      <p>
+        そのあと荷物を回収し、ポートエレン蒸留所へ。ポートエレンは蒸留を再開したばかりで、かなり高額なツアーの参加者しか敷地内に入れないようになっており、外観を眺めるだけにとどまりました。
+      </p>
+      <div class="j-grid">
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/sea_salt_oyster.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="Islay oysters at Sea Salt">
+          <figcaption class="j-cap">Islay oysters at Sea Salt</figcaption>
+        </figure>
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/bowmore_peat.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="A lump of peat from Bowmore">
+          <figcaption class="j-cap">A lump of peat from Bowmore</figcaption>
+        </figure>
+      </div>
+      <p>
+        ボウモア行きのバスを待つ間、時間があったので、初日に訪れたSea Saltへ。初日には食べられなかったアイラの牡蠣をいただきました。これがもう、めちゃくちゃ美味しい。細長い形で、新鮮かつミルキー、塩気が身の味と最高にマッチしていました。
+      </p>
+      
+      <p>
+        バスでボウモアへ向かいます。まずは蒸留所へ行き、お土産用にピートをゲット。「先日ツアーに参加した者です。ピートをもらえますか？」と尋ねたら、二つ返事で「いいよ」。ピートを取りにキルンルームへ案内してくれたうえ、ツアーでは入れなかったモルティングルームまで見せてくれました。優しすぎます。
+      </p>
+      <figure class="j-fig center tall sq">
+        <img src="../../../assets/images/islay-journal/bowmore_hotel.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="Bowmore Hotel">
+        <figcaption class="j-cap">Bowmore Hotel</figcaption>
+      </figure>
+      <p>
+        ランチは、ボウモアホテルでアイラビールとアイラビーフを堪能しました。
+      </p>
+      <div class="j-grid">
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/bowmore_hotel_islaybeer.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="An Islay ale">
+          <figcaption class="j-cap">An Islay ale</figcaption>
+        </figure>
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/bowmore_hotel_beef.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="Islay beef">
+          <figcaption class="j-cap">'Islay' beef</figcaption>
+        </figure>
+      </div>
+      <p>
+        スコットランドはスコティッシュビーフが有名で、噂では「アイラビーフ」も有名だと聞いていました。が、実のところアイラ島自体で牛を加工・販売しているわけではなく、いったん本土へ運んで加工し、「スコティッシュビーフ」として売っているらしいのです。だから厳密には「これがアイラ島の牛肉だ」とは言えないのだとか。とはいえ、ボウモアホテルの人は「アイラビーフ」と言っていました。よくわかりませんが、とりあえず僕は、アイラビーフを食べた——ということにしておきます。
+      </p>
+      <p>
+        アイラ島の川の水は、ピート層を通ってくるため、ほんのり茶色がかっています。透き通った茶色い水、というわけです。その水もお土産に持ち帰ろうと思っていたのですが、簡単に汲める川がなかなか見つかりません。場所を探すべく、まずはThe Islay Whisky Shopで買い物がてら店員さんに聞いてみたものの、わからないとのこと。——ところが、ここで特大ニュースを得てしまいます。蒸留所名が明かされていない謎のアイラボトル「フィンラガン（Finlaggan）」の正体を、僕は突き止めてしまったのです。……と、ここまで書いておきながら申し訳ないのですが、その正体はここでは明かせません。アイラ島民はみんな知っているようなので、訪れた際には、ぜひ現地で聞いてみてください。
+      </p>
+      <p>
+        次にThe Celtic Houseのカフェでコーヒーを飲み、ここでも川の情報を尋ねたところ、近くにあるとのこと。空港行きのバスの時間が迫っていたので、急いで向かい、無事に水を汲みました。
+      </p>
+      <div class="j-grid">
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/river.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="The peat-stained river near Bowmore">
+          <figcaption class="j-cap">The peat-stained river near Bowmore</figcaption>
+        </figure>
+        <figure class="j-fig">
+          <img src="../../../assets/images/islay-journal/water_from_river.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="River water, brown but not dirty">
+          <figcaption class="j-cap">River water — brown, but not dirty!</figcaption>
+        </figure>
+      </div>
+      <p>
+        少しわかりにくいかもしれませんが、けっこう茶色いです。決して汚いわけではありません！！
+      </p>
+      <p>
+        バスに乗って空港へ。少し時間があったので、空港の目の前にある——なんとこの旅行のちょうど1週間前に蒸留を開始したばかりの——アイラ島11番目の蒸留所、ラガンベイ（Laggan Bay）へ立ち寄りました。荷物を空港に置かせてもらえたらと思っていたのですが、断られてしまい、結局この日は本当に一日中、クソ重いカバンを2つ背負っていました。
+      </p>
+      
+      <p>
+        その状態で蒸留所へ。さすがに新しい蒸留所だけあって中には入れませんでしたが、同じ会社がアイラビールとアイラウイスキーのボトラーズを手がけていて、同じ敷地内のショップへ。そこでもビールとウイスキーを試飲させてもらえました。ふらっと立ち寄っただけなのに、こんなに色々飲ませてもらえるとは、感激です。
+      </p>
+      <div class="j-grid">
+        <figure class="j-fig sq">
+          <img src="../../../assets/images/islay-journal/lagganbay.jpg" width="1050" height="1400" loading="lazy" decoding="async" alt="Laggan Bay distillery">
+          <figcaption class="j-cap">Laggan Bay distillery</figcaption>
+        </figure>
+        <figure class="j-fig sq">
+          <img src="../../../assets/images/islay-journal/lagganbay_tasting.jpg" width="1400" height="1050" loading="lazy" decoding="async" alt="Tasting at Laggan Bay">
+          <figcaption class="j-cap">Tasting at Laggan Bay</figcaption>
+        </figure>
+      </div>
+      <p>
+        店員さんがいろいろ話してくれたのですが、なんとその方、去年まで数年間、日本に住んでいたというではありませんか。話は盛り上がり、ネルソン（Nelson）はビールを造る工場から、ウイスキーをボトリングする現場まで案内してくれました。そこでは、生のビールまでご馳走になりました。ツアーも何も予約していないのに全部見せてくれて、本当に感謝しかありません。
+      </p>
+      <p>
+        一番盛り上がったのは、蒸留所名を伏せたボトラーズのウイスキーを「教えてあげるから、飲んで蒸留所を当ててみて」と言われて挑戦したときです。ほんのりスモーキーな香りがありつつ、しっかりした甘みがベースにある——「ブナハーブンだ」と一発で当ててみせると、ネルソンはひっくり返るくらい驚いていました。僕も嬉しかったです。
+      </p>
+      <p>
+        そんなことをしているうちに、ついにアイラ島を離れる時間がやってきました。空港へ向かうと、そこでまたしてもアーサーと偶然出会い、最後の挨拶を交わして別れることができました。飛行機は1時間遅延。本土には着いたものの、スコットランドからイングランドへ向かう便に乗れず、急きょ予定を変更して深夜バスで帰ることに。この日は一日中、最強に重い荷物を抱えていたので、本当に疲れ果てました。
+      </p>
+      <p>
+        翌日、ようやく家に着き、買ったものをすべて並べてみました。
+      </p>
+      <figure class="j-fig wide">
+        <img src="../../../assets/images/islay-journal/all_I_got.jpg" width="1400" height="788" loading="lazy" decoding="async" alt="Everything I brought home">
+        <figcaption class="j-cap">Everything I brought home</figcaption>
+      </figure>
+      <p>
+        これだけの量を、たった1つのカバンに詰め込んでいたのです。Crazyです、ほんとに……。これから日本へいくつか送ったり、友達と飲んだり、ゆっくり楽しもうと思います。
+      </p>
+
+      <!-- outro -->
+      <div class="j-outro">
+        <h2 id="j-outro">おわりに</h2>
+        <p>
+          長くなりましたが、最後までお読みいただき、ありがとうございました。以上が、僕のアイラ島体験記です。島全体に流れる、まるで沖縄のようにゆっくりと進む時間の感覚。絶品の海鮮料理。そして何より、ウイスキー好きなら一度は必ず訪れてほしい、夢のような島でした。感想やご質問があれば、ぜひ私のページ（<a href="https://hibikishimizu.com">hibikishimizu.com</a>）のお問い合わせから、お気軽にお寄せください。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="islay-footer" role="contentinfo">
+    <div class="container">
+      <div class="islay-footer-inner">
+        <p class="islay-footer-brand">Isle of Islay — スコッチウイスキーガイド</p>
+        <div class="islay-footer-lang" aria-label="言語切替">
+          <button class="lang-btn active" data-lang="ja" aria-label="日本語">🇯🇵</button>
+          <span class="lang-divider" aria-hidden="true">|</span>
+          <button class="lang-btn" data-lang="en" aria-label="English">🇺🇸<span style="font-size:11px;opacity:0.5;margin-left:1px">🇬🇧</span></button>
+        </div>
+      </div>
+      <div class="islay-footer-bottom">
+        <p class="islay-footer-copy">&copy; 2026 志水 響. All rights reserved.</p>
+        <a href="https://hibikishimizu.com" target="_blank" rel="noopener" class="islay-footer-credit">hibikishimizu.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+  <script src="../../../assets/js/main.js"></script>
+</body>
+</html>

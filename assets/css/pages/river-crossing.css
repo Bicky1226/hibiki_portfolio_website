@@ -1,0 +1,546 @@
+/* ==========================================================================
+   River Crossing Puzzle — 猛獣家族の川渡り
+   /ja/works/river-crossing/ と /en/works/river-crossing/ で共有
+   base.css のトークン（紙・墨・朱・藍）の上に組む。角丸なし・硬い影。
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   ページ外枠 — 他の works 詳細ページと同じ体裁
+   -------------------------------------------------------------------------- */
+.project-page { padding-top: 80px; }
+
+.project-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-sm);
+  color: var(--c-text-muted);
+  text-decoration: none;
+  margin-bottom: 40px;
+  transition: color var(--dur-fast) ease;
+}
+
+.project-back:hover { color: var(--c-accent); }
+
+#project-hero { padding: clamp(52px, 7vw, 88px) 0 clamp(28px, 4vw, 44px); }
+
+.project-meta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  align-items: center;
+}
+
+.project-year {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  font-family: var(--font-en);
+  letter-spacing: 0.08em;
+}
+
+.project-hero-title {
+  font-size: clamp(32px, 6vw, 64px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+}
+
+.project-lead {
+  font-size: var(--fs-lg);
+  color: var(--c-text-muted);
+  line-height: 1.7;
+  max-width: 640px;
+}
+
+.project-body { padding: clamp(48px, 6vw, 80px) 0 clamp(80px, 10vw, 120px); }
+.project-body h2 { font-size: var(--fs-2xl); font-weight: 700; margin: 0 0 16px; color: var(--c-text); }
+.project-body h2:not(:first-child) { margin-top: 52px; }
+.project-body p { font-size: var(--fs-base); color: var(--c-text-muted); line-height: 1.9; margin-bottom: 16px; max-width: 800px; }
+.project-body ul { padding-left: 1.5em; margin: 12px 0 20px; max-width: 800px; }
+.project-body li { font-size: var(--fs-base); color: var(--c-text-muted); line-height: 1.8; margin-bottom: 6px; }
+.project-body strong { color: var(--c-text); }
+
+/* --------------------------------------------------------------------------
+   ゲーム本体
+   -------------------------------------------------------------------------- */
+.rc {
+  --rc-tile-w: clamp(40px, 10.5vw, 64px);
+  --rc-tile-h: calc(var(--rc-tile-w) * 1.4 + 20px);
+  --rc-gap: clamp(5px, 1vw, 9px);
+  --rc-boat-w: calc(var(--rc-tile-w) * 2 + var(--rc-gap) + 14px);
+  --rc-tile-bg: var(--c-bg-2);
+
+  /* 川が間延びしないよう横幅を抑える */
+  max-width: 880px;
+  margin: 0 auto;
+  border: 1px solid var(--c-border);
+  background: var(--c-bg-2);
+  box-shadow: var(--shadow-md);
+}
+
+/* --------------------------------------------------------------------------
+   HUD
+   -------------------------------------------------------------------------- */
+.rc-hud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: clamp(16px, 3vw, 32px);
+  padding: 12px clamp(12px, 2.4vw, 22px);
+  border-bottom: 1px solid var(--c-border);
+  background: var(--c-bg-3);
+}
+
+.rc-hud-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0;
+}
+
+.rc-hud-label {
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  letter-spacing: 0.08em;
+}
+
+.rc-hud-value {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  color: var(--c-text);
+  letter-spacing: 0.02em;
+}
+
+.rc-hud-item--best .rc-hud-value { color: var(--c-accent-2); }
+.rc-hud-item[hidden] { display: none; }
+
+/* --------------------------------------------------------------------------
+   盤面
+   -------------------------------------------------------------------------- */
+.rc-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: stretch;
+  background: var(--c-bg-2);
+}
+
+.rc-bank {
+  padding: 10px clamp(8px, 1.4vw, 14px) 14px;
+  background:
+    linear-gradient(rgba(33, 29, 23, 0.03), rgba(33, 29, 23, 0.03)),
+    var(--c-bg-2);
+}
+
+.rc-bank-name {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--c-text-muted);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.rc-slots {
+  display: grid;
+  grid-template-columns: repeat(2, var(--rc-tile-w));
+  gap: var(--rc-gap);
+  align-content: start;
+  justify-content: center;
+  min-height: calc(var(--rc-tile-h) * 4 + var(--rc-gap) * 3);
+}
+
+/* --------------------------------------------------------------------------
+   人物タイル
+   -------------------------------------------------------------------------- */
+.rc-tile {
+  /* 召使いのエプロン等、図形を紙色でくり抜くための色。
+     <use> の中まで届くよう、セレクタではなく継承プロパティで渡す */
+  --rc-cut: var(--rc-tile-bg);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  width: var(--rc-tile-w);
+  padding: 5px 2px 3px;
+  background: var(--rc-tile-bg);
+  border: 1px solid var(--c-border);
+  box-shadow: 3px 3px 0 rgba(33, 29, 23, 0.16);
+  color: var(--c-text);
+  font-family: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: box-shadow var(--dur-fast) ease, border-color var(--dur-fast) ease;
+}
+
+/* 操縦できる人物は朱の枠 */
+.rc-tile--pilot {
+  border-color: var(--c-accent);
+  box-shadow: 3px 3px 0 rgba(191, 58, 50, 0.24);
+}
+
+.rc-tile-fig {
+  display: block;
+  width: 100%;
+  color: var(--c-text);
+}
+
+.rc-tile-fig svg {
+  display: block;
+  width: 100%;
+  aspect-ratio: 40 / 56;
+  fill: currentColor;
+}
+
+.rc-tile-name {
+  font-family: var(--font-display);
+  font-size: clamp(9px, 1.6vw, 12px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: var(--c-text-sub);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 英語版は名前が長いので2行に折り返し、高さを揃える */
+html[lang="en"] .rc-tile-name {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  min-height: 2.4em;
+}
+
+.rc-tile:not(:disabled):hover { box-shadow: 5px 5px 0 rgba(33, 29, 23, 0.2); }
+.rc-tile--pilot:not(:disabled):hover { box-shadow: 5px 5px 0 rgba(191, 58, 50, 0.3); }
+.rc-tile:not(:disabled):active { box-shadow: 1px 1px 0 rgba(33, 29, 23, 0.2); }
+
+.rc-tile:focus-visible {
+  outline: 2px solid var(--c-accent-2);
+  outline-offset: 2px;
+}
+
+/* 乗船中 — 活字が版に沈んだ状態 */
+.rc-tile.is-aboard {
+  border-color: var(--c-text);
+  background: var(--c-bg-3);
+  box-shadow: inset 2px 2px 0 rgba(33, 29, 23, 0.14);
+}
+
+.rc-tile.is-aboard { --rc-cut: var(--c-bg-3); }
+
+/* ヒント表示 */
+.rc-tile.is-hinted {
+  outline: 2px dashed var(--c-accent);
+  outline-offset: 2px;
+}
+
+.rc-tile:disabled {
+  opacity: 0.34;
+  cursor: default;
+  box-shadow: none;
+}
+
+.rc-tile.is-aboard:disabled { opacity: 0.75; }
+
+/* --------------------------------------------------------------------------
+   川と舟
+   -------------------------------------------------------------------------- */
+.rc-river {
+  position: relative;
+  overflow: hidden;
+  border-left: 1px solid var(--c-border);
+  border-right: 1px solid var(--c-border);
+}
+
+/* 青海波 — 藍の木版 */
+.rc-water {
+  position: absolute;
+  inset: 0;
+  background-color: #E6EAEC;
+  background-image:
+    radial-gradient(circle at 50% 130%, transparent 36%, rgba(44, 74, 110, 0.20) 37%, rgba(44, 74, 110, 0.20) 39%, transparent 40%, transparent 46%, rgba(44, 74, 110, 0.15) 47%, rgba(44, 74, 110, 0.15) 49%, transparent 50%, transparent 56%, rgba(44, 74, 110, 0.11) 57%, rgba(44, 74, 110, 0.11) 59%, transparent 60%),
+    radial-gradient(circle at 0% 80%, transparent 36%, rgba(44, 74, 110, 0.20) 37%, rgba(44, 74, 110, 0.20) 39%, transparent 40%, transparent 46%, rgba(44, 74, 110, 0.15) 47%, rgba(44, 74, 110, 0.15) 49%, transparent 50%, transparent 56%, rgba(44, 74, 110, 0.11) 57%, rgba(44, 74, 110, 0.11) 59%, transparent 60%),
+    radial-gradient(circle at 100% 80%, transparent 36%, rgba(44, 74, 110, 0.20) 37%, rgba(44, 74, 110, 0.20) 39%, transparent 40%, transparent 46%, rgba(44, 74, 110, 0.15) 47%, rgba(44, 74, 110, 0.15) 49%, transparent 50%, transparent 56%, rgba(44, 74, 110, 0.11) 57%, rgba(44, 74, 110, 0.11) 59%, transparent 60%);
+  background-size: 68px 34px;
+}
+
+.rc-boat {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: var(--rc-boat-w);
+  transform: translate(0, -50%);
+  transition: transform 0.9s cubic-bezier(0.42, 0.02, 0.28, 1);
+}
+
+.rc-boat[data-side="R"] {
+  transform: translate(var(--rc-travel, 0px), -50%);
+}
+
+.rc-boat-slots {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: var(--rc-gap);
+  min-height: var(--rc-tile-h);
+  padding: 0 6px;
+}
+
+.rc-hull {
+  display: block;
+  width: 100%;
+  height: clamp(24px, 3.6vw, 36px);
+  margin-top: -3px;
+}
+
+.rc-hull path {
+  fill: var(--c-bg-2);
+  stroke: var(--c-text);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+/* --------------------------------------------------------------------------
+   結果オーバーレイ
+   -------------------------------------------------------------------------- */
+.rc-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(242, 237, 224, 0.88);
+}
+
+.rc-overlay[hidden] { display: none; }
+
+.rc-card {
+  max-width: 400px;
+  padding: clamp(20px, 3.4vw, 32px);
+  text-align: center;
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-text);
+  box-shadow: var(--shadow-lg);
+}
+
+.rc-stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 58px;
+  height: 58px;
+  margin: 0 0 16px;
+  padding: 0 8px;
+  border: 3px solid var(--c-accent);
+  color: var(--c-accent);
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  transform: rotate(-7deg);
+}
+
+html[lang="en"] .rc-stamp {
+  font-family: var(--font-en);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+}
+
+.rc-overlay[data-kind="clear"] .rc-stamp {
+  border-color: var(--c-accent-2);
+  color: var(--c-accent-2);
+}
+
+.rc-card-title {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--c-text);
+}
+
+.rc-card-body {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.8;
+  color: var(--c-text-muted);
+}
+
+.rc-card-flag {
+  margin: 12px 0 0;
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-accent);
+}
+
+.rc-card-flag[hidden] { display: none; }
+
+.rc-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+/* --------------------------------------------------------------------------
+   操作ボタン・ステータス
+   -------------------------------------------------------------------------- */
+.rc-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 14px clamp(12px, 2.4vw, 22px);
+  border-top: 1px solid var(--c-border);
+  background: var(--c-bg-3);
+}
+
+.rc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-text);
+  box-shadow: 3px 3px 0 rgba(33, 29, 23, 0.2);
+  color: var(--c-text);
+  font-family: inherit;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: box-shadow var(--dur-fast) ease, background var(--dur-fast) ease;
+}
+
+.rc-btn:not(:disabled):hover { box-shadow: 5px 5px 0 rgba(33, 29, 23, 0.25); }
+.rc-btn:not(:disabled):active { box-shadow: 1px 1px 0 rgba(33, 29, 23, 0.25); }
+
+.rc-btn:focus-visible {
+  outline: 2px solid var(--c-accent-2);
+  outline-offset: 2px;
+}
+
+.rc-btn--go {
+  margin-right: auto;
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: #FAF6EB;
+  box-shadow: 3px 3px 0 rgba(33, 29, 23, 0.3);
+}
+
+.rc-btn--go:not(:disabled):hover { box-shadow: 5px 5px 0 rgba(33, 29, 23, 0.34); }
+
+.rc-go-arrow {
+  font-family: var(--font-en);
+  font-size: 1.1em;
+  line-height: 1;
+}
+
+.rc-btn:disabled {
+  opacity: 0.36;
+  cursor: default;
+  box-shadow: none;
+}
+
+.rc-card-actions .rc-btn--go { margin-right: 0; }
+
+.rc-status {
+  margin: 0;
+  padding: 12px clamp(12px, 2.4vw, 22px);
+  border-top: 1px solid var(--c-border-2);
+  border-left: 3px solid var(--c-accent);
+  font-size: var(--fs-sm);
+  line-height: 1.7;
+  color: var(--c-text-muted);
+  min-height: 3.2em;
+}
+
+/* スプライト格納用 — display:none は <use> を壊す環境があるため使わない */
+.rc-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   ルール説明（ページ側のマークアップ）
+   -------------------------------------------------------------------------- */
+.rc-rules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: clamp(14px, 2vw, 22px);
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rc-rule {
+  padding: 16px 18px;
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.rc-rule-num {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.16em;
+  color: var(--c-accent);
+}
+
+.rc-rule-text {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.8;
+  color: var(--c-text-muted);
+}
+
+.rc-rule-text strong { color: var(--c-text); }
+
+/* --------------------------------------------------------------------------
+   レスポンシブ
+   -------------------------------------------------------------------------- */
+/* 広い画面では岸を3列にして盤面の縦を詰める */
+@media (min-width: 720px) {
+  .rc-slots {
+    grid-template-columns: repeat(3, var(--rc-tile-w));
+    min-height: calc(var(--rc-tile-h) * 3 + var(--rc-gap) * 2);
+  }
+}
+
+@media (max-width: 640px) {
+  /* 川幅（＝舟の移動距離）を稼ぐため、岸まわりを詰める */
+  .rc { --rc-tile-w: clamp(34px, 9.4vw, 48px); }
+  .rc-bank { padding: 8px 4px 12px; }
+  .rc-bank-name { font-size: 10px; letter-spacing: 0.08em; }
+  .rc-controls { padding: 12px; gap: 8px; }
+  .rc-btn { padding: 9px 14px; font-size: var(--fs-xs); }
+  .rc-btn--go { margin-right: 0; flex: 1 1 100%; justify-content: center; }
+  .rc-hud { gap: 14px; padding: 10px 12px; }
+  .rc-status { padding: 10px 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rc-boat,
+  .rc-tile,
+  .rc-btn {
+    transition: none;
+  }
+}

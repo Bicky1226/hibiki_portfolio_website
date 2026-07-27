@@ -401,6 +401,29 @@ function initContentProtection() {
   });
 }
 
+/* journal table-of-contents smooth scroll
+   (Lenis doesn't intercept native anchor jumps; offset clears the fixed top
+   bar + sticky sub-nav so the target heading isn't hidden underneath) */
+function initJournalToc() {
+  const toc = document.querySelector('.j-toc');
+  if (!toc) return;
+  const HEADER_OFFSET = 120;
+  toc.addEventListener('click', e => {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    const target = document.getElementById(link.getAttribute('href').slice(1));
+    if (!target) return;
+    e.preventDefault();
+    if (lenis) {
+      lenis.scrollTo(target, { offset: -HEADER_OFFSET });
+    } else {
+      const y = target.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+    history.pushState(null, '', link.getAttribute('href'));
+  });
+}
+
 /* initialize on dom ready */
 document.addEventListener('DOMContentLoaded', () => {
   LangController.init();
@@ -411,4 +434,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initMouseGlow();
   initActiveNav();
   initContentProtection();
+  initJournalToc();
 });

@@ -80,18 +80,6 @@
       padding-top: 4px;
       position: relative;
     }
-    .pn-ver-col::after {
-      content: '';
-      position: absolute;
-      right: -20px;
-      top: 10px;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--c-accent);
-      border: 2px solid var(--c-bg);
-      box-shadow: 0 0 8px rgba(191,58,50,0.5);
-    }
     .pn-version {
       font-family: var(--font-en);
       font-size: var(--fs-base);
@@ -133,10 +121,10 @@
       border-radius: 4px;
       margin-bottom: 8px;
     }
-    .pn-label--added    { background: rgba(91, 213, 155, 0.12); color: #3E7A4E; }
-    .pn-label--fixed    { background: rgba(91, 155, 213, 0.12); color: #2C4A6E; }
-    .pn-label--changed  { background: rgba(191,58,50,0.12); color: var(--c-accent); }
-    .pn-label--security { background: rgba(213, 91, 91, 0.12);  color: #d55b5b; }
+    .pn-label--added,
+    .pn-label--fixed,
+    .pn-label--changed,
+    .pn-label--security { background: rgba(107, 79, 53, 0.10); color: #6B4F35; }
 
     .pn-items {
       list-style: none;
@@ -167,6 +155,24 @@
       .pn-ver-col::after { display: none; }
       .pn-ver-col { display: flex; gap: 12px; align-items: baseline; }
       .pn-date { margin-top: 0; }
+    }
+
+    /* Footer logo rendered as the 響 seal (matches the nav icon) */
+    .footer-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      background: var(--c-accent);
+      color: #F6F1E5;
+      -webkit-text-fill-color: #F6F1E5;
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1;
+      box-shadow: inset 0 0 0 1.5px #F6F1E5, inset 0 0 0 3px var(--c-accent);
+      transform: rotate(-2.5deg);
     }
   </style>
 </head>
@@ -200,14 +206,85 @@
 
   <section id="main-content" class="pn-hero">
     <div class="container">
-      <p class="pn-hero-label reveal font-en">Site Changelog</p>
+      <p class="pn-hero-label reveal font-en">Site Log</p>
       <h1 class="pn-hero-title reveal">パッチノート</h1>
-      <p class="pn-hero-sub reveal">hibikishimizu.com のバージョン履歴 — すべての更新・修正・改善を記録しています。</p>
+      <p class="pn-hero-sub reveal">本ウェブサイトのバージョン履歴ー更新・修正内容を記録しています。</p>
     </div>
   </section>
 
   <div class="container">
     <div class="pn-timeline reveal">
+
+      <!-- v1.4 -->
+      <div class="pn-entry" id="v1-4">
+        <div class="pn-ver-col">
+          <div class="pn-version">v1.4</div>
+          <div class="pn-date">2026-06-22</div>
+        </div>
+        <div class="pn-content">
+          <p class="pn-release-title">Works 詳細の拡充・分類の統一・フッター刷新</p>
+
+          <div class="pn-group">
+            <span class="pn-group-label pn-label--added">Added</span>
+            <ul class="pn-items">
+              <li>Works に「Blink Challenge」（2023・学園祭の反応速度ゲーム）を新規追加。詳細ページ（JA/EN）も作成</li>
+              <li>読唇システム（卒業研究）の詳細ページを作成。dlib 68点ランドマーク図・精度／損失グラフを掲載</li>
+              <li>Morse Gesture Input（タイ姉妹校との国際PBL）の詳細ページを作成。ジェスチャー設計・チーム体制を掲載</li>
+              <li>About のスキルに NumPy・pandas・LSTM（ML/CV）、GSAP（Design &amp; UX）を追加</li>
+            </ul>
+          </div>
+
+          <div class="pn-group">
+            <span class="pn-group-label pn-label--changed">Changed</span>
+            <ul class="pn-items">
+              <li>Works のカテゴリ表示を Web / Research / App / System の単一分類に統一（一覧・トップの代表作・詳細上部）</li>
+              <li>各作品の説明文を更新し、詳細ページ上部の技術バッジを一覧カードの技術タグと一致</li>
+              <li>読唇の技術表記を実態に合わせ Python / TensorFlow / dlib / LSTM に修正、ohmatching に HTML / CSS を追加</li>
+              <li>トップの Interests を About と統一（Music・Reading を追加、Whisky のアイコンを削除）</li>
+              <li>読唇 Works のサムネイルを dlib ランドマーク画像に変更</li>
+              <li>About：自動車免許と二輪免許を1つの「運転免許」枠に統合、言語の小見出しを「最近勉強はじめました。」に変更</li>
+              <li>Blog のタイトル下の紹介文、Email 枠の表記、Patch Notes の見出し（Site Log）・説明文を更新</li>
+              <li>Works 詳細ページのナビ・フッターをトップページに統一（リンク項目・GitHub・言語切替）</li>
+              <li>フッターの「響」を朱印の赤アイコンに変更。Patch Notes のラベル配色を茶色で統一し、バージョンの赤いドットを削除</li>
+            </ul>
+          </div>
+
+          <div class="pn-group">
+            <span class="pn-group-label pn-label--fixed">Fixed</span>
+            <ul class="pn-items">
+              <li>全ページのフッター GitHub リンクを正しい URL（github.com/Bicky1226）に修正</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.3 -->
+      <div class="pn-entry" id="v1-3">
+        <div class="pn-ver-col">
+          <div class="pn-version">v1.3</div>
+          <div class="pn-date">2026-06-20</div>
+        </div>
+        <div class="pn-content">
+          <p class="pn-release-title">デザイン簡素化・旅行記の目次・トップページ刷新</p>
+
+          <div class="pn-group">
+            <span class="pn-group-label pn-label--added">Added</span>
+            <ul class="pn-items">
+              <li>アイラ島旅行記に目次を追加（はじめに〜おわりに・各日）。クリックで該当セクションへスムーズスクロール</li>
+            </ul>
+          </div>
+
+          <div class="pn-group">
+            <span class="pn-group-label pn-label--changed">Changed</span>
+            <ul class="pn-items">
+              <li>サイト全体の「左に色付き＋外周枠」のボックス装飾を廃止し、シンプルな枠線に統一（旅行記メタ・ハイライトボックス・言語スキル・お問い合わせの成功／エラー表示）</li>
+              <li>トップページのヒーロー：墨流し背景を画面幅いっぱいに拡張し、上端をナビゲーションの下線まで延長</li>
+              <li>トップページのヒーロー：四隅のトンボ（＋）と外周の枠罫を削除し、上下のラインのみに変更</li>
+              <li>トップページのタイトル「陳腐なエンジニアの巣。」の行間スペースを詰めて連続表示に</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
       <!-- v1.2 -->
       <div class="pn-entry" id="v1-2">

@@ -59,6 +59,22 @@
       font-size: var(--fs-sm);
       color: var(--c-text-muted);
     }
+    .project-figure { margin: 28px 0 8px; }
+    .project-figure img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-sm);
+      background: var(--c-bg-3);
+    }
+    .project-figcap {
+      font-family: var(--font-en);
+      font-size: var(--fs-xs);
+      color: var(--c-text-faint);
+      margin-top: 8px;
+      letter-spacing: 0.02em;
+    }
   </style>
 </head>
 <body class="project-page">
@@ -80,8 +96,7 @@
       <li><a href="/ja/works/" class="active">Works</a></li>
       <li><a href="/ja/about/">About</a></li>
       <li><a href="/ja/blog/">Blog</a></li>
-      <li><a href="/ja/contact/">Contact</a>
-          <a href="/ja/patch-notes/">Patch Notes</a></li>
+      <li><a href="/ja/contact/">Contact</a></li>
     </ul>
     <div class="nav-lang" aria-label="言語切替">
       <button class="lang-btn active" data-lang="ja" aria-label="日本語">日</button>
@@ -96,45 +111,65 @@
       <a href="/ja/works/" class="project-back reveal"><i class="ph ph-arrow-left"></i> Works一覧へ</a>
 
       <div class="project-meta reveal">
-        <span class="project-year font-en">2024</span>
-        <span class="tech-badge">ML / CV</span>
+        <span class="project-year font-en">2023</span>
         <span class="tech-badge">Python</span>
         <span class="tech-badge">MediaPipe</span>
-        <span class="tech-badge">HCI</span>
         <span class="tech-badge">OpenCV</span>
       </div>
 
       <h1 class="project-hero-title reveal">Morse Gesture Input</h1>
-      <p class="project-lead reveal">手のジェスチャーでモールス符号を入力し文字へ変換するシステム。MediaPipeによるハンドトラッキングとモールス符号デコーダーを組み合わせたHCIプロジェクト。</p>
+      <p class="project-lead reveal">手のジェスチャーだけでモールス符号を入力し、リアルタイムで文字に変換するシステム。タイの姉妹校で行われた1週間の国際PBLとして、現地学生3名・日本人2名の計5名チームで開発し、私がリーダーを務めた。</p>
     </div>
   </section>
 
   <div class="container">
     <div class="project-body reveal">
 
-      <div class="wip-notice">
-        <strong>詳細ページ準備中</strong> — このプロジェクトの詳細ドキュメントは現在執筆中です。近日公開予定。
-      </div>
-
       <h2>概要</h2>
-
       <p>
-        PCのカメラに向かって手のジェスチャーを行うだけでモールス符号を入力し、リアルタイムで文字へ変換するシステム。
-        音声や物理的なキーボードを使わずに文字入力を可能にするHCI（ヒューマン・コンピュータ・インタラクション）の実験的プロジェクト。
-        アクセシビリティ向上や身体的制約のあるユーザーへの入力支援への応用を念頭に設計した。
+        PCのカメラに手をかざし、ジェスチャーを行うだけでモールス符号を入力して、リアルタイムに文字へ変換するシステム。
+        音声や物理キーボードを使わずに意思を伝えられる入力手段として、発話や聴覚に困難のある人のコミュニケーション支援を念頭に設計した、
+        HCI（ヒューマン・コンピュータ・インタラクション）の実験的プロジェクト。標準的なノートPCのCPUだけで動作し、特別な機材を必要としない。
       </p>
+
+      <figure class="project-figure">
+        <img src="../../../assets/images/morse_code_screen.jpeg" alt="モールス符号ジェスチャー入力の実行画面 — 手の認識、モールス符号対応表、変換結果" loading="lazy">
+        <figcaption class="project-figcap">リアルタイム実行画面 — ハンドトラッキングとモールス符号対応表、変換結果</figcaption>
+      </figure>
+
+      <h2>プロジェクト体制と私の役割</h2>
+      <p>
+        大学3年次、タイの姉妹校を1週間訪問して取り組んだ国際協働開発プロジェクト。
+        現地のタイ人学生3名と日本人学生2名の計5名で1チームを組み、私がリーダーとして開発を先導した。
+      </p>
+      <p>
+        英語で技術的な議論を行うのはこのときが初めてで、意思疎通は決して円滑ではなかった。
+        そこで開発対象を機能ごとに細分化し、全体の構造を図として示して共有することで、各メンバーが自分の担当範囲と全体の関係を把握できるようにした。
+        結果として、1週間という限られた期限の中で、チームとして動作するシステムを完成させることができた。
+      </p>
+
+      <h2>操作とジェスチャー設計</h2>
+      <p>モールス符号の「トン（・）」「ツー（－）」を、手のジェスチャーとその保持時間で表現できるよう設計した。</p>
+      <ul>
+        <li><strong>サムズアップ：</strong>入力を開始</li>
+        <li><strong>手のひらを開く（短く・〜1秒）：</strong>「・」（短点 / dot）</li>
+        <li><strong>手のひらを開く（長く・1秒以上）：</strong>「－」（長点 / dash）</li>
+        <li><strong>ILoveYou サイン：</strong>スペース（単語の区切り）</li>
+        <li><strong>ピース（Victory）：</strong>入力中のモールス列を1文字に確定・変換</li>
+        <li><strong>人差し指を立てる：</strong>入力中の信号をクリア</li>
+        <li><strong>サムズダウン：</strong>入力全体をリセット</li>
+        <li>このほか、1文字削除（バックスペース）や単語削除などの編集コマンドも用意</li>
+      </ul>
 
       <h2>主な技術・手法</h2>
       <ul>
-        <li><strong>ハンドトラッキング：</strong>Google MediaPipe Hands で指の関節21点をリアルタイム検出</li>
-        <li><strong>ジェスチャー分類：</strong>指の曲げ状態（fist / open / point等）をルールベースで分類し「・（ドット）」「－（ダッシュ）」「スペース」にマッピング</li>
-        <li><strong>モールス変換：</strong>入力されたドット・ダッシュ列をモールス符号テーブルで英字・数字に変換</li>
-        <li><strong>UI：</strong>OpenCVによるリアルタイム映像オーバーレイで入力状態を可視化</li>
-        <li><strong>実装：</strong>Python / MediaPipe / OpenCV</li>
+        <li><strong>ジェスチャー認識：</strong>MediaPipe Gesture Recognizer（gesture_recognizer.task）で、手の形を Open_Palm / Victory / Thumb_Up / ILoveYou などの定義済みジェスチャーに分類</li>
+        <li><strong>タイミング判定：</strong>各ジェスチャーの保持時間を計測し、短押し＝短点・長押し＝長点としてモールス信号列を構築</li>
+        <li><strong>モールス変換：</strong>A〜Z・0〜9・記号（? ! . , ; : + - / =）に対応した変換テーブルで、確定ジェスチャーを引き金に文字へデコード</li>
+        <li><strong>リアルタイムUI：</strong>OpenCV でミラー表示のカメラ映像にモールス対応表を並べ、入力中の信号列・確定テキスト・「Now Reading」インジケータを可視化</li>
+        <li><strong>設計：</strong>ハンドランドマーク検出クラスを継承してジェスチャー認識クラスを構築（クラス継承による拡張）</li>
+        <li><strong>実装：</strong>Python / MediaPipe / OpenCV / NumPy</li>
       </ul>
-
-      <h2>ステータス</h2>
-      <p>プロトタイプ段階のプロジェクト。デモ動画・コードリポジトリへのリンクは近日このページに掲載予定。</p>
 
     </div>
   </div>
@@ -146,7 +181,10 @@
         <nav class="footer-links" aria-label="フッターナビゲーション">
           <a href="/ja/works/">Works</a>
           <a href="/ja/about/">About</a>
+          <a href="/ja/blog/">Blog</a>
           <a href="/ja/contact/">Contact</a>
+          <a href="/ja/privacy/">Privacy</a>
+          <a href="/ja/patch-notes/">Patch Notes</a>
         </nav>
         <div class="footer-lang" aria-label="言語切替">
           <button class="lang-btn active" data-lang="ja" aria-label="日本語">日</button>
@@ -156,6 +194,9 @@
       </div>
       <div class="footer-bottom">
         <p class="footer-copy font-en">&copy; 2026 Hibiki Shimizu. All rights reserved.</p>
+        <a href="https://github.com/Bicky1226" target="_blank" rel="noopener" class="footer-social" aria-label="GitHub">
+          <i class="ph ph-github-logo" aria-hidden="true"></i>
+        </a>
       </div>
     </div>
   </footer>

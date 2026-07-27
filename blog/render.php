@@ -250,7 +250,7 @@ function e(string $s): string {
       </div>
       <div class="footer-bottom">
         <p class="footer-copy font-en">&copy; 2026 Hibiki Shimizu. All rights reserved.</p>
-        <a href="https://github.com/HibikiShimizu" target="_blank" rel="noopener" class="footer-social" aria-label="GitHub">
+        <a href="https://github.com/Bicky1226" target="_blank" rel="noopener" class="footer-social" aria-label="GitHub">
           <i class="ph ph-github-logo" aria-hidden="true"></i>
         </a>
       </div>

@@ -59,6 +59,21 @@
   padding-left: 10px;
 }
 
+/* スマホ: 縦書きの脇ラベルが題字と重なるため、題字の下に横書きで配置する */
+@media (max-width: 640px) {
+  .works-hero-title::after {
+    position: static;
+    display: block;
+    writing-mode: horizontal-tb;
+    width: max-content;
+    margin-top: 10px;
+    padding-left: 0;
+    border-left: none;
+    letter-spacing: 0.35em;
+    font-size: 12px;
+  }
+}
+
 .works-hero-sub {
   font-size: var(--fs-base);
   color: var(--c-text-muted);
@@ -111,6 +126,23 @@
   background: var(--c-text);
   border-color: var(--c-text);
   color: var(--c-bg);
+}
+
+/* スマホ: フィルタを等幅セグメントにして 1 行に収める(文字を小さく) */
+@media (max-width: 640px) {
+  .works-filter {
+    width: 100%;
+    flex-wrap: nowrap;
+  }
+  .filter-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 9px 4px;
+    font-size: 9.5px;
+    letter-spacing: 0.03em;
+    text-align: center;
+    white-space: nowrap;
+  }
 }
 
 /* works grid — full list */
@@ -293,11 +325,32 @@
     font-size: 9px;
     width: 32px;
   }
+  /* リスト行: 小さな正方サムネ + 要点を横並びに(縦積みをやめて本来のリスト表示にする)。
+     説明文・技術タグ・CTA は省いてコンパクトな一覧にする */
   .works-list-grid.view-timeline .work-card-link {
-    grid-template-columns: 1fr;
+    grid-template-columns: 84px 1fr;
+    gap: 14px;
   }
   .works-list-grid.view-timeline .work-card-thumb {
-    border-right: none;
-    border-bottom: 1px solid var(--c-border);
+    aspect-ratio: 1 / 1;
+    height: auto;
+    align-self: start;
+    border-right: 1px solid var(--c-border);
+    border-bottom: none;
+  }
+  .works-list-grid.view-timeline .work-card-thumb-inner {
+    min-height: 0;
+  }
+  .works-list-grid.view-timeline .thumb-label {
+    font-size: 13px;
+  }
+  .works-list-grid.view-timeline .work-card-body {
+    padding: 0 2px 0 0;
+    gap: 6px;
+  }
+  .works-list-grid.view-timeline .work-card-desc,
+  .works-list-grid.view-timeline .work-card-tech,
+  .works-list-grid.view-timeline .work-card-footer {
+    display: none;
   }
 }

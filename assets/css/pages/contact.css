@@ -236,7 +236,6 @@
   display: block;
   background: rgba(62, 122, 78, 0.08);
   border: 1px solid #3E7A4E;
-  border-left-width: 4px;
   color: #2E5C3B;
 }
 
@@ -244,7 +243,6 @@
   display: block;
   background: rgba(191, 58, 50, 0.07);
   border: 1px solid var(--c-accent);
-  border-left-width: 4px;
   color: var(--c-accent);
 }
 

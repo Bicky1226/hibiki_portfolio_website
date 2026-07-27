@@ -50,6 +50,15 @@
   </url>
 
   <url>
+    <loc>https://hibikishimizu.com/ja/works/river-crossing/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/works/river-crossing/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/works/river-crossing/"/>
+    <lastmod>2026-07-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://hibikishimizu.com/ja/about/</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/about/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/about/"/>
@@ -191,6 +200,15 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/works/morse-gesture/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/works/morse-gesture/"/>
     <lastmod>2026-03-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/en/works/river-crossing/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/works/river-crossing/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/works/river-crossing/"/>
+    <lastmod>2026-07-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

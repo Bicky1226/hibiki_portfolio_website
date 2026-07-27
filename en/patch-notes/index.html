@@ -80,18 +80,6 @@
       padding-top: 4px;
       position: relative;
     }
-    .pn-ver-col::after {
-      content: '';
-      position: absolute;
-      right: -20px;
-      top: 10px;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--c-accent);
-      border: 2px solid var(--c-bg);
-      box-shadow: 0 0 8px rgba(191,58,50,0.5);
-    }
     .pn-version {
       font-family: var(--font-en);
       font-size: var(--fs-base);
@@ -133,10 +121,10 @@
       border-radius: 4px;
       margin-bottom: 8px;
     }
-    .pn-label--added    { background: rgba(91, 213, 155, 0.12); color: #3E7A4E; }
-    .pn-label--fixed    { background: rgba(91, 155, 213, 0.12); color: #2C4A6E; }
-    .pn-label--changed  { background: rgba(191,58,50,0.12); color: var(--c-accent); }
-    .pn-label--security { background: rgba(213, 91, 91, 0.12);  color: #d55b5b; }
+    .pn-label--added,
+    .pn-label--fixed,
+    .pn-label--changed,
+    .pn-label--security { background: rgba(107, 79, 53, 0.10); color: #6B4F35; }
 
     .pn-items {
       list-style: none;
@@ -167,6 +155,24 @@
       .pn-ver-col::after { display: none; }
       .pn-ver-col { display: flex; gap: 12px; align-items: baseline; }
       .pn-date { margin-top: 0; }
+    }
+
+    /* Footer logo rendered as the 響 seal (matches the nav icon) */
+    .footer-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      background: var(--c-accent);
+      color: #F6F1E5;
+      -webkit-text-fill-color: #F6F1E5;
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1;
+      box-shadow: inset 0 0 0 1.5px #F6F1E5, inset 0 0 0 3px var(--c-accent);
+      transform: rotate(-2.5deg);
     }
   </style>
 </head>
@@ -200,14 +206,85 @@
 
   <section id="main-content" class="pn-hero">
     <div class="container">
-      <p class="pn-hero-label reveal font-en">Site Changelog</p>
+      <p class="pn-hero-label reveal font-en">Site Log</p>
       <h1 class="pn-hero-title reveal">Patch Notes</h1>
-      <p class="pn-hero-sub reveal">Version history for hibikishimizu.com — every update, fix, and improvement recorded.</p>
+      <p class="pn-hero-sub reveal">Version history of this website — a record of updates and fixes.</p>
     </div>
   </section>
 
   <div class="container">
     <div class="pn-timeline reveal">
+
+      <!-- v1.4 -->
+      <div class="pn-entry" id="v1-4">
+        <div class="pn-ver-col">
+          <div class="pn-version">v1.4</div>
+          <div class="pn-date">2026-06-22</div>
+        </div>
+        <div class="pn-content">
+          <p class="pn-release-title">Expanded Works detail, unified categories &amp; new footer</p>
+
+          <div class="pn-group">
+            <span class="pn-group-label pn-label--added">Added</span>
+            <ul class="pn-items">
+              <li>New work "Blink Challenge" (2023 campus-festival reaction-time game) added to Works, with a full detail page (JA/EN)</li>
+              <li>Detail page for the Lip Reading graduation research — dlib 68-landmark figure and accuracy/loss curves included</li>
+              <li>Detail page for Morse Gesture Input (international PBL with a Thai sister university) — gesture design and team structure documented</li>
+              <li>NumPy, pandas, LSTM (ML/CV) and GSAP (Design &amp; UX) added to the About skills</li>
+            </ul>
+          </div>
+
+          <div class="pn-group">
+            <span class="pn-group-label pn-label--changed">Changed</span>
+            <ul class="pn-items">
+              <li>Works category labels unified to single Web / Research / App / System badges (list, featured, and detail headers)</li>
+              <li>All project descriptions refreshed; detail-page tech badges aligned with the list-card tech tags</li>
+              <li>Lip Reading tech corrected to Python / TensorFlow / dlib / LSTM; HTML / CSS added to ohmatching</li>
+              <li>Home Interests aligned with About (added Music &amp; Reading, removed the Whisky icon)</li>
+              <li>Lip Reading thumbnail switched to the dlib landmark image</li>
+              <li>About: car and motorcycle licences merged into one "Driver's License" entry; the languages sub-heading reworded</li>
+              <li>Reworded the Blog intro, the Contact email box, and the Patch Notes heading (Site Log) &amp; description</li>
+              <li>Works detail pages' nav and footer unified with the top page (links, GitHub, language switch)</li>
+              <li>Footer "響" changed to the red seal icon; Patch Notes labels unified to a single brown and the red version dots removed</li>
+            </ul>
+          </div>
+
+          <div class="pn-group">
+            <span class="pn-group-label pn-label--fixed">Fixed</span>
+            <ul class="pn-items">
+              <li>Footer GitHub link corrected site-wide to the right URL (github.com/Bicky1226)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- v1.3 -->
+      <div class="pn-entry" id="v1-3">
+        <div class="pn-ver-col">
+          <div class="pn-version">v1.3</div>
+          <div class="pn-date">2026-06-20</div>
+        </div>
+        <div class="pn-content">
+          <p class="pn-release-title">Design cleanup, journal contents &amp; home refresh</p>
+
+          <div class="pn-group">
+            <span class="pn-group-label pn-label--added">Added</span>
+            <ul class="pn-items">
+              <li>Table of contents added to the Islay travel journal (Intro through Closing, plus each day) with smooth-scroll jump links</li>
+            </ul>
+          </div>
+
+          <div class="pn-group">
+            <span class="pn-group-label pn-label--changed">Changed</span>
+            <ul class="pn-items">
+              <li>Removed the "accent left edge + outer frame" box treatment site-wide in favour of a simple border (journal meta, highlight boxes, language skills, contact success/error messages)</li>
+              <li>Home hero: suminagashi ink background now spans the full viewport width and reaches up to the navigation's bottom rule</li>
+              <li>Home hero: removed the four corner registration marks (+) and the outer frame, keeping only top and bottom rules</li>
+              <li>Home hero: closed the gaps between the title lines so the headline reads as one continuous column</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
       <!-- v1.2 -->
       <div class="pn-entry" id="v1-2">

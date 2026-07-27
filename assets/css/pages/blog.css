@@ -55,6 +55,21 @@
   padding-left: 10px;
 }
 
+/* スマホ: 縦書きの脇ラベルが題字と重なるため、題字の下に横書きで配置する */
+@media (max-width: 640px) {
+  .blog-hero-title::after {
+    position: static;
+    display: block;
+    writing-mode: horizontal-tb;
+    width: max-content;
+    margin-top: 10px;
+    padding-left: 0;
+    border-left: none;
+    letter-spacing: 0.35em;
+    font-size: 12px;
+  }
+}
+
 .blog-hero-sub {
   font-size: var(--fs-base);
   color: var(--c-text-muted);
@@ -100,6 +115,23 @@
   background: var(--c-text);
   border-color: var(--c-text);
   color: var(--c-bg);
+}
+
+/* スマホ: タグフィルタを等幅セグメントにして 1 行に収める(文字を小さく) */
+@media (max-width: 640px) {
+  .blog-tags-filter {
+    width: 100%;
+    flex-wrap: nowrap;
+  }
+  .tag-filter-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 9px 4px;
+    font-size: 9.5px;
+    letter-spacing: 0.03em;
+    text-align: center;
+    white-space: nowrap;
+  }
 }
 
 /* blog list — 目次組み */

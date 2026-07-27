@@ -83,14 +83,6 @@
   <!-- hero -->
   <div id="main-content"></div>
   <section id="hero" aria-label="ヒーロー">
-    <!-- 枠罫 + 見当(トンボ) -->
-    <div class="hero-frame" aria-hidden="true">
-      <span class="kento kento--tl"></span>
-      <span class="kento kento--tr"></span>
-      <span class="kento kento--bl"></span>
-      <span class="kento kento--br"></span>
-    </div>
-
     <div class="hero-paper">
 
       <!-- 墨流し — 枠罫の内側を水盤に見立てる -->
@@ -153,26 +145,23 @@
           <a href="/ja/Islay/" class="work-card-link" aria-label="アイラ島旅行のしおり — 詳細を見る">
             <div class="work-card-thumb">
               <div class="work-card-thumb-inner islay-thumb">
-                <div class="thumb-pattern islay-pattern" aria-hidden="true"></div>
-                <div class="thumb-label font-en">Islay Guide</div>
+                <img src="../assets/images/islay-hero-maps.webp" alt="アイラ島の地図（北部・南部を統合）" loading="lazy" class="work-thumb-img">
               </div>
               <div class="work-card-year font-en">2026</div>
             </div>
             <div class="work-card-body">
               <div class="work-card-cat">
                 <span class="tech-badge">Web</span>
-                <span class="tech-badge">Travel Guide</span>
               </div>
               <h3 class="work-card-title">ウイスキー好きへの<br>アイラ島旅行のしおり</h3>
               <p class="work-card-title-en font-en">The whole whisky experience<br>in Isle of Islay</p>
               <p class="work-card-desc">
-                ウイスキー好きのためのアイラ島完全ガイド。島の歴史、各蒸留所の詳細、飲み方まで網羅した没入感のある情報サイト。
+                ウイスキー好きのためのアイラ島完全ガイド。島の歴史から、全蒸留所を巡った私の経験まで、知識を詰め込みました。アイラ島に関しての包括的な情報サイトとしてお楽しみください。
               </p>
               <div class="work-card-tech">
                 <span class="tech-badge">HTML</span>
                 <span class="tech-badge">CSS</span>
                 <span class="tech-badge">JavaScript</span>
-                <span class="tech-badge">Leaflet</span>
               </div>
             </div>
             <div class="work-card-footer">
@@ -199,18 +188,19 @@
             </div>
             <div class="work-card-body">
               <div class="work-card-cat">
-                <span class="tech-badge">Web App</span>
-                <span class="tech-badge">Full-Stack</span>
+                <span class="tech-badge">Web</span>
               </div>
               <h3 class="work-card-title">独立系産業医・保健師<br>マッチングゲート</h3>
               <p class="work-card-title-en font-en">Occupational Health<br>Matching Platform</p>
               <p class="work-card-desc">
-                企業と独立系産業医・保健師をつなぐWebマッチングシステム。多条件検索・OTP二段階認証・管理者機能を備えたフルスタックWebアプリ。
+                本サイトはクライアントの方から依頼を受けて作成した産業医・保健師等の検索サイト。「独立系産業医・保健師マッチングゲート」は、個人事業主または小規模法人として活動する産業医・保健師等の専門職と、 直接業務委託契約を希望される企業・団体の皆さまをつなぐための検索システム。<br>※依頼主より掲載許可をいただいております。
               </p>
               <div class="work-card-tech">
                 <span class="tech-badge">PHP</span>
                 <span class="tech-badge">MySQL</span>
                 <span class="tech-badge">JavaScript</span>
+                <span class="tech-badge">HTML</span>
+                <span class="tech-badge">CSS</span>
               </div>
             </div>
             <div class="work-card-footer">
@@ -233,13 +223,12 @@
             </div>
             <div class="work-card-body">
               <div class="work-card-cat">
-                <span class="tech-badge">Writing</span>
-                <span class="tech-badge">Engineering</span>
+                <span class="tech-badge">Web</span>
               </div>
               <h3 class="work-card-title">エンジニアブログ</h3>
               <p class="work-card-title-en font-en">Engineer's Blog</p>
               <p class="work-card-desc">
-                技術・旅・日常をつづるエンジニアブログ。思考の記録と継続的なアウトプットの場。
+                システム・日常・旅・学んだことをアウトプットする場所。適当につぶやくのでよかったら見ていってください。
               </p>
               <div class="work-card-tech">
                 <span class="tech-badge">HTML</span>
@@ -286,8 +275,8 @@
           </div>
 
           <p class="about-lead reveal">
-            システムエンジニアとして、<strong>Web開発・UX・プロダクト企画</strong>を軸に活動。
-            細部まで妥協しない実装と、ユーザーが自然に感じ取れる体験設計を大切にしています。
+            システム屋さんとして、<strong>Web開発・システム開発・機械学習研究</strong>を軸に活動しています。
+            UXを向上させる実装を意識し、ユーザーのエンゲージメントを高める設計をモットーにしています。
           </p>
 
           <div class="about-stats" data-stagger>
@@ -300,7 +289,7 @@
               <span class="stat-label">Projects</span>
             </div>
             <div class="stat-item" data-stagger-item>
-              <span class="stat-num font-en">5</span>
+              <span class="stat-num font-en">8</span>
               <span class="stat-label">Certifications</span>
             </div>
           </div>
@@ -316,7 +305,7 @@
             <div class="edu-item">
               <div class="edu-year font-en">2021 — 2025</div>
               <div class="edu-body">
-                <div class="edu-degree font-en">B.S. Information Science and Technology</div>
+                <div class="edu-degree font-en">B.S. Information Systems</div>
                 <div class="edu-school">大阪工業大学 — Osaka Institute of Technology</div>
               </div>
             </div>
@@ -358,25 +347,25 @@
             <div class="skill-bar-item">
               <span class="skill-name">JavaScript</span>
               <div class="skill-bar-track">
-                <div class="skill-bar-fill" data-width="65"></div>
+                <div class="skill-bar-fill" data-width="55"></div>
               </div>
             </div>
             <div class="skill-bar-item">
               <span class="skill-name">PHP</span>
               <div class="skill-bar-track">
-                <div class="skill-bar-fill" data-width="60"></div>
+                <div class="skill-bar-fill" data-width="40"></div>
               </div>
             </div>
             <div class="skill-bar-item">
               <span class="skill-name">SQL</span>
               <div class="skill-bar-track">
-                <div class="skill-bar-fill" data-width="72"></div>
+                <div class="skill-bar-fill" data-width="90"></div>
               </div>
             </div>
             <div class="skill-bar-item">
               <span class="skill-name">Java / C</span>
               <div class="skill-bar-track">
-                <div class="skill-bar-fill" data-width="58"></div>
+                <div class="skill-bar-fill" data-width="70"></div>
               </div>
             </div>
           </div>
@@ -409,11 +398,13 @@
         <div class="skill-group" data-stagger-item>
           <h3 class="skill-group-title label-sm">Interests</h3>
           <div class="skill-tags">
-            <span class="skill-tag">UX Design</span>
-            <span class="skill-tag">Product Planning</span>
-            <span class="skill-tag"><i class="ph ph-wine" aria-hidden="true"></i> Whisky</span>
+            <span class="skill-tag">Whisky</span>
             <span class="skill-tag">Travel</span>
-            <span class="skill-tag">Photography</span>
+            <span class="skill-tag">Language Learning</span>
+            <span class="skill-tag">Music</span>
+            <span class="skill-tag">Film</span>
+            <span class="skill-tag">Reading</span>
+            <span class="skill-tag">Video Editing</span>
           </div>
         </div>
 
@@ -513,7 +504,7 @@
         <p class="footer-copy font-en">
           &copy; 2026 Hibiki Shimizu. All rights reserved.
         </p>
-        <a href="https://github.com/HibikiShimizu" target="_blank" rel="noopener" class="footer-social" aria-label="GitHub">
+        <a href="https://github.com/Bicky1226" target="_blank" rel="noopener" class="footer-social" aria-label="GitHub">
           <i class="ph ph-github-logo" aria-hidden="true"></i>
         </a>
       </div>

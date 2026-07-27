@@ -11,38 +11,17 @@
   overflow: hidden;
 }
 
-/* 枠罫(墨より上に引く — 水盤の縁) */
-.hero-frame {
-  position: absolute;
-  inset: calc(var(--nav-height) + clamp(14px, 2.5vw, 32px)) clamp(14px, 2.5vw, 32px) clamp(14px, 2.5vw, 32px);
-  border: 1px solid var(--c-border);
-  pointer-events: none;
-  z-index: 3;
-}
-
-/* 見当(トンボ) — 四隅の十字 */
-.kento {
-  position: absolute;
-  width: 17px;
-  height: 17px;
-  background:
-    linear-gradient(var(--c-text-muted), var(--c-text-muted)) center / 1px 100% no-repeat,
-    linear-gradient(var(--c-text-muted), var(--c-text-muted)) center / 100% 1px no-repeat;
-}
-.kento--tl { top: -8.5px; left: -8.5px; }
-.kento--tr { top: -8.5px; right: -8.5px; }
-.kento--bl { bottom: -8.5px; left: -8.5px; }
-.kento--br { bottom: -8.5px; right: -8.5px; }
-
 .hero-paper {
   position: relative;
   z-index: 2;
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin: clamp(14px, 2.5vw, 32px);
-  margin-top: clamp(14px, 2.5vw, 32px);
+  /* 上はナビ下線に合わせて余白なし、下は従来の余白。横は画面いっぱい(墨を全幅に流す) */
+  margin: 0 0 clamp(14px, 2.5vw, 32px);
   padding: clamp(20px, 4vw, 64px) clamp(20px, 5vw, 80px);
+  /* 下だけ罫(上辺はナビの下線が兼ねる / 横は全幅) */
+  border-bottom: 1px solid var(--c-border);
 }
 
 /* 墨流し — 枠罫の内側を水盤に見立てた webgl 流体 */
@@ -163,7 +142,8 @@
   color: var(--c-text);
   display: flex;
   align-items: flex-start;
-  gap: 0.4em;
+  /* 各行をくっつけて連続表示(行間スペースなし) */
+  gap: 0;
 }
 
 .headline-line {
@@ -411,6 +391,14 @@ html[lang="en"] .hero-author {
   filter: sepia(0.12) contrast(0.98);
 }
 
+/* 作品サムネに実画像を敷くときの共通クラス(Islay 地図 / Morse / 朱印など) */
+.work-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* Blog — 原稿用紙 */
 .blog-thumb {
   background-color: #EFE9D9;
@@ -429,6 +417,26 @@ html[lang="en"] .hero-author {
   inset: 14px;
   border: 1px solid rgba(191, 58, 50, 0.3);
   background: none;
+}
+
+/* River Crossing — 川面(藍の木版) */
+.rivercross-thumb {
+  background-color: #E3E8EA;
+}
+
+.rivercross-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.6;
+  background-image:
+    repeating-linear-gradient(90deg,
+      transparent 0px, transparent 30px,
+      rgba(44, 74, 110, 0.32) 30px, rgba(44, 74, 110, 0.32) 32px,
+      transparent 32px, transparent 48px),
+    repeating-linear-gradient(0deg,
+      transparent 0px, transparent 16px,
+      rgba(44, 74, 110, 0.22) 16px, rgba(44, 74, 110, 0.22) 17px);
+  background-size: 48px 34px, 100% 34px;
 }
 
 /* サムネイルの題字 — 縦書きの明朝 */

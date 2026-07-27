@@ -31,6 +31,9 @@
     .project-body li { font-size: var(--fs-base); color: var(--c-text-muted); line-height: 1.8; margin-bottom: 6px; }
     .project-body strong { color: var(--c-text); }
     .wip-notice { background: rgba(191,58,50,0.08); border: 1px solid rgba(191,58,50,0.25); border-left: 3px solid var(--c-accent); border-radius: var(--radius-sm); padding: 16px 20px; margin: 32px 0; font-size: var(--fs-sm); color: var(--c-text-muted); }
+    .project-figure { margin: 28px 0 8px; }
+    .project-figure img { width: 100%; height: auto; display: block; border: 1px solid var(--c-border); border-radius: var(--radius-sm); background: var(--c-bg-3); }
+    .project-figcap { font-family: var(--font-en); font-size: var(--fs-xs); color: var(--c-text-faint); margin-top: 8px; letter-spacing: 0.02em; }
   </style>
 </head>
 <body class="project-page">
@@ -52,8 +55,7 @@
       <li><a href="/en/works/" class="active">Works</a></li>
       <li><a href="/en/about/">About</a></li>
       <li><a href="/en/blog/">Blog</a></li>
-      <li><a href="/en/contact/">Contact</a>
-          <a href="/en/patch-notes/">Patch Notes</a></li>
+      <li><a href="/en/contact/">Contact</a></li>
     </ul>
     <div class="nav-lang" aria-label="Language switcher">
       <button class="lang-btn" data-lang="ja" aria-label="日本語">日</button>
@@ -68,46 +70,66 @@
       <a href="/en/works/" class="project-back reveal"><i class="ph ph-arrow-left"></i> Back to Works</a>
 
       <div class="project-meta reveal">
-        <span class="project-year font-en">2024</span>
-        <span class="tech-badge">ML / CV</span>
+        <span class="project-year font-en">2023</span>
         <span class="tech-badge">Python</span>
         <span class="tech-badge">MediaPipe</span>
-        <span class="tech-badge">HCI</span>
         <span class="tech-badge">OpenCV</span>
       </div>
 
       <h1 class="project-hero-title reveal">Morse Gesture Input</h1>
-      <p class="project-lead reveal">A hand-gesture interface for entering Morse code that converts to text in real time. Uses MediaPipe hand tracking — no physical keyboard required.</p>
+      <p class="project-lead reveal">A system that lets you enter Morse code with hand gestures alone and converts it to text in real time. Built during a one-week international PBL at our sister university in Thailand by a team of five — three local students and two Japanese students — which I led.</p>
     </div>
   </section>
 
   <div class="container">
     <div class="project-body reveal">
 
-      <div class="wip-notice">
-        <strong>Full write-up coming soon</strong> — Detailed documentation for this project is currently being prepared.
-      </div>
-
       <h2>Overview</h2>
-
       <p>
-        This HCI (Human-Computer Interaction) project explores an alternative input method for users with physical constraints
-        or in situations where a keyboard is impractical. By holding the hand up to a webcam and making simple gestures,
-        the user enters dots and dashes that are decoded into alphanumeric characters in real time.
-        The system runs entirely on a standard laptop CPU with no specialised hardware.
+        Hold your hand up to a webcam, make a few gestures, and the system enters Morse code and decodes it into text in real time.
+        Conceived as an input method that lets people communicate without speech or a physical keyboard, it was designed with
+        accessibility in mind — supporting communication for people with hearing or speech difficulties. This HCI
+        (Human-Computer Interaction) project runs entirely on a standard laptop CPU with no specialised hardware.
       </p>
+
+      <figure class="project-figure">
+        <img src="../../../assets/images/morse_code_screen.jpeg" alt="Morse gesture input running — hand tracking, Morse code reference chart, and decoded result" loading="lazy">
+        <figcaption class="project-figcap">Live session — hand tracking with the Morse reference chart and decoded output</figcaption>
+      </figure>
+
+      <h2>Team &amp; my role</h2>
+      <p>
+        An international collaborative project carried out during a one-week visit to our sister university in Thailand, in my third year.
+        We formed a single team of five — three Thai students and two Japanese students — and I led the development as team lead.
+      </p>
+      <p>
+        It was my first time holding technical discussions in English, and communication was far from smooth. So I broke the work down
+        into individual features and shared a diagram of the overall structure, so every member could see both their own piece and how
+        it fit into the whole. As a result, we managed to ship a working system within the tight one-week deadline.
+      </p>
+
+      <h2>Controls &amp; gesture design</h2>
+      <p>Morse code's "dit (·)" and "dah (–)" are expressed through hand gestures and how long each one is held.</p>
+      <ul>
+        <li><strong>Thumbs up:</strong> start input</li>
+        <li><strong>Open palm (short, ≤ 1s):</strong> "·" (dot / dit)</li>
+        <li><strong>Open palm (long, &gt; 1s):</strong> "–" (dash / dah)</li>
+        <li><strong>"I love you" sign:</strong> space (word separator)</li>
+        <li><strong>Victory / peace sign:</strong> confirm and convert the current Morse sequence into one character</li>
+        <li><strong>Pointing up:</strong> clear the current signal</li>
+        <li><strong>Thumbs down:</strong> reset the entire input</li>
+        <li>Plus editing commands such as backspace (delete one character) and word delete</li>
+      </ul>
 
       <h2>Key Technologies</h2>
       <ul>
-        <li><strong>Hand tracking:</strong> Google MediaPipe Hands — detects 21 landmarks per hand at real-time speed</li>
-        <li><strong>Gesture classification:</strong> Rule-based classifier maps finger-bend states (fist / open / point) to "dot," "dash," and "space"</li>
-        <li><strong>Morse decoding:</strong> Lookup table converts dot/dash sequences to letters and digits</li>
-        <li><strong>UI:</strong> Real-time video overlay via OpenCV shows current input state and decoded text</li>
-        <li><strong>Stack:</strong> Python / MediaPipe / OpenCV</li>
+        <li><strong>Gesture recognition:</strong> MediaPipe Gesture Recognizer (gesture_recognizer.task) classifies hand shapes into predefined gestures — Open_Palm / Victory / Thumb_Up / ILoveYou, and more</li>
+        <li><strong>Timing logic:</strong> measures how long each gesture is held — a short hold is a dot, a long hold is a dash — to build the Morse signal sequence</li>
+        <li><strong>Morse decoding:</strong> a lookup table covering A–Z, 0–9, and symbols (? ! . , ; : + - / =) decodes the sequence into a character, triggered by the confirm gesture</li>
+        <li><strong>Real-time UI:</strong> OpenCV shows the mirrored camera feed alongside a Morse reference chart, visualising the live signal, the decoded text, and a "Now Reading" indicator</li>
+        <li><strong>Design:</strong> the gesture-recognition class extends a hand-landmark detection class (built through class inheritance)</li>
+        <li><strong>Stack:</strong> Python / MediaPipe / OpenCV / NumPy</li>
       </ul>
-
-      <h2>Status</h2>
-      <p>Working prototype stage. A demo video and link to the code repository will be added to this page shortly.</p>
 
     </div>
   </div>
@@ -115,11 +137,14 @@
   <footer class="site-footer" role="contentinfo">
     <div class="container">
       <div class="footer-inner">
-        <div class="footer-brand"></div>
+        <div class="footer-brand"><span class="footer-logo">響</span></div>
         <nav class="footer-links" aria-label="Footer navigation">
           <a href="/en/works/">Works</a>
           <a href="/en/about/">About</a>
+          <a href="/en/blog/">Blog</a>
           <a href="/en/contact/">Contact</a>
+          <a href="/en/privacy/">Privacy</a>
+          <a href="/en/patch-notes/">Patch Notes</a>
         </nav>
         <div class="footer-lang" aria-label="Language switcher">
           <button class="lang-btn" data-lang="ja" aria-label="日本語">日</button>
@@ -129,6 +154,9 @@
       </div>
       <div class="footer-bottom">
         <p class="footer-copy font-en">&copy; 2026 Hibiki Shimizu. All rights reserved.</p>
+        <a href="https://github.com/Bicky1226" target="_blank" rel="noopener" class="footer-social" aria-label="GitHub">
+          <i class="ph ph-github-logo" aria-hidden="true"></i>
+        </a>
       </div>
     </div>
   </footer>
