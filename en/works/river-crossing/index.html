@@ -94,7 +94,9 @@
         <li><strong>2.</strong> Once someone who can row — the father, mother or servant, marked with a <strong>vermilion border</strong> — is aboard, the Cross button becomes available.</li>
         <li><strong>3.</strong> Press Cross and the boat sails over. <strong>Anyone in the boat counts as being off the bank</strong>, and both banks are checked for safety the moment the boat departs.</li>
         <li><strong>4.</strong> Break a rule and you get an incident. Undo and Restart are right there in the dialog, so feel free to experiment.</li>
+        <!-- The hint feature is temporarily disabled. Uncomment this item to bring it back.
         <li><strong>5.</strong> Stuck? Press Hint for the next move on the shortest path from wherever you currently are.</li>
+        -->
       </ul>
 
       <h2>On the shortest solution</h2>
@@ -102,9 +104,11 @@
         The puzzle can be solved in <strong>17 crossings</strong>, and that is the theoretical minimum — a breadth-first search over the whole state space confirms no solution of 16 or fewer exists.
         There are only 512 states in total (2<sup>8</sup> = 256 arrangements of the eight characters, times two positions for the boat), and the search walks the legal ones exhaustively.
       </p>
+      <!-- The hint feature is temporarily disabled. Uncomment this paragraph to bring it back.
       <p>
         The Hint button runs that same search live. It is not replaying a canned answer — it re-solves for the shortest path <strong>from the position you are actually in</strong>, so it stays correct no matter how far you have wandered.
       </p>
+      -->
 
       <h2>Implementation notes</h2>
       <ul>

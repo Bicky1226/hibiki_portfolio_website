@@ -362,7 +362,9 @@
         '<span class="rc-go-arrow" id="rc-go-arrow" aria-hidden="true">→</span></button>' +
       '<button type="button" class="rc-btn" id="rc-undo">' + esc(T.undo) + '</button>' +
       '<button type="button" class="rc-btn" id="rc-reset">' + esc(T.reset) + '</button>' +
-      '<button type="button" class="rc-btn" id="rc-hint">' + esc(T.hint) + '</button>' +
+      /* ヒント機能は一時的に無効化中。
+         復活させるときは、この行と「ヒント無効化」と書いた3か所のコメントを外す。
+      '<button type="button" class="rc-btn" id="rc-hint">' + esc(T.hint) + '</button>' + */
     '</div>' +
 
     '<p class="rc-status" id="rc-status" role="status" aria-live="polite">' + esc(T.start) + '</p>';
@@ -380,7 +382,7 @@
     goArrow:   root.querySelector('#rc-go-arrow'),
     undo:      root.querySelector('#rc-undo'),
     reset:     root.querySelector('#rc-reset'),
-    hint:      root.querySelector('#rc-hint'),
+    /* ヒント無効化 — hint: root.querySelector('#rc-hint'), */
     status:    root.querySelector('#rc-status'),
     overlay:   root.querySelector('#rc-overlay'),
     stamp:     root.querySelector('#rc-stamp'),
@@ -530,7 +532,7 @@
     el.go.disabled = !playable || riders.length === 0 || !hasPilot;
     el.undo.disabled = busy || (history.length === 0 && riders.length === 0);
     el.reset.disabled = busy;
-    el.hint.disabled = !playable;
+    /* ヒント無効化 — el.hint.disabled = !playable; */
   }
 
   function say(msg) { el.status.textContent = msg; }
@@ -640,8 +642,9 @@
     say(T.start);
   }
 
+  /* ヒント無効化中は el.hint が存在しないので、呼ばれても何もしない */
   function hint() {
-    if (el.hint.disabled) return;
+    if (!el.hint || el.hint.disabled) return;
     clearHint();
     var move = nextBestMove(state.pos, state.boatSide);
     if (!move) { say(T.hintNone); return; }
@@ -709,7 +712,7 @@
   el.go.addEventListener('click', cross);
   el.undo.addEventListener('click', undo);
   el.reset.addEventListener('click', reset);
-  el.hint.addEventListener('click', hint);
+  /* ヒント無効化 — el.hint.addEventListener('click', hint); */
 
   state = freshState();
   history = [];
