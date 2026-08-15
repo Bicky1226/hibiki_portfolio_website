@@ -183,6 +183,24 @@ a:hover { color: var(--c-text); }
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
 }
 
+/* 英語版は横組み。落款は題字の上に据える
+   （横組みで左肩に置くと、狭い画面で画面外へはみ出すため） */
+html[lang="en"] .kw-hero-title {
+  writing-mode: horizontal-tb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  font-size: clamp(42px, 9vw, 94px);
+  line-height: 1.06;
+  letter-spacing: 0.02em;
+}
+
+html[lang="en"] .kw-hero-seal {
+  position: static;
+  order: -1;
+}
+
 .kw-hero-seal {
   position: absolute;
   top: -6px;
