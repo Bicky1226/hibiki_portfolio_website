@@ -50,6 +50,24 @@
   </url>
 
   <url>
+    <loc>https://hibikishimizu.com/kawawatari/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/kawawatari/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/kawawatari/en/"/>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://hibikishimizu.com/kawawatari/en/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/kawawatari/en/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/kawawatari/"/>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
     <loc>https://hibikishimizu.com/ja/works/river-crossing/</loc>
     <xhtml:link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/works/river-crossing/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/works/river-crossing/"/>

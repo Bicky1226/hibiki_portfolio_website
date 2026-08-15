@@ -1,70 +1,10 @@
 /* ==========================================================================
-   River Crossing Puzzle — 猛獣家族の川渡り
-   /ja/works/river-crossing/ と /en/works/river-crossing/ で共有
-   base.css のトークン（紙・墨・朱・藍）の上に組む。角丸なし・硬い影。
+   川渡りパズル — ゲーム盤のスタイル
+   デザイントークン（--c-* / --font-* / --fs-* など）は kawawatari.css が定義する。
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   ページ外枠 — 他の works 詳細ページと同じ体裁
-   -------------------------------------------------------------------------- */
-.project-page { padding-top: 80px; }
+.font-en { font-family: var(--font-en); }
 
-.project-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: var(--fs-sm);
-  color: var(--c-text-muted);
-  text-decoration: none;
-  margin-bottom: 40px;
-  transition: color var(--dur-fast) ease;
-}
-
-.project-back:hover { color: var(--c-accent); }
-
-#project-hero { padding: clamp(52px, 7vw, 88px) 0 clamp(28px, 4vw, 44px); }
-
-.project-meta {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-bottom: 24px;
-  align-items: center;
-}
-
-.project-year {
-  font-size: var(--fs-xs);
-  color: var(--c-text-muted);
-  font-family: var(--font-en);
-  letter-spacing: 0.08em;
-}
-
-.project-hero-title {
-  font-size: clamp(32px, 6vw, 64px);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  margin-bottom: 20px;
-}
-
-.project-lead {
-  font-size: var(--fs-lg);
-  color: var(--c-text-muted);
-  line-height: 1.7;
-  max-width: 640px;
-}
-
-.project-body { padding: clamp(48px, 6vw, 80px) 0 clamp(80px, 10vw, 120px); }
-.project-body h2 { font-size: var(--fs-2xl); font-weight: 700; margin: 0 0 16px; color: var(--c-text); }
-.project-body h2:not(:first-child) { margin-top: 52px; }
-.project-body p { font-size: var(--fs-base); color: var(--c-text-muted); line-height: 1.9; margin-bottom: 16px; max-width: 800px; }
-.project-body ul { padding-left: 1.5em; margin: 12px 0 20px; max-width: 800px; }
-.project-body li { font-size: var(--fs-base); color: var(--c-text-muted); line-height: 1.8; margin-bottom: 6px; }
-.project-body strong { color: var(--c-text); }
-
-/* --------------------------------------------------------------------------
-   ゲーム本体
-   -------------------------------------------------------------------------- */
 .rc {
   --rc-tile-w: clamp(40px, 10.5vw, 64px);
   --rc-tile-h: calc(var(--rc-tile-w) * 1.4 + 20px);
@@ -81,7 +21,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   HUD
+   HUD — 手数 / タイム / 最短
    -------------------------------------------------------------------------- */
 .rc-hud {
   display: flex;
@@ -111,9 +51,17 @@
   font-weight: 600;
   color: var(--c-text);
   letter-spacing: 0.02em;
+  /* タイムの桁が動いても幅が揺れないように */
+  font-variant-numeric: tabular-nums;
 }
 
-.rc-hud-item--best .rc-hud-value { color: var(--c-accent-2); }
+/* 「最短17手」は目標値なので控えめに */
+.rc-hud-item--target { margin-left: auto; }
+.rc-hud-item--target .rc-hud-value {
+  font-size: var(--fs-base);
+  color: var(--c-text-muted);
+}
+
 .rc-hud-item[hidden] { display: none; }
 
 /* --------------------------------------------------------------------------
@@ -227,17 +175,10 @@ html[lang="en"] .rc-tile-name {
 
 /* 乗船中 — 活字が版に沈んだ状態 */
 .rc-tile.is-aboard {
+  --rc-cut: var(--c-bg-3);
   border-color: var(--c-text);
   background: var(--c-bg-3);
   box-shadow: inset 2px 2px 0 rgba(33, 29, 23, 0.14);
-}
-
-.rc-tile.is-aboard { --rc-cut: var(--c-bg-3); }
-
-/* ヒント表示 */
-.rc-tile.is-hinted {
-  outline: 2px dashed var(--c-accent);
-  outline-offset: 2px;
 }
 
 .rc-tile:disabled {
@@ -308,7 +249,7 @@ html[lang="en"] .rc-tile-name {
 }
 
 /* --------------------------------------------------------------------------
-   結果オーバーレイ
+   オーバーレイ — 開始前 / 事件 / クリア
    -------------------------------------------------------------------------- */
 .rc-overlay {
   position: absolute;
@@ -354,9 +295,15 @@ html[lang="en"] .rc-stamp {
   letter-spacing: 0.06em;
 }
 
+/* 事件は朱、クリアは藍、開始前は墨 */
 .rc-overlay[data-kind="clear"] .rc-stamp {
   border-color: var(--c-accent-2);
   color: var(--c-accent-2);
+}
+
+.rc-overlay[data-kind="ready"] .rc-stamp {
+  border-color: var(--c-text);
+  color: var(--c-text);
 }
 
 .rc-card-title {
@@ -375,12 +322,46 @@ html[lang="en"] .rc-stamp {
   color: var(--c-text-muted);
 }
 
+/* クリア時の 手数 / タイム */
+.rc-card-stats {
+  display: flex;
+  justify-content: center;
+  gap: clamp(24px, 6vw, 48px);
+  margin: 20px 0 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--c-border-2);
+  border-bottom: 1px solid var(--c-border-2);
+}
+
+.rc-card-stats[hidden] { display: none; }
+
+.rc-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+}
+
+.rc-stat-label {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.1em;
+  color: var(--c-text-muted);
+}
+
+.rc-stat-value {
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--c-text);
+  font-variant-numeric: tabular-nums;
+}
+
 .rc-card-flag {
   margin: 12px 0 0;
-  font-family: var(--font-en);
+  font-family: var(--font-display);
   font-size: var(--fs-xs);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   color: var(--c-accent);
 }
 
@@ -456,7 +437,12 @@ html[lang="en"] .rc-stamp {
   box-shadow: none;
 }
 
-.rc-card-actions .rc-btn--go { margin-right: 0; }
+/* 開始ボタンはカード内で目立たせる */
+.rc-card-actions .rc-btn--go {
+  margin-right: 0;
+  padding: 13px 34px;
+  font-size: var(--fs-base);
+}
 
 .rc-status {
   margin: 0;
@@ -478,45 +464,9 @@ html[lang="en"] .rc-stamp {
 }
 
 /* --------------------------------------------------------------------------
-   ルール説明（ページ側のマークアップ）
-   -------------------------------------------------------------------------- */
-.rc-rules {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: clamp(14px, 2vw, 22px);
-  margin: 28px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.rc-rule {
-  padding: 16px 18px;
-  background: var(--c-bg-2);
-  border: 1px solid var(--c-border);
-  box-shadow: var(--shadow-sm);
-}
-
-.rc-rule-num {
-  display: block;
-  margin-bottom: 6px;
-  font-family: var(--font-en);
-  font-size: var(--fs-xs);
-  letter-spacing: 0.16em;
-  color: var(--c-accent);
-}
-
-.rc-rule-text {
-  margin: 0;
-  font-size: var(--fs-sm);
-  line-height: 1.8;
-  color: var(--c-text-muted);
-}
-
-.rc-rule-text strong { color: var(--c-text); }
-
-/* --------------------------------------------------------------------------
    レスポンシブ
    -------------------------------------------------------------------------- */
+
 /* 広い画面では岸を3列にして盤面の縦を詰める */
 @media (min-width: 720px) {
   .rc-slots {
@@ -534,6 +484,7 @@ html[lang="en"] .rc-stamp {
   .rc-btn { padding: 9px 14px; font-size: var(--fs-xs); }
   .rc-btn--go { margin-right: 0; flex: 1 1 100%; justify-content: center; }
   .rc-hud { gap: 14px; padding: 10px 12px; }
+  .rc-hud-item--target { margin-left: 0; }
   .rc-status { padding: 10px 12px; }
 }
 

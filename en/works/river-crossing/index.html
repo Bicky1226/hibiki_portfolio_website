@@ -4,8 +4,8 @@
   <!-- GA4 loaded dynamically after cookie consent (see main.js) -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>River Crossing Puzzle — Hibiki Shimizu Works</title>
-  <meta name="description" content="Get a father, a mother, two sons, two daughters, a servant and a dog across the river in a boat that seats two. Playable in the browser. The shortest solution is 17 crossings.">
+  <title>River Crossing Puzzle — Build Notes — Hibiki Shimizu Works</title>
+  <meta name="description" content="Build notes for a browser river-crossing puzzle: one pure function as the single definition of a legal position, a breadth-first search proving 17 crossings is optimal, and FLIP animation with SVG silhouettes — no libraries.">
   <link rel="canonical" href="https://hibikishimizu.com/en/works/river-crossing/">
   <link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/works/river-crossing/">
   <link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/works/river-crossing/">
@@ -14,7 +14,55 @@
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
   <link rel="stylesheet" href="../../../assets/css/base.css">
-  <link rel="stylesheet" href="../../../assets/css/pages/river-crossing.css">
+  <style>
+    .project-page { padding-top: 80px; }
+    .project-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: var(--fs-sm);
+      color: var(--c-text-muted);
+      text-decoration: none;
+      margin-bottom: 40px;
+      transition: color 0.2s;
+    }
+    .project-back:hover { color: var(--c-accent); }
+    #project-hero { padding: clamp(52px, 7vw, 88px) 0 clamp(28px, 4vw, 44px); }
+    .project-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; align-items: center; }
+    .project-year { font-size: var(--fs-xs); color: var(--c-text-muted); font-family: var(--font-en); letter-spacing: 0.08em; }
+    .project-hero-title {
+      font-size: clamp(32px, 6vw, 64px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+    .project-lead { font-size: var(--fs-lg); color: var(--c-text-muted); line-height: 1.7; max-width: 640px; margin-bottom: 32px; }
+    .project-body { max-width: 800px; padding-bottom: clamp(80px, 10vw, 120px); }
+    .project-body h2 { font-size: var(--fs-2xl); font-weight: 700; margin: 52px 0 16px; color: var(--c-text); }
+    .project-body h2:first-child { margin-top: 0; }
+    .project-body p { font-size: var(--fs-base); color: var(--c-text-muted); line-height: 1.9; margin-bottom: 16px; }
+    .project-body ul { padding-left: 1.5em; margin: 12px 0 20px; }
+    .project-body li { font-size: var(--fs-base); color: var(--c-text-muted); line-height: 1.8; margin-bottom: 6px; }
+    .project-body strong { color: var(--c-text); }
+
+    .play-cta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      padding: 24px 28px;
+      margin-bottom: 8px;
+      background: var(--c-bg-2);
+      border: 1px solid var(--c-border);
+      border-left: 4px solid var(--c-accent);
+      box-shadow: var(--shadow-md);
+    }
+    .play-cta-text { flex: 1 1 260px; }
+    .play-cta-title { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 700; color: var(--c-text); margin-bottom: 4px; }
+    .play-cta-sub { font-size: var(--fs-xs); color: var(--c-text-muted); }
+    .play-cta .btn { white-space: nowrap; }
+  </style>
 </head>
 <body class="project-page">
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -46,82 +94,104 @@
 
   <div id="main-content"></div>
   <section id="project-hero">
-    <div class="container container--wide">
-      <a href="/en/works/" class="project-back"><i class="ph ph-arrow-left"></i> Back to Works</a>
+    <div class="container">
+      <a href="/en/works/" class="project-back reveal"><i class="ph ph-arrow-left"></i> Back to Works</a>
 
-      <div class="project-meta">
+      <div class="project-meta reveal">
         <span class="project-year font-en">2026</span>
         <span class="tech-badge">JavaScript</span>
         <span class="tech-badge">SVG</span>
-        <span class="tech-badge">Puzzle</span>
+        <span class="tech-badge">BFS</span>
       </div>
 
-      <h1 class="project-hero-title">River Crossing Puzzle</h1>
-      <p class="project-lead">A father, a mother, two sons, two daughters, a servant and a dog. Get all eight of them safely to the far bank in a boat that seats two — bearing in mind that some of them really should not be left alone together.</p>
+      <h1 class="project-hero-title reveal">River Crossing Puzzle</h1>
+      <p class="project-lead reveal">A classic puzzle — get a father, a mother, two sons, two daughters, a servant and a dog across the river in a boat that seats two. Rule checking, a proof of the shortest solution, and the animation are all plain JavaScript with no libraries.</p>
     </div>
   </section>
 
-  <div class="container container--wide">
-    <div id="rc-game" class="rc"></div>
-  </div>
-
   <div class="container">
-    <div class="project-body">
+    <div class="project-body reveal">
 
-      <h2>Rules</h2>
-      <ol class="rc-rules">
-        <li class="rc-rule">
-          <span class="rc-rule-num font-en">RULE 01</span>
-          <p class="rc-rule-text"><strong>The father kills a daughter if the mother is not there.</strong> Never leave the father with either daughter on a bank without the mother.</p>
-        </li>
-        <li class="rc-rule">
-          <span class="rc-rule-num font-en">RULE 02</span>
-          <p class="rc-rule-text"><strong>The mother kills a son if the father is not there.</strong> Never leave the mother with either son on a bank without the father.</p>
-        </li>
-        <li class="rc-rule">
-          <span class="rc-rule-num font-en">RULE 03</span>
-          <p class="rc-rule-text"><strong>The dog kills the whole family if the servant is not there.</strong> Never leave the dog with any family member without the servant. The dog and the servant alone are fine.</p>
-        </li>
-        <li class="rc-rule">
-          <span class="rc-rule-num font-en">RULE 04</span>
-          <p class="rc-rule-text"><strong>The boat seats two.</strong> Only the <strong>father, the mother and the servant</strong> can row it, and one of them must be aboard on every trip — going across and coming back.</p>
-        </li>
-      </ol>
+      <div class="play-cta">
+        <div class="play-cta-text">
+          <p class="play-cta-title">You can actually play it</p>
+          <p class="play-cta-sub">It has its own standalone page. See if you can do it in 17 crossings.</p>
+        </div>
+        <a href="/kawawatari/en/" class="btn btn-primary">Play <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+      </div>
 
-      <h2>How to play</h2>
+      <h2>What it is</h2>
+      <p>
+        A playable version of the classic river-crossing puzzle known in English as the "jealous husbands" problem.
+        The father harms a daughter if the mother is absent, the mother harms a son if the father is absent, and the dog attacks the whole family if the servant is absent.
+        The boat seats two and only the father, the mother and the servant can row it.
+      </p>
+      <p>
+        The game is <strong>HTML, CSS and JavaScript only</strong> — no framework, no animation library.
+        It wanted a look of its own rather than the portfolio's, so it lives on a <a href="/kawawatari/en/">standalone page</a> where someone arriving from a search can simply play.
+      </p>
+
+      <h2>One definition of "safe"</h2>
+      <p>
+        The easiest thing to get wrong here is letting the definition of a legal position exist in two places.
+        If the game loop checks the rules one way and the solver checks them another, the two will eventually disagree.
+      </p>
+      <p>
+        So there is <strong>exactly one pure function</strong>: it takes the set of people on a bank and returns the list of violations. The game and the solver both call it.
+        There is one place to change if the rules change, and the board's behaviour can never drift from what the search believes.
+      </p>
+
+      <h2>Proving 17 is optimal</h2>
+      <p>
+        The puzzle can be solved in 17 crossings, and <strong>the code itself establishes that this is the minimum</strong>.
+      </p>
+      <p>
+        Each of the eight characters is on one bank or the other — 2<sup>8</sup> = 256 arrangements — times two positions for the boat, giving 512 states in total.
+        Each state packs into a single integer (a bitmask of who is on the far bank, shifted, plus one bit for the boat) and a breadth-first search walks the legal ones.
+        The state space is small enough that it resolves instantly in the browser, and it shows that no solution of 16 or fewer exists.
+      </p>
+      <p>
+        The search is exposed as part of the board's public API, so it can re-solve for the shortest path <strong>from whatever position the player is actually in</strong>.
+        It is not replaying a canned answer, so it stays correct no matter how far someone has wandered.
+      </p>
+
+      <h2>Keeping the DOM and the state in step</h2>
+      <p>
+        Boarding and disembarking use <strong>FLIP</strong>. Measure every tile before the change; in the DOM, simply <code>appendChild</code> the element from the bank's container into the boat's; measure again, apply the inverse transform for one frame, then animate it to zero.
+      </p>
+      <p>
+        The point is that <strong>there is no second source of truth for where things appear</strong>. Computing coordinates by hand and absolutely positioning the tiles would invite exactly the class of bug where the visual state and the game state disagree.
+        Here the DOM's parent-child structure is the only answer to "where is this person", so rebuilding the board for an undo or a restart cannot desynchronise it.
+      </p>
+
+      <h2>What went wrong along the way</h2>
       <ul>
-        <li><strong>1.</strong> Tap (or click) anyone standing on the bank where the boat is to put them aboard. Tap again to take them back out.</li>
-        <li><strong>2.</strong> Once someone who can row — the father, mother or servant, marked with a <strong>vermilion border</strong> — is aboard, the Cross button becomes available.</li>
-        <li><strong>3.</strong> Press Cross and the boat sails over. <strong>Anyone in the boat counts as being off the bank</strong>, and both banks are checked for safety the moment the boat departs.</li>
-        <li><strong>4.</strong> Break a rule and you get an incident. Undo and Restart are right there in the dialog, so feel free to experiment.</li>
-        <!-- The hint feature is temporarily disabled. Uncomment this item to bring it back.
-        <li><strong>5.</strong> Stuck? Press Hint for the next move on the shortest path from wherever you currently are.</li>
-        -->
+        <li>
+          <strong>Undo was broken.</strong> The history snapshot was taken after Cross was pressed, so it restored the two passengers as still sitting in the boat, which left the game unplayable.
+          Fixing it meant normalising boat occupants back onto their departure bank at snapshot time, so an undo always restores an empty boat.
+        </li>
+        <li>
+          <strong>The servant's apron never rendered.</strong> CSS selectors do not reach inside the shadow tree that <code>&lt;use&gt;</code> creates, so <code>.rc-cut { fill: ... }</code> simply never applied.
+          Custom properties <em>do</em> inherit through it, so writing <code>fill: var(--rc-cut)</code> directly on the symbol's paths fixed it — and made the servant distinguishable from the father.
+        </li>
+        <li>
+          <strong>The board's proportions.</strong> At 1280px the river was 820px wide and the banks were cramped. Capping the board's width and switching the banks to three columns on wide screens fixed the balance.
+          The opposite problem appeared on phones, where the boat only travelled 24px and never read as "crossing"; trimming the padding around the banks bought back the distance.
+        </li>
       </ul>
 
-      <h2>On the shortest solution</h2>
-      <p>
-        The puzzle can be solved in <strong>17 crossings</strong>, and that is the theoretical minimum — a breadth-first search over the whole state space confirms no solution of 16 or fewer exists.
-        There are only 512 states in total (2<sup>8</sup> = 256 arrangements of the eight characters, times two positions for the boat), and the search walks the legal ones exhaustively.
-      </p>
-      <!-- The hint feature is temporarily disabled. Uncomment this paragraph to bring it back.
-      <p>
-        The Hint button runs that same search live. It is not replaying a canned answer — it re-solves for the shortest path <strong>from the position you are actually in</strong>, so it stays correct no matter how far you have wandered.
-      </p>
-      -->
-
-      <h2>Implementation notes</h2>
+      <h2>Details</h2>
       <ul>
-        <li><strong>Rule checking:</strong> a single pure function takes the set of people on a bank and returns the violations. Both the game itself and the hint solver call it, so there is exactly one definition of what "safe" means and one place to change if the rules change.</li>
-        <li><strong>Solver:</strong> the eight characters are packed into a bitmask with one more bit for the boat, and the 512 states are searched breadth-first. It resolves instantly in the browser.</li>
-        <li><strong>Animation:</strong> boarding and disembarking use FLIP — measure the position before and after, apply the inverse transform, then animate it away. In the DOM it is just a matter of moving the element from the bank's container into the boat's, so the visual state can never drift from the game state.</li>
-        <li><strong>Characters:</strong> plain SVG silhouettes. Adults and children differ in height, skirts and trousers do the rest, and the servant gets an apron and a bow tie. The three who can row are outlined in vermilion.</li>
-        <li><strong>Everything else:</strong> fully keyboard playable, with a live region for screen readers, respect for the OS "reduce motion" setting, and a personal best stored locally.</li>
+        <li><strong>Characters:</strong> SVG silhouettes. Adults and children differ in height, skirts and trousers do the rest, and the servant gets an apron and a bow tie. The three who can row are outlined in vermilion.</li>
+        <li><strong>Stopwatch:</strong> timed from the difference between <code>performance.now()</code> readings and driven by <code>requestAnimationFrame</code>, but only touching the DOM when the tenths digit changes. Time away from the tab still counts, which is what you want from a wall clock.</li>
+        <li><strong>Records:</strong> fewest moves and fastest time are stored separately in <code>localStorage</code>, so a fast run in 18 moves is still worth something.</li>
+        <li><strong>Accessibility:</strong> characters are <code>&lt;button&gt;</code> elements, so the whole game is keyboard playable. Moves and incidents are announced through a live region, and the OS "reduce motion" setting is respected.</li>
+        <li><strong>Verification:</strong> Playwright drives a real browser through the optimal 17-move solution, all three rule violations, undo, the two-seat limit, the no-pilot case and a 375px viewport.</li>
       </ul>
 
       <h2>Origins</h2>
       <p>
-        This is a classic river-crossing puzzle, known variously as the "jealous husbands" problem or, in Japanese, 猛獣家族の川渡り.
+        A classic river-crossing puzzle, called the "jealous husbands" problem in English and 猛獣家族の川渡り in Japanese.
         It extends the familiar wolf, goat and cabbage riddle: eight characters instead of three, and only some of them can row, which is what makes it genuinely hard.
       </p>
 
@@ -159,6 +229,5 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
   <script src="../../../assets/js/main.js"></script>
-  <script src="../../../assets/js/pages/river-crossing.js"></script>
 </body>
 </html>

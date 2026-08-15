@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>川渡りパズル｜猛獣家族の川渡り 無料ブラウザゲーム</title>
+  <meta name="description" content="父・母・息子2人・娘2人・召使い・犬の8人を、定員2名の舟で対岸へ渡らせる川渡りゲーム。父は母がいないと娘を、母は父がいないと息子を、犬は召使いがいないと家族を襲います。インストール不要、スマホでも遊べる無料の川渡りパズル。最短17手。">
+  <meta name="theme-color" content="#14273A">
+
+  <link rel="canonical" href="https://hibikishimizu.com/kawawatari/">
+  <link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/kawawatari/">
+  <link rel="alternate" hreflang="en" href="https://hibikishimizu.com/kawawatari/en/">
+  <link rel="alternate" hreflang="x-default" href="https://hibikishimizu.com/kawawatari/">
+
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://hibikishimizu.com/kawawatari/">
+  <meta property="og:title"       content="川渡りパズル｜猛獣家族の川渡り">
+  <meta property="og:description" content="八人を、二人乗りの舟で対岸へ。目を離すと事件が起きる古典パズル。最短17手であなたは渡れるか。">
+  <meta property="og:image"       content="https://hibikishimizu.com/kawawatari/assets/og.png">
+  <meta property="og:locale"      content="ja_JP">
+  <meta property="og:site_name"   content="川渡りパズル">
+
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="川渡りパズル｜猛獣家族の川渡り">
+  <meta name="twitter:description" content="八人を、二人乗りの舟で対岸へ。最短17手。">
+  <meta name="twitter:image"       content="https://hibikishimizu.com/kawawatari/assets/og.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/kawawatari/assets/kawawatari.css">
+  <link rel="stylesheet" href="/kawawatari/assets/board.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "川渡りパズル",
+    "alternateName": ["猛獣家族の川渡り", "川渡りゲーム"],
+    "url": "https://hibikishimizu.com/kawawatari/",
+    "description": "父・母・息子2人・娘2人・召使い・犬の8人を、定員2名の舟で対岸へ渡らせる川渡りパズル。最短17手。",
+    "genre": ["Puzzle", "Logic"],
+    "gamePlatform": "Web browser",
+    "playMode": "SinglePlayer",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Any",
+    "inLanguage": ["ja", "en"],
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+    "author": {
+      "@type": "Person",
+      "name": "志水 響",
+      "alternateName": "Hibiki Shimizu",
+      "url": "https://hibikishimizu.com/ja/"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "川渡りパズルは何手でクリアできますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "最短17回の渡河でクリアできます。8人の配置と舟の位置からなる全512状態を幅優先探索で調べた結果で、16手以下の解は存在しません。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "舟を漕げるのは誰ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "父・母・召使いの3人だけです。行きも帰りも必ずこの誰かが乗っている必要があり、子どもと犬だけでは舟を出せません。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "犬と召使いを2人きりにしても大丈夫ですか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "大丈夫です。犬が襲うのは家族6人で、召使いは家族に含まれません。犬が単独でいる場合も安全です。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "舟に乗り込んだ人は岸にいる扱いになりますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "なりません。舟に乗った時点でその人は岸を離れた扱いになり、「渡る」を押した瞬間に両岸の安全が判定されます。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "スマートフォンでも遊べますか？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "遊べます。インストールや会員登録は不要で、ブラウザだけで動きます。人物をタップして舟に乗せ、「渡る」を押すだけです。"
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a href="#game" class="kw-skip">ゲームへスキップ</a>
+
+  <!-- ================= ヒーロー ================= -->
+  <header class="kw-hero">
+    <div class="kw-lang"><a href="/kawawatari/en/" hreflang="en">EN</a></div>
+
+    <div class="kw-hero-inner">
+      <p class="kw-hero-kicker">猛獣家族の川渡り</p>
+      <h1 class="kw-hero-title">川渡り<span class="kw-hero-seal" aria-hidden="true">舟</span></h1>
+      <p class="kw-hero-lead">
+        父、母、息子ふたり、娘ふたり、召使い、そして犬。<br>
+        この八人を、二人しか乗れない舟で対岸へ渡してください。<br>
+        ただし——誰と誰を残すかを、間違えてはいけません。
+      </p>
+      <button type="button" class="kw-cta" id="kw-start">はじめる</button>
+      <p class="kw-hero-note">FREE · NO INSTALL · 最短 17 手</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= ゲーム盤 ================= -->
+    <section class="kw-section kw-section--board" id="game">
+      <div class="kw-wrap">
+        <div id="rc-game" class="rc"></div>
+
+        <div class="kw-records">
+          <p class="kw-records-label">あなたの記録</p>
+          <dl class="kw-record">
+            <dt>最少手数</dt>
+            <dd data-rc-best-moves>—</dd>
+          </dl>
+          <dl class="kw-record">
+            <dt>最速タイム</dt>
+            <dd data-rc-best-time>—</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ルール ================= -->
+    <section class="kw-section" id="rules">
+      <div class="kw-wrap">
+        <h2 class="kw-h2">ルール</h2>
+        <ol class="rc-rules">
+          <li class="rc-rule">
+            <span class="rc-rule-num font-en">RULE 01</span>
+            <p class="rc-rule-text"><strong>父は、母がいないと娘を殺す。</strong>母のいない岸に、父と娘（どちらか一方でも）を残してはいけません。</p>
+          </li>
+          <li class="rc-rule">
+            <span class="rc-rule-num font-en">RULE 02</span>
+            <p class="rc-rule-text"><strong>母は、父がいないと息子を殺す。</strong>父のいない岸に、母と息子（どちらか一方でも）を残してはいけません。</p>
+          </li>
+          <li class="rc-rule">
+            <span class="rc-rule-num font-en">RULE 03</span>
+            <p class="rc-rule-text"><strong>犬は、召使いがいないと家族全員を殺す。</strong>召使いのいない岸に、犬と家族の誰かを残してはいけません。犬と召使いだけなら安全です。</p>
+          </li>
+          <li class="rc-rule">
+            <span class="rc-rule-num font-en">RULE 04</span>
+            <p class="rc-rule-text"><strong>舟は定員2名。</strong>漕げるのは<strong>父・母・召使い</strong>の3人だけ。行きも帰りも、必ずこの誰かが乗っている必要があります。</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= 遊び方 ================= -->
+    <section class="kw-section" id="howto" style="background: var(--c-bg-3);">
+      <div class="kw-wrap">
+        <h2 class="kw-h2">遊び方</h2>
+        <ol class="kw-steps">
+          <li class="kw-step">
+            <p><strong>「はじめる」を押す。</strong>押した瞬間からタイムの計測が始まります。それまで人物は動かせません。</p>
+          </li>
+          <li class="kw-step">
+            <p><strong>人物をタップして舟に乗せる。</strong>舟のある側の岸にいる人だけが乗れます。もう一度タップすると降ります。定員は2名です。</p>
+          </li>
+          <li class="kw-step">
+            <p><strong>「渡る」で対岸へ。</strong>枠が<strong>朱色</strong>の人物（父・母・召使い）が乗っていないと舟は出せません。舟に乗り込んだ人はもう岸にいない扱いになり、渡った瞬間に両岸の安全が判定されます。</p>
+          </li>
+          <li class="kw-step">
+            <p><strong>ルールを破ると「事件」。</strong>その場で「1手戻す」か「最初から」を選べます。<strong>事件が起きてもタイマーは止まりません。</strong>気軽に試して構いません。</p>
+          </li>
+          <li class="kw-step">
+            <p><strong>八人全員が対岸に渡ればクリア。</strong>手数とタイムが表示されます。最少手数と最速タイムはそれぞれ別に記録されるので、じっくり最短を狙うのも、速さを競うのも自由です。</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= 解説 ================= -->
+    <section class="kw-section" id="about">
+      <div class="kw-wrap">
+        <h2 class="kw-h2">このパズルについて</h2>
+
+        <p class="kw-p">
+          「猛獣家族の川渡り」と呼ばれる、古典的な<strong>川渡りパズル</strong>のひとつです。
+          オオカミとヤギとキャベツを運ぶ有名な問題や、「宣教師と人食い人」の名で知られる問題と同じ系譜にあります。
+        </p>
+        <p class="kw-p">
+          違うのは規模です。渡すものが3つではなく<strong>八人</strong>あり、しかも舟を漕げるのは父・母・召使いの3人だけ。
+          誰かを対岸に送るたびに「今この岸に残るのは誰か」「向こう岸に増えるのは誰か」を同時に考えなければならず、それが一気に難しくしています。
+        </p>
+
+        <h2 class="kw-h2" style="margin-top: 2em;">最短は17手</h2>
+        <p class="kw-p">
+          このパズルは<strong>17回の渡河</strong>で解けます。そしてこれが理論上の最短です。
+          8人がどちらの岸にいるか（2の8乗＝256通り）と舟の位置の組み合わせ、あわせて512の状態をすべて幅優先探索で調べた結果なので、
+          <strong>16手以下の解は存在しません</strong>。
+        </p>
+        <p class="kw-p">
+          初めて解くと、たいてい25手から40手ほどかかります。17手に届いたなら、それはもう縮めようがない最善手順です。
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section class="kw-section" id="faq" style="background: var(--c-bg-3);">
+      <div class="kw-wrap">
+        <h2 class="kw-h2">よくある質問</h2>
+        <div class="kw-faq">
+          <div class="kw-faq-item">
+            <h3 class="kw-faq-q">川渡りパズルは何手でクリアできますか？</h3>
+            <p class="kw-faq-a">最短17回の渡河でクリアできます。全512状態を幅優先探索で調べた結果で、16手以下の解は存在しません。</p>
+          </div>
+          <div class="kw-faq-item">
+            <h3 class="kw-faq-q">舟を漕げるのは誰ですか？</h3>
+            <p class="kw-faq-a">父・母・召使いの3人だけです。行きも帰りも必ずこの誰かが乗っている必要があり、子どもと犬だけでは舟を出せません。</p>
+          </div>
+          <div class="kw-faq-item">
+            <h3 class="kw-faq-q">犬と召使いを2人きりにしても大丈夫ですか？</h3>
+            <p class="kw-faq-a">大丈夫です。犬が襲うのは家族6人で、召使いは家族に含まれません。犬が単独でいる場合も安全です。</p>
+          </div>
+          <div class="kw-faq-item">
+            <h3 class="kw-faq-q">舟に乗り込んだ人は岸にいる扱いになりますか？</h3>
+            <p class="kw-faq-a">なりません。舟に乗った時点でその人は岸を離れた扱いになり、「渡る」を押した瞬間に両岸の安全が判定されます。</p>
+          </div>
+          <div class="kw-faq-item">
+            <h3 class="kw-faq-q">スマートフォンでも遊べますか？</h3>
+            <p class="kw-faq-a">遊べます。インストールや会員登録は不要で、ブラウザだけで動きます。人物をタップして舟に乗せ、「渡る」を押すだけです。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= 制作者 ================= -->
+  <footer class="kw-footer">
+    <div class="kw-wrap">
+      <h2 class="kw-h2">このゲームを作った人</h2>
+
+      <div class="kw-author">
+        <p class="kw-author-seal" aria-hidden="true">響</p>
+        <div>
+          <p class="kw-author-name">志水 響</p>
+          <p class="kw-author-role font-en">HIBIKI SHIMIZU — SOFTWARE ENGINEER</p>
+        </div>
+        <p class="kw-author-text">
+          イギリス・ウォーリック大学の大学院でコンピュータサイエンスを学んでいます。
+          このゲームはHTMLとCSSとJavaScriptだけで書かれていて、ライブラリは使っていません。
+          ヒント機能のために書いた探索アルゴリズムが、そのまま「最短17手」の証明にもなっています。
+        </p>
+        <div class="kw-author-links">
+          <a href="https://hibikishimizu.com/ja/" class="kw-cta kw-cta--paper">制作者のサイトへ</a>
+        </div>
+        <p class="kw-author-text" style="font-size: var(--fs-xs);">
+          このゲームの作り方は<a href="https://hibikishimizu.com/ja/works/river-crossing/">実装解説ページ</a>に書いています。
+        </p>
+      </div>
+
+      <div class="kw-footer-bottom">
+        <p class="kw-footer-copy">&copy; 2026 Hibiki Shimizu</p>
+        <nav class="kw-footer-links" aria-label="関連リンク">
+          <a href="https://hibikishimizu.com/ja/">ポートフォリオ</a>
+          <a href="https://hibikishimizu.com/ja/works/river-crossing/">実装解説</a>
+          <a href="https://hibikishimizu.com/ja/privacy/">プライバシーポリシー</a>
+          <a href="/kawawatari/en/" hreflang="en">English</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <div class="kw-cookie" id="kw-cookie" role="dialog" aria-label="Cookie利用についての通知" hidden>
+    <p class="kw-cookie-text">
+      このサイトはアクセス解析のためCookieを使用することがあります。詳しくは<a href="https://hibikishimizu.com/ja/privacy/">プライバシーポリシー</a>をご覧ください。
+    </p>
+    <div class="kw-cookie-actions">
+      <button type="button" class="kw-cookie-btn kw-cookie-btn--accept" id="kw-cookie-accept">同意する</button>
+      <button type="button" class="kw-cookie-btn" id="kw-cookie-reject">拒否する</button>
+    </div>
+  </div>
+
+  <script src="/kawawatari/assets/board.js"></script>
+  <script src="/kawawatari/assets/kawawatari.js"></script>
+</body>
+</html>

@@ -4,8 +4,8 @@
   <!-- GA4 loaded dynamically after cookie consent (see main.js) -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>川渡りパズル — 志水 響 Works</title>
-  <meta name="description" content="父・母・息子2人・娘2人・召使い・犬の8人を、定員2名の舟で無事に対岸へ渡らせるパズル。ブラウザ上でキャラクターを動かして遊べます。最短17手。">
+  <title>川渡りパズル 実装解説 — 志水 響 Works</title>
+  <meta name="description" content="ブラウザで遊べる川渡りパズルの実装解説。ルール判定を1つの純粋関数に集約し、幅優先探索で最短17手を証明。FLIPアニメーションとSVGシルエットで、ライブラリなしに組み立てた。">
   <link rel="canonical" href="https://hibikishimizu.com/ja/works/river-crossing/">
   <link rel="alternate" hreflang="ja" href="https://hibikishimizu.com/ja/works/river-crossing/">
   <link rel="alternate" hreflang="en" href="https://hibikishimizu.com/en/works/river-crossing/">
@@ -14,7 +14,56 @@
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/src/index.js" defer></script>
   <link rel="stylesheet" href="../../../assets/css/base.css">
-  <link rel="stylesheet" href="../../../assets/css/pages/river-crossing.css">
+  <style>
+    .project-page { padding-top: 80px; }
+    .project-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: var(--fs-sm);
+      color: var(--c-text-muted);
+      text-decoration: none;
+      margin-bottom: 40px;
+      transition: color 0.2s;
+    }
+    .project-back:hover { color: var(--c-accent); }
+    #project-hero { padding: clamp(52px, 7vw, 88px) 0 clamp(28px, 4vw, 44px); }
+    .project-meta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; align-items: center; }
+    .project-year { font-size: var(--fs-xs); color: var(--c-text-muted); font-family: var(--font-en); letter-spacing: 0.08em; }
+    .project-hero-title {
+      font-size: clamp(32px, 6vw, 64px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+    .project-lead { font-size: var(--fs-lg); color: var(--c-text-muted); line-height: 1.7; max-width: 640px; margin-bottom: 32px; }
+    .project-body { max-width: 800px; padding-bottom: clamp(80px, 10vw, 120px); }
+    .project-body h2 { font-size: var(--fs-2xl); font-weight: 700; margin: 52px 0 16px; color: var(--c-text); }
+    .project-body h2:first-child { margin-top: 0; }
+    .project-body p { font-size: var(--fs-base); color: var(--c-text-muted); line-height: 1.9; margin-bottom: 16px; }
+    .project-body ul { padding-left: 1.5em; margin: 12px 0 20px; }
+    .project-body li { font-size: var(--fs-base); color: var(--c-text-muted); line-height: 1.8; margin-bottom: 6px; }
+    .project-body strong { color: var(--c-text); }
+
+    /* 「遊ぶ」への誘導 */
+    .play-cta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      padding: 24px 28px;
+      margin-bottom: 8px;
+      background: var(--c-bg-2);
+      border: 1px solid var(--c-border);
+      border-left: 4px solid var(--c-accent);
+      box-shadow: var(--shadow-md);
+    }
+    .play-cta-text { flex: 1 1 260px; }
+    .play-cta-title { font-family: var(--font-display); font-size: var(--fs-lg); font-weight: 700; color: var(--c-text); margin-bottom: 4px; }
+    .play-cta-sub { font-size: var(--fs-xs); color: var(--c-text-muted); }
+    .play-cta .btn { white-space: nowrap; }
+  </style>
 </head>
 <body class="project-page">
   <a href="#main-content" class="skip-link">メインコンテンツへスキップ</a>
@@ -46,83 +95,106 @@
 
   <div id="main-content"></div>
   <section id="project-hero">
-    <div class="container container--wide">
-      <a href="/ja/works/" class="project-back"><i class="ph ph-arrow-left"></i> Works一覧へ</a>
+    <div class="container">
+      <a href="/ja/works/" class="project-back reveal"><i class="ph ph-arrow-left"></i> Works一覧へ</a>
 
-      <div class="project-meta">
+      <div class="project-meta reveal">
         <span class="project-year font-en">2026</span>
         <span class="tech-badge">JavaScript</span>
         <span class="tech-badge">SVG</span>
-        <span class="tech-badge">Puzzle</span>
+        <span class="tech-badge">BFS</span>
       </div>
 
-      <h1 class="project-hero-title">川渡りパズル</h1>
-      <p class="project-lead">父・母・息子2人・娘2人・召使い・犬。この8人を、定員2名の小舟で全員無事に対岸へ渡らせてください。ただし、目を離すと大変なことになる組み合わせがあります。</p>
+      <h1 class="project-hero-title reveal">川渡りパズル</h1>
+      <p class="project-lead reveal">父・母・息子2人・娘2人・召使い・犬の8人を、定員2名の舟で対岸へ渡らせる古典パズル。ライブラリを一切使わず、ルール判定・最短手数の証明・アニメーションまでを素のJavaScriptで組み立てた。</p>
     </div>
   </section>
 
-  <div class="container container--wide">
-    <div id="rc-game" class="rc"></div>
-  </div>
-
   <div class="container">
-    <div class="project-body">
+    <div class="project-body reveal">
 
-      <h2>ルール</h2>
-      <ol class="rc-rules">
-        <li class="rc-rule">
-          <span class="rc-rule-num font-en">RULE 01</span>
-          <p class="rc-rule-text"><strong>父は、母がいないと娘を殺す。</strong>母のいない岸に父と娘（どちらか一方でも）を残してはいけません。</p>
-        </li>
-        <li class="rc-rule">
-          <span class="rc-rule-num font-en">RULE 02</span>
-          <p class="rc-rule-text"><strong>母は、父がいないと息子を殺す。</strong>父のいない岸に母と息子（どちらか一方でも）を残してはいけません。</p>
-        </li>
-        <li class="rc-rule">
-          <span class="rc-rule-num font-en">RULE 03</span>
-          <p class="rc-rule-text"><strong>犬は、召使いがいないと家族全員を殺す。</strong>召使いのいない岸に、犬と家族の誰かを残してはいけません。犬と召使いだけなら安全です。</p>
-        </li>
-        <li class="rc-rule">
-          <span class="rc-rule-num font-en">RULE 04</span>
-          <p class="rc-rule-text"><strong>舟は定員2名。</strong>舟を漕げるのは<strong>父・母・召使い</strong>の3人だけ。行きも帰りも、必ずこの誰かが乗っている必要があります。</p>
-        </li>
-      </ol>
+      <div class="play-cta">
+        <div class="play-cta-text">
+          <p class="play-cta-title">実際に遊べます</p>
+          <p class="play-cta-sub">独立したゲームページを用意しています。最短17手に挑戦してみてください。</p>
+        </div>
+        <a href="/kawawatari/" class="btn btn-primary">遊ぶ <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+      </div>
 
-      <h2>遊び方</h2>
+      <h2>つくったもの</h2>
+      <p>
+        「猛獣家族の川渡り」として知られる古典的な川渡りパズルを、ブラウザ上でキャラクターを動かして遊べる形にした。
+        父は母がいないと娘を、母は父がいないと息子を、犬は召使いがいないと家族全員を襲う。舟の定員は2名で、漕げるのは父・母・召使いの3人だけ。
+        この条件で8人全員を無事に対岸へ渡す。
+      </p>
+      <p>
+        ゲーム本体は <strong>HTML・CSS・JavaScript のみ</strong>で、フレームワークもアニメーションライブラリも使っていない。
+        ポートフォリオ本体とは別の意匠を与えたかったので、<a href="/kawawatari/">独立したページ</a>として切り出し、検索から直接訪れた人がそのまま遊べるようにしている。
+      </p>
+
+      <h2>ルール判定を1か所に集約する</h2>
+      <p>
+        このパズルで一番間違えやすいのは「安全とは何か」の定義がコードの中で二重化することだ。
+        ゲーム進行の判定と、ヒント用ソルバの探索とで別々に書くと、必ずどこかでズレる。
+      </p>
+      <p>
+        そこで<strong>「岸にいる人物の集合を受け取り、違反の一覧を返す純粋関数」を1つだけ</strong>用意し、ゲーム本体もソルバもそれを呼ぶようにした。
+        ルールを変えたくなったときに直す場所が1か所で済み、盤面の挙動と探索結果が食い違うこともない。
+      </p>
+
+      <h2>最短17手を、探索で証明する</h2>
+      <p>
+        このパズルは17回の渡河で解ける。そして<strong>それが理論上の最短である</strong>ことも、実装の中で確かめている。
+      </p>
+      <p>
+        8人がそれぞれどちらの岸にいるかは2の8乗で256通り、そこに舟の位置の2通りを掛けて全512状態。
+        これを「向こう岸にいる人物のビットマスク×2＋舟の位置」という1つの整数に押し込み、幅優先探索で辿る。
+        状態数が小さいのでブラウザ上でも一瞬で終わり、16手以下の解が存在しないことが分かる。
+      </p>
+      <p>
+        この探索は盤面の公開APIとして残してあり、<strong>プレイヤーが今いる局面から</strong>最短経路を解き直せる。
+        あらかじめ用意した正解手順を再生するのではないので、どれだけ遠回りした局面からでも正しい次の一手が求まる。
+      </p>
+
+      <h2>状態とDOMをずらさない</h2>
+      <p>
+        人物の乗り降りは<strong>FLIP</strong>で処理している。移動前に全タイルの座標を測り、DOM上では要素を岸のコンテナから舟のコンテナへ <code>appendChild</code> で移し替えるだけにして、
+        移動後に測り直した差分を逆変換として一瞬だけ当て、それをゼロへアニメーションさせる。
+      </p>
+      <p>
+        こうすると<strong>「見た目の位置」を管理する状態を別に持たなくて済む</strong>。座標を手で計算して要素を絶対配置すると、内部状態とのズレがバグの温床になる。
+        DOMの親子関係そのものが唯一の真実になっているので、Undoやリセットで盤面を作り直しても表示が破綻しない。
+      </p>
+
+      <h2>つまずいた点</h2>
       <ul>
-        <li><strong>1．</strong>舟のある側の岸から、人物をタップ（クリック）して舟に乗せる。もう一度タップすると降ります。</li>
-        <li><strong>2．</strong>操縦できる人物（枠が<strong>朱色</strong>の父・母・召使い）が乗っていれば「渡る」ボタンが押せます。</li>
-        <li><strong>3．</strong>「渡る」で舟が対岸へ。<strong>舟に乗り込んだ人はもう岸にはいない扱い</strong>になり、渡った瞬間に両岸の安全が判定されます。</li>
-        <li><strong>4．</strong>ルールを破ると「事件」になります。その場で「1手戻す」か「最初から」を選べるので、気軽に試して構いません。</li>
-        <!-- ヒント機能は一時的に無効化中。復活させたらこの項目のコメントを外す
-        <li><strong>5．</strong>行き詰まったら「ヒント」。今の盤面から最短で解く次の一手を教えてくれます。</li>
-        -->
+        <li>
+          <strong>Undoが壊れていた。</strong>履歴の断面を「渡る」を押した直後に保存していたため、乗船中の2人が舟に乗ったままの状態で復元され、操作不能になっていた。
+          断面を保存する時点で乗員を出発側の岸に戻す形に直し、Undo後は必ず舟が空になるようにした。
+        </li>
+        <li>
+          <strong>召使いのエプロンが表示されなかった。</strong><code>&lt;use&gt;</code> が作るシャドウツリーの中にはCSSセレクタが届かないため、
+          <code>.rc-cut { fill: ... }</code> が一切適用されていなかった。カスタムプロパティは継承されるので、<code>fill: var(--rc-cut)</code> をシンボル側に直接書く形に変更して解決した。
+        </li>
+        <li>
+          <strong>盤面の比率。</strong>初期実装では画面幅1280pxで川が820pxもあり、岸が窮屈だった。盤面全体の幅を制限し、広い画面では岸を3列にして縦を詰めた。
+          逆にスマートフォンでは舟が24pxしか動かず「渡っている」感じが出なかったので、岸まわりの余白を削って移動距離を確保した。
+        </li>
       </ul>
 
-      <h2>最短手数について</h2>
-      <p>
-        このパズルは<strong>17回の渡河</strong>で解けます。そしてこれが理論上の最短です。
-        全状態を幅優先探索して確かめたので、16手以下の解は存在しません。8人の配置（2の8乗＝256通り）と舟の位置の組み合わせ、計512状態のうち、ルールを満たすものだけを辿った結果です。
-      </p>
-      <!-- ヒント機能は一時的に無効化中。復活させたらこの段落のコメントを外す
-      <p>
-        「ヒント」ボタンも同じ探索をその場で実行しています。決められた正解手順を再生しているのではなく、<strong>あなたが今いる盤面から</strong>最短経路を解き直しているので、途中でどれだけ遠回りしても正しい次の一手が出ます。
-      </p>
-      -->
-
-      <h2>実装メモ</h2>
+      <h2>細かい実装</h2>
       <ul>
-        <li><strong>ルール判定：</strong>「岸にいる人物の集合」を受け取って違反を返す純粋関数を1つだけ用意し、ゲーム本体とヒント用ソルバの両方がそれを使っています。判定基準が二重にならないので、ルールを変えたい時も1か所で済みます。</li>
-        <li><strong>ソルバ：</strong>8人の配置をビットマスク、舟の位置を1ビットで表し、512状態を幅優先探索。ブラウザ上で一瞬で解けます。</li>
-        <li><strong>アニメーション：</strong>人物の乗り降りはFLIP（移動前後の座標を測って差分を打ち消してから戻す手法）で処理。DOM上は要素を岸のコンテナから舟のコンテナへ移し替えるだけなので、内部状態と画面表示がずれません。</li>
-        <li><strong>キャラクター：</strong>SVGのシルエット。大人と子供は背丈、性別はスカートとズボン、召使いはエプロンと蝶ネクタイで描き分けています。舟を漕げる3人は枠を朱色にしました。</li>
-        <li><strong>その他：</strong>キーボードだけで最後まで遊べます。読み上げ用のライブリージョン、OSの「視差効果を減らす」設定への対応、自己ベストのローカル保存も入れてあります。</li>
+        <li><strong>キャラクター：</strong>SVGのシルエット。大人と子供は背丈、性別はスカートとズボン、召使いはエプロンと蝶ネクタイで描き分けた。舟を漕げる3人は枠を朱色にしてある。</li>
+        <li><strong>ストップウォッチ：</strong><code>performance.now()</code> の差分で計測し、<code>requestAnimationFrame</code> で回す。ただしDOMの書き換えは1/10秒の桁が変わったときだけに絞っている。タブを離れている間も実時間が正しく積算される。</li>
+        <li><strong>記録：</strong>最少手数と最速タイムを別々に <code>localStorage</code> へ保存。「18手だが速い」クリアも記録として残る。</li>
+        <li><strong>アクセシビリティ：</strong>人物は <code>&lt;button&gt;</code> なのでキーボードだけで最後まで遊べる。移動と事件はライブリージョンで読み上げられ、OSの「視差効果を減らす」設定にも対応している。</li>
+        <li><strong>検証：</strong>Playwrightで実際にブラウザを操作し、最適解17手の通し・3種のルール違反・Undo・定員・操縦士なしでの出航不可・375px幅での表示までを自動で確認している。</li>
       </ul>
 
       <h2>元ネタ</h2>
       <p>
-        「猛獣家族の川渡り」「嫉妬深い夫たち」などの名前で知られる古典的な川渡りパズルの一種です。
-        オオカミ・ヤギ・キャベツの3つを渡す有名な問題の拡張版にあたり、登場人物が8人まで増え、漕ぎ手が限られることで一気に難しくなります。
+        「猛獣家族の川渡り」「嫉妬深い夫たち」などの名前で知られる古典パズルの一種。
+        オオカミ・ヤギ・キャベツを運ぶ有名な問題の拡張版にあたり、登場人物が8人に増え、漕ぎ手が限られることで一気に難しくなる。
       </p>
 
     </div>
@@ -159,6 +231,5 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
   <script src="../../../assets/js/main.js"></script>
-  <script src="../../../assets/js/pages/river-crossing.js"></script>
 </body>
 </html>

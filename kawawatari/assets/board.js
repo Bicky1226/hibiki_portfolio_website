@@ -1,7 +1,13 @@
 /* ==========================================================================
-   River Crossing Puzzle — 猛獣家族の川渡り
-   /ja/works/river-crossing/ と /en/works/river-crossing/ で共有
+   川渡りパズル — ゲーム盤
+   /kawawatari/ と /kawawatari/en/ で共有
    ページ側は <div id="rc-game"></div> を置くだけ。UIはすべてここで生成する。
+
+   ページ側との連携:
+     window.RiverCrossing.start()    計測を開始する
+     window.RiverCrossing.isReady()  開始前かどうか
+     window.RiverCrossing.solve()    現在の盤面から最短の次の一手を返す
+     [data-rc-best-moves] [data-rc-best-time]  自己ベストの差し込み先
    ========================================================================== */
 'use strict';
 
@@ -30,7 +36,9 @@
   var SONS      = ['sonA', 'sonB'];
   var DAUGHTERS = ['dauA', 'dauB'];
   var OPTIMAL   = 17;
-  var BEST_KEY  = 'hibiki_rc_best';
+
+  var BEST_KEY      = 'hibiki_rc_best';
+  var BEST_TIME_KEY = 'hibiki_rc_best_ms';
 
   /* ----------------------------------------------------------------------
      文言
@@ -41,22 +49,20 @@
         father: '父', mother: '母', sonA: '息子A', sonB: '息子B',
         dauA: '娘A', dauB: '娘B', servant: '召使い', dog: '犬'
       },
-      pilot: '操縦できる',
       bankL: '手前の岸', bankR: '向こう岸',
-      moves: '手数', target: '最短', best: '自己ベスト', unit: '手',
-      cross: '渡る', undo: '1手戻す', reset: '最初から', hint: 'ヒント',
+      moves: '手数', time: 'タイム', target: '最短', unit: '手',
+      cross: '渡る', undo: '1手戻す', reset: '最初から',
       boatLabel: '舟（定員2名）',
-      hintText: function (a, b) {
-        return b ? '次の一手 — ' + a + ' と ' + b + ' を乗せて渡る。'
-                 : '次の一手 — ' + a + ' ひとりで渡る。';
-      },
-      hintNone: 'この局面からは渡り切れない。1手戻すか、最初からやり直そう。',
       needPilot: '舟を出すには、父・母・召使いのいずれかが乗っている必要がある。',
       moved: function (who, dir, n) {
         return who + 'が' + (dir === 'R' ? '向こう岸' : '手前の岸') + 'へ渡った。（' + n + '手目）';
       },
-      start: '人物をタップして舟に乗せ、「渡る」を押す。',
-      stampFail: '事件', stampClear: '成功',
+      play: '人物をタップして舟に乗せ、「渡る」を押す。',
+      readyHint: '「はじめる」を押すと計測が始まります。',
+      stampReady: '用意', stampFail: '事件', stampClear: '成功',
+      readyTitle: '八人を、対岸へ',
+      readyBody: '押した瞬間からタイムの計測が始まります。',
+      startBtn: 'はじめる',
       failTitle: {
         father: '父が娘に手をかけた',
         mother: '母が息子に手をかけた',
@@ -69,34 +75,33 @@
       },
       clearTitle: '全員、無事に渡り切った',
       clearBody: function (n) {
-        if (n === OPTIMAL) return n + '手でクリア。これが最短手数です。';
-        return n + '手でクリア。最短は' + OPTIMAL + '手。';
+        if (n === OPTIMAL) return 'これが最短手数です。';
+        return '最短は' + OPTIMAL + '手。まだ縮められます。';
       },
-      newBest: '自己ベスト更新',
+      newBestMoves: '最少手数を更新', newBestTime: '最速タイムを更新',
       againClear: 'もう一度遊ぶ',
-      undone: function (n) { return '1手戻した。（現在' + n + '手目）'; }
+      undone: function (n) { return '1手戻した。（現在' + n + '手目）'; },
+      none: '—'
     },
     en: {
       names: {
         father: 'Father', mother: 'Mother', sonA: 'Son A', sonB: 'Son B',
         dauA: 'Daughter A', dauB: 'Daughter B', servant: 'Servant', dog: 'Dog'
       },
-      pilot: 'can row the boat',
       bankL: 'Near bank', bankR: 'Far bank',
-      moves: 'Moves', target: 'Best possible', best: 'Your best', unit: '',
-      cross: 'Cross', undo: 'Undo', reset: 'Restart', hint: 'Hint',
+      moves: 'Moves', time: 'Time', target: 'Best possible', unit: '',
+      cross: 'Cross', undo: 'Undo', reset: 'Restart',
       boatLabel: 'Boat (seats 2)',
-      hintText: function (a, b) {
-        return b ? 'Next move — take ' + a + ' and ' + b + ' across.'
-                 : 'Next move — send ' + a + ' across alone.';
-      },
-      hintNone: 'There is no way across from here. Undo a move or restart.',
       needPilot: 'The boat needs the Father, the Mother or the Servant aboard to move.',
       moved: function (who, dir, n) {
         return who + ' crossed to the ' + (dir === 'R' ? 'far bank' : 'near bank') + '. (move ' + n + ')';
       },
-      start: 'Tap a character to put them in the boat, then press Cross.',
-      stampFail: 'FAIL', stampClear: 'SOLVED',
+      play: 'Tap a character to put them in the boat, then press Cross.',
+      readyHint: 'The timer starts when you press Start.',
+      stampReady: 'READY', stampFail: 'FAIL', stampClear: 'SOLVED',
+      readyTitle: 'Eight to the far bank',
+      readyBody: 'The clock starts the moment you press it.',
+      startBtn: 'Start',
       failTitle: {
         father: 'The father turned on his daughter',
         mother: 'The mother turned on her son',
@@ -109,12 +114,13 @@
       },
       clearTitle: 'Everyone made it across safely',
       clearBody: function (n) {
-        if (n === OPTIMAL) return 'Solved in ' + n + ' crossings — the shortest possible.';
-        return 'Solved in ' + n + ' crossings. The shortest possible is ' + OPTIMAL + '.';
+        if (n === OPTIMAL) return 'That is the shortest solution possible.';
+        return 'The shortest possible is ' + OPTIMAL + ' — there is room to improve.';
       },
-      newBest: 'New personal best',
+      newBestMoves: 'Fewest moves — new best', newBestTime: 'Fastest time — new best',
       againClear: 'Play again',
-      undone: function (n) { return 'Move undone. (now at move ' + n + ')'; }
+      undone: function (n) { return 'Move undone. (now at move ' + n + ')'; },
+      none: '—'
     }
   };
 
@@ -317,11 +323,10 @@
     '<div class="rc-hud">' +
       '<p class="rc-hud-item"><span class="rc-hud-label">' + esc(T.moves) + '</span>' +
         '<span class="rc-hud-value font-en" id="rc-moves">0</span></p>' +
-      '<p class="rc-hud-item"><span class="rc-hud-label">' + esc(T.target) + '</span>' +
+      '<p class="rc-hud-item"><span class="rc-hud-label">' + esc(T.time) + '</span>' +
+        '<span class="rc-hud-value font-en" id="rc-time">0:00.0</span></p>' +
+      '<p class="rc-hud-item rc-hud-item--target"><span class="rc-hud-label">' + esc(T.target) + '</span>' +
         '<span class="rc-hud-value font-en">' + OPTIMAL + esc(T.unit) + '</span></p>' +
-      '<p class="rc-hud-item rc-hud-item--best" id="rc-best-wrap" hidden>' +
-        '<span class="rc-hud-label">' + esc(T.best) + '</span>' +
-        '<span class="rc-hud-value font-en" id="rc-best">—</span></p>' +
     '</div>' +
 
     '<div class="rc-stage">' +
@@ -350,6 +355,12 @@
           '<p class="rc-stamp" id="rc-stamp" aria-hidden="true"></p>' +
           '<h3 class="rc-card-title" id="rc-card-title"></h3>' +
           '<p class="rc-card-body" id="rc-card-body"></p>' +
+          '<div class="rc-card-stats" id="rc-card-stats" hidden>' +
+            '<p class="rc-stat"><span class="rc-stat-label">' + esc(T.moves) + '</span>' +
+              '<span class="rc-stat-value font-en" id="rc-stat-moves"></span></p>' +
+            '<p class="rc-stat"><span class="rc-stat-label">' + esc(T.time) + '</span>' +
+              '<span class="rc-stat-value font-en" id="rc-stat-time"></span></p>' +
+          '</div>' +
           '<p class="rc-card-flag" id="rc-card-flag" hidden></p>' +
           '<div class="rc-card-actions" id="rc-card-actions"></div>' +
         '</div>' +
@@ -362,34 +373,32 @@
         '<span class="rc-go-arrow" id="rc-go-arrow" aria-hidden="true">→</span></button>' +
       '<button type="button" class="rc-btn" id="rc-undo">' + esc(T.undo) + '</button>' +
       '<button type="button" class="rc-btn" id="rc-reset">' + esc(T.reset) + '</button>' +
-      /* ヒント機能は一時的に無効化中。
-         復活させるときは、この行と「ヒント無効化」と書いた3か所のコメントを外す。
-      '<button type="button" class="rc-btn" id="rc-hint">' + esc(T.hint) + '</button>' + */
     '</div>' +
 
-    '<p class="rc-status" id="rc-status" role="status" aria-live="polite">' + esc(T.start) + '</p>';
+    '<p class="rc-status" id="rc-status" role="status" aria-live="polite">' + esc(T.readyHint) + '</p>';
 
   var el = {
-    bankL:     root.querySelector('#rc-bank-L'),
-    bankR:     root.querySelector('#rc-bank-R'),
-    boat:      root.querySelector('#rc-boat'),
-    boatSlots: root.querySelector('#rc-boat-slots'),
-    river:     root.querySelector('.rc-river'),
-    moves:     root.querySelector('#rc-moves'),
-    bestWrap:  root.querySelector('#rc-best-wrap'),
-    best:      root.querySelector('#rc-best'),
-    go:        root.querySelector('#rc-go'),
-    goArrow:   root.querySelector('#rc-go-arrow'),
-    undo:      root.querySelector('#rc-undo'),
-    reset:     root.querySelector('#rc-reset'),
-    /* ヒント無効化 — hint: root.querySelector('#rc-hint'), */
-    status:    root.querySelector('#rc-status'),
-    overlay:   root.querySelector('#rc-overlay'),
-    stamp:     root.querySelector('#rc-stamp'),
-    cardTitle: root.querySelector('#rc-card-title'),
-    cardBody:  root.querySelector('#rc-card-body'),
-    cardFlag:  root.querySelector('#rc-card-flag'),
-    cardActs:  root.querySelector('#rc-card-actions')
+    bankL:      root.querySelector('#rc-bank-L'),
+    bankR:      root.querySelector('#rc-bank-R'),
+    boat:       root.querySelector('#rc-boat'),
+    boatSlots:  root.querySelector('#rc-boat-slots'),
+    river:      root.querySelector('.rc-river'),
+    moves:      root.querySelector('#rc-moves'),
+    time:       root.querySelector('#rc-time'),
+    go:         root.querySelector('#rc-go'),
+    goArrow:    root.querySelector('#rc-go-arrow'),
+    undo:       root.querySelector('#rc-undo'),
+    reset:      root.querySelector('#rc-reset'),
+    status:     root.querySelector('#rc-status'),
+    overlay:    root.querySelector('#rc-overlay'),
+    stamp:      root.querySelector('#rc-stamp'),
+    cardTitle:  root.querySelector('#rc-card-title'),
+    cardBody:   root.querySelector('#rc-card-body'),
+    cardStats:  root.querySelector('#rc-card-stats'),
+    statMoves:  root.querySelector('#rc-stat-moves'),
+    statTime:   root.querySelector('#rc-stat-time'),
+    cardFlag:   root.querySelector('#rc-card-flag'),
+    cardActs:   root.querySelector('#rc-card-actions')
   };
 
   var tiles = {};
@@ -407,7 +416,7 @@
   function freshState() {
     var pos = {};
     CAST.forEach(function (c) { pos[c.id] = 'L'; });
-    return { pos: pos, boatSide: 'L', moves: 0, status: 'playing' };
+    return { pos: pos, boatSide: 'L', moves: 0, status: 'ready' };
   }
 
   /* 履歴に積む断面。乗船中の人物は出発側の岸に戻した形で保存する
@@ -430,6 +439,56 @@
   function boatRiders() {
     return CAST.filter(function (c) { return state.pos[c.id] === 'boat'; })
                .map(function (c) { return c.id; });
+  }
+
+  /* ----------------------------------------------------------------------
+     ストップウォッチ
+     ---------------------------------------------------------------------- */
+  var timer = { base: 0, elapsed: 0, raf: 0, shown: -1, running: false };
+
+  function fmtTime(ms) {
+    var t = Math.max(0, ms);
+    var m = Math.floor(t / 60000);
+    var s = Math.floor((t % 60000) / 1000);
+    var d = Math.floor((t % 1000) / 100);
+    return m + ':' + (s < 10 ? '0' : '') + s + '.' + d;
+  }
+
+  /* rAF で回すが、DOM の書き換えは 1/10 秒の桁が変わったときだけ */
+  function timerTick() {
+    if (!timer.running) return;
+    timer.elapsed = performance.now() - timer.base;
+    var tenths = Math.floor(timer.elapsed / 100);
+    if (tenths !== timer.shown) {
+      timer.shown = tenths;
+      el.time.textContent = fmtTime(timer.elapsed);
+    }
+    timer.raf = window.requestAnimationFrame(timerTick);
+  }
+
+  function startTimer() {
+    timer.base = performance.now();
+    timer.elapsed = 0;
+    timer.shown = -1;
+    timer.running = true;
+    timerTick();
+  }
+
+  function stopTimer() {
+    if (timer.running) timer.elapsed = performance.now() - timer.base;
+    timer.running = false;
+    if (timer.raf) window.cancelAnimationFrame(timer.raf);
+    timer.raf = 0;
+    el.time.textContent = fmtTime(timer.elapsed);
+  }
+
+  function resetTimer() {
+    timer.running = false;
+    if (timer.raf) window.cancelAnimationFrame(timer.raf);
+    timer.raf = 0;
+    timer.elapsed = 0;
+    timer.shown = -1;
+    el.time.textContent = fmtTime(0);
   }
 
   /* ----------------------------------------------------------------------
@@ -489,26 +548,35 @@
   }
 
   /* ----------------------------------------------------------------------
-     描画
+     記録
      ---------------------------------------------------------------------- */
-  function readBest() {
+  function readNum(key) {
     try {
-      var v = parseInt(window.localStorage.getItem(BEST_KEY), 10);
+      var v = parseInt(window.localStorage.getItem(key), 10);
       return isNaN(v) ? null : v;
     } catch (e) { return null; }
   }
 
-  function writeBest(n) {
-    try { window.localStorage.setItem(BEST_KEY, String(n)); } catch (e) { /* noop */ }
+  function writeNum(key, n) {
+    try { window.localStorage.setItem(key, String(n)); } catch (e) { /* noop */ }
   }
 
-  function renderBest() {
-    var b = readBest();
-    if (b === null) { el.bestWrap.hidden = true; return; }
-    el.bestWrap.hidden = false;
-    el.best.textContent = b + T.unit;
+  /* 自己ベストはページ側の任意の要素に差し込む */
+  function fill(selector, text) {
+    var nodes = document.querySelectorAll(selector);
+    for (var i = 0; i < nodes.length; i++) nodes[i].textContent = text;
   }
 
+  function renderBests() {
+    var m = readNum(BEST_KEY);
+    var t = readNum(BEST_TIME_KEY);
+    fill('[data-rc-best-moves]', m === null ? T.none : m + T.unit);
+    fill('[data-rc-best-time]', t === null ? T.none : fmtTime(t));
+  }
+
+  /* ----------------------------------------------------------------------
+     描画
+     ---------------------------------------------------------------------- */
   function render() {
     var riders = boatRiders();
     var playable = state.status === 'playing' && !busy;
@@ -530,20 +598,25 @@
 
     var hasPilot = riders.some(function (id) { return PILOTS[id] === true; });
     el.go.disabled = !playable || riders.length === 0 || !hasPilot;
-    el.undo.disabled = busy || (history.length === 0 && riders.length === 0);
-    el.reset.disabled = busy;
-    /* ヒント無効化 — el.hint.disabled = !playable; */
+    el.undo.disabled = busy || state.status === 'ready' ||
+                       (history.length === 0 && riders.length === 0);
+    el.reset.disabled = busy || state.status === 'ready';
   }
 
   function say(msg) { el.status.textContent = msg; }
 
-  function clearHint() {
-    CAST.forEach(function (c) { tiles[c.id].classList.remove('is-hinted'); });
-  }
-
   /* ----------------------------------------------------------------------
      操作
      ---------------------------------------------------------------------- */
+  function startGame() {
+    if (state.status !== 'ready') return;
+    hideOverlay();
+    state.status = 'playing';
+    startTimer();
+    render();
+    say(T.play);
+  }
+
   function toggleBoard(id) {
     if (busy || state.status !== 'playing') return;
     var where = state.pos[id];
@@ -556,7 +629,6 @@
       flip(function () { state.pos[id] = 'boat'; place(id); });
     }
 
-    clearHint();
     render();
 
     var riders = boatRiders();
@@ -577,7 +649,6 @@
 
     history.push(snapshot());
     busy = true;
-    clearHint();
     state.boatSide = to;
     state.moves += 1;
     render();
@@ -592,6 +663,7 @@
 
       var bad = violationsOn(occupantsOf('L')).concat(violationsOn(occupantsOf('R')));
       if (bad.length) {
+        /* 事件が起きてもタイマーは止めない — 失敗して戻した時間もタイムのうち */
         state.status = 'failed';
         showFail(bad[0]);
       } else if (occupantsOf('R').size === CAST.length) {
@@ -607,7 +679,6 @@
   function undo() {
     if (el.undo.disabled) return;
     hideOverlay();
-    clearHint();
 
     if (history.length === 0) {
       flip(function () {
@@ -616,7 +687,7 @@
       });
       state.status = 'playing';
       render();
-      say(T.start);
+      say(T.play);
       return;
     }
 
@@ -626,30 +697,21 @@
       placeAll();
     });
     render();
-    say(state.moves === 0 ? T.start : T.undone(state.moves));
+    say(state.moves === 0 ? T.play : T.undone(state.moves));
   }
 
+  /* 「最初から」は ready まで戻す — もう一度「はじめる」を押して計測し直す */
   function reset() {
     if (busy) return;
     hideOverlay();
-    clearHint();
+    resetTimer();
     flip(function () {
       state = freshState();
       history = [];
       placeAll();
     });
     render();
-    say(T.start);
-  }
-
-  /* ヒント無効化中は el.hint が存在しないので、呼ばれても何もしない */
-  function hint() {
-    if (!el.hint || el.hint.disabled) return;
-    clearHint();
-    var move = nextBestMove(state.pos, state.boatSide);
-    if (!move) { say(T.hintNone); return; }
-    move.forEach(function (id) { tiles[id].classList.add('is-hinted'); });
-    say(T.hintText(T.names[move[0]], move[1] ? T.names[move[1]] : null));
+    showReady(true);
   }
 
   /* ----------------------------------------------------------------------
@@ -664,21 +726,37 @@
     return b;
   }
 
-  function showOverlay(kind, stamp, title, body, flag, actions) {
-    el.overlay.dataset.kind = kind;
-    el.stamp.textContent = stamp;
-    el.cardTitle.textContent = title;
-    el.cardBody.textContent = body;
-    if (flag) { el.cardFlag.hidden = false; el.cardFlag.textContent = flag; }
+  /* o: { kind, stamp, title, body, flag, stats, actions, focus } */
+  function showOverlay(o) {
+    el.overlay.dataset.kind = o.kind;
+    el.stamp.textContent = o.stamp;
+    el.cardTitle.textContent = o.title;
+    el.cardBody.textContent = o.body;
+
+    if (o.stats) {
+      el.cardStats.hidden = false;
+      el.statMoves.textContent = o.stats.moves;
+      el.statTime.textContent = o.stats.time;
+    } else {
+      el.cardStats.hidden = true;
+    }
+
+    if (o.flag) { el.cardFlag.hidden = false; el.cardFlag.textContent = o.flag; }
     else { el.cardFlag.hidden = true; el.cardFlag.textContent = ''; }
+
     el.cardActs.innerHTML = '';
-    actions.forEach(function (a) { el.cardActs.appendChild(a); });
+    o.actions.forEach(function (a) { el.cardActs.appendChild(a); });
     el.overlay.hidden = false;
-    say(title + ' ' + body);
-    window.setTimeout(function () {
-      var first = el.cardActs.querySelector('button');
-      if (first) first.focus();
-    }, 30);
+    say(o.status || (o.title + ' ' + o.body));
+
+    /* 初回表示でフォーカスを当てるとページが盤面までスクロールしてしまうので、
+       明示的に focus:true のときだけ当てる */
+    if (o.focus) {
+      window.setTimeout(function () {
+        var first = el.cardActs.querySelector('button');
+        if (first) first.focus();
+      }, 30);
+    }
   }
 
   function hideOverlay() {
@@ -686,21 +764,51 @@
     el.cardActs.innerHTML = '';
   }
 
+  function showReady(focus) {
+    showOverlay({
+      kind: 'ready', stamp: T.stampReady,
+      title: T.readyTitle, body: T.readyBody,
+      status: T.readyHint,
+      actions: [actionButton(T.startBtn, startGame, true)],
+      focus: !!focus
+    });
+  }
+
   function showFail(v) {
-    showOverlay('fail', T.stampFail, T.failTitle[v.rule], T.failBody[v.rule], null, [
-      actionButton(T.undo, undo, true),
-      actionButton(T.reset, reset, false)
-    ]);
+    showOverlay({
+      kind: 'fail', stamp: T.stampFail,
+      title: T.failTitle[v.rule], body: T.failBody[v.rule],
+      actions: [actionButton(T.undo, undo, true), actionButton(T.reset, reset, false)],
+      focus: true
+    });
   }
 
   function showClear() {
-    var best = readBest();
-    var isBest = best === null || state.moves < best;
-    if (isBest) writeBest(state.moves);
-    renderBest();
-    showOverlay('clear', T.stampClear, T.clearTitle, T.clearBody(state.moves),
-      isBest && best !== null ? T.newBest : null,
-      [actionButton(T.againClear, reset, true)]);
+    stopTimer();
+    var ms = Math.round(timer.elapsed);
+
+    var prevMoves = readNum(BEST_KEY);
+    var prevTime  = readNum(BEST_TIME_KEY);
+    var newMoves  = prevMoves === null || state.moves < prevMoves;
+    var newTime   = prevTime === null || ms < prevTime;
+
+    if (newMoves) writeNum(BEST_KEY, state.moves);
+    if (newTime)  writeNum(BEST_TIME_KEY, ms);
+    renderBests();
+
+    /* 初回クリアは「更新」ではないのでバッジを出さない */
+    var flags = [];
+    if (newMoves && prevMoves !== null) flags.push(T.newBestMoves);
+    if (newTime && prevTime !== null) flags.push(T.newBestTime);
+
+    showOverlay({
+      kind: 'clear', stamp: T.stampClear,
+      title: T.clearTitle, body: T.clearBody(state.moves),
+      stats: { moves: state.moves + T.unit, time: fmtTime(ms) },
+      flag: flags.join('　／　') || null,
+      actions: [actionButton(T.againClear, reset, true)],
+      focus: true
+    });
   }
 
   /* ----------------------------------------------------------------------
@@ -712,13 +820,19 @@
   el.go.addEventListener('click', cross);
   el.undo.addEventListener('click', undo);
   el.reset.addEventListener('click', reset);
-  /* ヒント無効化 — el.hint.addEventListener('click', hint); */
 
   state = freshState();
   history = [];
   busy = false;
   placeAll();
-  renderBest();
+  renderBests();
   render();
   syncTravel();
+  showReady(false);
+
+  window.RiverCrossing = {
+    start: startGame,
+    isReady: function () { return state.status === 'ready'; },
+    solve: function () { return nextBestMove(state.pos, state.boatSide); }
+  };
 })();

@@ -1,0 +1,659 @@
+/* ==========================================================================
+   川渡り — ページの意匠「絵巻」とデザイントークンの定義
+   盤面のスタイル（board.css）はここで定義した配色・書体を参照する。
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* 紙 */
+  --c-bg:       #F2EDE0;
+  --c-bg-2:     #FAF6EB;
+  --c-bg-3:     #EAE3D1;
+  --c-bg-4:     #DFD5BD;
+  --c-border:   rgba(33, 29, 23, 0.25);
+  --c-border-2: rgba(33, 29, 23, 0.12);
+
+  /* 墨 */
+  --c-text:       #211D17;
+  --c-text-sub:   #3E382E;
+  --c-text-muted: #6B6253;
+  --c-text-faint: #998F7B;
+
+  /* 朱・藍 */
+  --c-accent:   #BF3A32;
+  --c-accent-2: #2C4A6E;
+
+  /* 夜の川（ヒーローの地） */
+  --c-river-deep: #14273A;
+  --c-river-mid:  #1E3A55;
+
+  /* 書体 */
+  --font-ja:      'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+  --font-en:      'IBM Plex Mono', 'Courier New', monospace;
+  --font-display: 'Shippori Mincho B1', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+
+  /* 文字サイズ */
+  --fs-xs:   clamp(10px, 1.1vw, 12px);
+  --fs-sm:   clamp(12px, 1.3vw, 14px);
+  --fs-md:   clamp(14px, 1.6vw, 16px);
+  --fs-base: clamp(14px, 1.6vw, 16px);
+  --fs-lg:   clamp(16px, 2vw, 20px);
+  --fs-xl:   clamp(20px, 3vw, 28px);
+  --fs-2xl:  clamp(28px, 4.5vw, 44px);
+
+  /* 影 — 活版の押し圧 */
+  --shadow-sm: 2px 2px 0 rgba(33, 29, 23, 0.18);
+  --shadow-md: 4px 4px 0 rgba(33, 29, 23, 0.16);
+  --shadow-lg: 6px 6px 0 rgba(33, 29, 23, 0.14);
+
+  --dur-fast: 150ms;
+  --dur-mid:  280ms;
+
+  --wrap: 880px;
+}
+
+/* --------------------------------------------------------------------------
+   リセット
+   -------------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font-ja);
+  font-size: var(--fs-base);
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 和紙の繊維 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+img, svg { max-width: 100%; }
+button { font: inherit; color: inherit; }
+a { color: var(--c-accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--c-text); }
+
+.kw-sr {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.kw-skip {
+  position: absolute;
+  top: -60px; left: 12px;
+  z-index: 10000;
+  padding: 10px 18px;
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-text);
+  color: var(--c-text);
+  text-decoration: none;
+  transition: top var(--dur-fast) ease;
+}
+.kw-skip:focus { top: 12px; }
+
+.kw-wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding-inline: clamp(18px, 5vw, 32px);
+}
+
+/* --------------------------------------------------------------------------
+   ヒーロー — 夜の川に浮かぶ縦書きの題字
+   -------------------------------------------------------------------------- */
+.kw-hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  padding: clamp(56px, 10vh, 96px) 0 clamp(40px, 8vh, 72px);
+  overflow: hidden;
+  background-color: var(--c-river-deep);
+  background-image:
+    radial-gradient(ellipse at 50% 30%, rgba(60, 104, 148, 0.45), transparent 68%);
+  color: var(--c-bg);
+  text-align: center;
+}
+
+/* 青海波を波打たせて重ねる */
+.kw-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(circle at 50% 130%, transparent 36%, rgba(173, 201, 224, 0.55) 37%, rgba(173, 201, 224, 0.55) 39%, transparent 40%, transparent 46%, rgba(173, 201, 224, 0.4) 47%, rgba(173, 201, 224, 0.4) 49%, transparent 50%, transparent 56%, rgba(173, 201, 224, 0.28) 57%, rgba(173, 201, 224, 0.28) 59%, transparent 60%),
+    radial-gradient(circle at 0% 80%, transparent 36%, rgba(173, 201, 224, 0.55) 37%, rgba(173, 201, 224, 0.55) 39%, transparent 40%, transparent 46%, rgba(173, 201, 224, 0.4) 47%, rgba(173, 201, 224, 0.4) 49%, transparent 50%, transparent 56%, rgba(173, 201, 224, 0.28) 57%, rgba(173, 201, 224, 0.28) 59%, transparent 60%),
+    radial-gradient(circle at 100% 80%, transparent 36%, rgba(173, 201, 224, 0.55) 37%, rgba(173, 201, 224, 0.55) 39%, transparent 40%, transparent 46%, rgba(173, 201, 224, 0.4) 47%, rgba(173, 201, 224, 0.4) 49%, transparent 50%, transparent 56%, rgba(173, 201, 224, 0.28) 57%, rgba(173, 201, 224, 0.28) 59%, transparent 60%);
+  background-size: 96px 48px;
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 38%, #000 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 38%, #000 100%);
+}
+
+.kw-hero-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(20px, 3.5vh, 34px);
+  padding-inline: clamp(18px, 5vw, 32px);
+}
+
+.kw-hero-kicker {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+  color: rgba(242, 237, 224, 0.72);
+}
+
+/* 縦書きの題字。朱の印を左肩に添える */
+.kw-hero-title {
+  position: relative;
+  writing-mode: vertical-rl;
+  font-family: var(--font-display);
+  font-size: clamp(56px, 13vw, 118px);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: 0.1em;
+  color: var(--c-bg-2);
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}
+
+.kw-hero-seal {
+  position: absolute;
+  top: -6px;
+  left: -46px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  writing-mode: horizontal-tb;
+  border: 2px solid var(--c-accent);
+  background: rgba(191, 58, 50, 0.9);
+  color: var(--c-bg-2);
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  transform: rotate(-8deg);
+}
+
+.kw-hero-lead {
+  max-width: 30em;
+  font-size: var(--fs-md);
+  line-height: 2.05;
+  color: rgba(242, 237, 224, 0.88);
+}
+
+.kw-hero-note {
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.18em;
+  color: rgba(242, 237, 224, 0.55);
+}
+
+/* --------------------------------------------------------------------------
+   ボタン
+   -------------------------------------------------------------------------- */
+.kw-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 17px 46px;
+  background: var(--c-accent);
+  border: 1px solid var(--c-accent);
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.42);
+  color: #FBF7EE;
+  font-family: var(--font-display);
+  font-size: clamp(17px, 2.2vw, 21px);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-indent: 0.16em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: box-shadow var(--dur-fast) ease, transform var(--dur-fast) ease;
+}
+
+.kw-cta:hover { box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.46); color: #FBF7EE; }
+.kw-cta:active { box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.46); }
+.kw-cta:focus-visible { outline: 2px solid var(--c-bg-2); outline-offset: 4px; }
+
+/* 紙面上に置く版 */
+.kw-cta--paper {
+  background: var(--c-bg-2);
+  border-color: var(--c-text);
+  color: var(--c-text);
+  box-shadow: var(--shadow-md);
+}
+.kw-cta--paper:hover { box-shadow: 7px 7px 0 rgba(33, 29, 23, 0.2); color: var(--c-text); }
+
+/* 言語切替 */
+.kw-lang {
+  position: absolute;
+  top: clamp(14px, 3vw, 26px);
+  right: clamp(14px, 3vw, 26px);
+  z-index: 2;
+}
+
+.kw-lang a {
+  display: inline-block;
+  padding: 7px 15px;
+  border: 1px solid rgba(242, 237, 224, 0.45);
+  color: rgba(242, 237, 224, 0.85);
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  transition: background var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+
+.kw-lang a:hover { background: rgba(242, 237, 224, 0.92); color: var(--c-river-deep); }
+
+/* --------------------------------------------------------------------------
+   セクション
+   -------------------------------------------------------------------------- */
+.kw-section { padding: clamp(56px, 9vw, 104px) 0; }
+
+.kw-section--board {
+  padding-top: clamp(40px, 6vw, 64px);
+  background: linear-gradient(var(--c-bg-3), var(--c-bg) 220px);
+}
+
+.kw-section--dark {
+  background: var(--c-river-deep);
+  color: rgba(242, 237, 224, 0.9);
+}
+
+.kw-h2 {
+  position: relative;
+  margin: 0 0 clamp(24px, 4vw, 40px);
+  padding-left: 20px;
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+}
+
+/* 見出しの肩に朱の罫 */
+.kw-h2::before {
+  content: '';
+  position: absolute;
+  top: 0.16em;
+  left: 0;
+  width: 5px;
+  height: 1em;
+  background: var(--c-accent);
+}
+
+.kw-p {
+  margin-bottom: 1.2em;
+  max-width: 40em;
+  color: var(--c-text-sub);
+}
+
+.kw-p:last-child { margin-bottom: 0; }
+.kw-p strong { font-weight: 700; color: var(--c-text); }
+
+.kw-section--dark .kw-p { color: rgba(242, 237, 224, 0.82); }
+.kw-section--dark .kw-h2 { color: var(--c-bg-2); }
+
+/* --------------------------------------------------------------------------
+   記録
+   -------------------------------------------------------------------------- */
+.kw-records {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: center;
+  gap: clamp(20px, 5vw, 56px);
+  max-width: 880px;
+  margin: clamp(22px, 3vw, 32px) auto 0;
+  padding: 20px clamp(18px, 3vw, 28px);
+  border-top: 1px solid var(--c-border);
+  border-bottom: 1px solid var(--c-border);
+}
+
+.kw-records-label {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--c-text-muted);
+}
+
+.kw-record {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0;
+}
+
+.kw-record dt {
+  font-size: var(--fs-xs);
+  letter-spacing: 0.1em;
+  color: var(--c-text-muted);
+}
+
+.kw-record dd {
+  font-family: var(--font-en);
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  color: var(--c-accent-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --------------------------------------------------------------------------
+   ルール — 朱の罫線で区切った箇条
+   -------------------------------------------------------------------------- */
+.rc-rules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: clamp(14px, 2vw, 20px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rc-rule {
+  padding: 20px 22px;
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-border);
+  border-top: 3px solid var(--c-accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.rc-rule-num {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.18em;
+  color: var(--c-accent);
+}
+
+.rc-rule-text {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.9;
+  color: var(--c-text-muted);
+}
+
+.rc-rule-text strong { color: var(--c-text); font-weight: 700; }
+
+/* --------------------------------------------------------------------------
+   遊び方 — 番号付きの手順
+   -------------------------------------------------------------------------- */
+.kw-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: kw-step;
+  max-width: 44em;
+}
+
+.kw-step {
+  position: relative;
+  padding: 0 0 22px 52px;
+  counter-increment: kw-step;
+}
+
+.kw-step::before {
+  content: counter(kw-step);
+  position: absolute;
+  top: 2px;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--c-text);
+  background: var(--c-bg-2);
+  box-shadow: 2px 2px 0 rgba(33, 29, 23, 0.16);
+  font-family: var(--font-en);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+/* 最後の項目まで線を引く（絵巻の道筋） */
+.kw-step::after {
+  content: '';
+  position: absolute;
+  top: 38px;
+  left: 16px;
+  width: 1px;
+  height: calc(100% - 38px);
+  background: var(--c-border-2);
+}
+
+.kw-step:last-child { padding-bottom: 0; }
+.kw-step:last-child::after { display: none; }
+
+.kw-step p { margin: 0; color: var(--c-text-sub); line-height: 1.9; }
+.kw-step strong { font-weight: 700; color: var(--c-text); }
+
+/* --------------------------------------------------------------------------
+   よくある質問
+   -------------------------------------------------------------------------- */
+.kw-faq { max-width: 44em; }
+
+.kw-faq-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--c-border-2);
+}
+
+.kw-faq-item:first-child { border-top: 1px solid var(--c-border-2); }
+
+.kw-faq-q {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--c-text);
+}
+
+.kw-faq-q::before {
+  content: '問';
+  display: inline-grid;
+  place-items: center;
+  width: 1.6em;
+  height: 1.6em;
+  margin-right: 0.6em;
+  background: var(--c-accent);
+  color: var(--c-bg-2);
+  font-size: 0.62em;
+  vertical-align: 0.16em;
+}
+
+.kw-faq-a {
+  margin: 0;
+  padding-left: 2.1em;
+  font-size: var(--fs-sm);
+  line-height: 2;
+  color: var(--c-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   制作者 — ここからポートフォリオへ渡る
+   -------------------------------------------------------------------------- */
+.kw-author {
+  display: grid;
+  gap: clamp(18px, 3vw, 26px);
+  max-width: 640px;
+  padding: clamp(28px, 5vw, 44px);
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-border);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  justify-items: center;
+}
+
+.kw-author-seal {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  background: var(--c-accent);
+  color: var(--c-bg-2);
+  font-family: var(--font-display);
+  font-size: 27px;
+  font-weight: 700;
+}
+
+.kw-author-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--c-text);
+}
+
+.kw-author-role {
+  margin: 4px 0 0;
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.14em;
+  color: var(--c-text-muted);
+}
+
+.kw-author-text {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 2;
+  color: var(--c-text-muted);
+}
+
+.kw-author-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   フッター
+   -------------------------------------------------------------------------- */
+.kw-footer {
+  padding: clamp(48px, 8vw, 88px) 0 clamp(32px, 5vw, 56px);
+  background: var(--c-bg-3);
+  border-top: 1px solid var(--c-border);
+}
+
+.kw-footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  max-width: var(--wrap);
+  margin: clamp(36px, 6vw, 56px) auto 0;
+  padding: 20px clamp(18px, 5vw, 32px) 0;
+  border-top: 1px solid var(--c-border-2);
+}
+
+.kw-footer-copy {
+  font-family: var(--font-en);
+  font-size: var(--fs-xs);
+  letter-spacing: 0.06em;
+  color: var(--c-text-faint);
+}
+
+.kw-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-size: var(--fs-xs);
+}
+
+.kw-footer-links a { color: var(--c-text-muted); text-decoration: none; }
+.kw-footer-links a:hover { color: var(--c-accent); text-decoration: underline; }
+
+/* --------------------------------------------------------------------------
+   Cookie 同意 — 本体サイトと同じキーを見るので、同意済みなら出ない
+   -------------------------------------------------------------------------- */
+.kw-cookie {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  z-index: 9998;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  width: min(720px, calc(100vw - 32px));
+  padding: 16px 20px;
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-text);
+  box-shadow: var(--shadow-lg);
+  transform: translateX(-50%);
+}
+
+.kw-cookie[hidden] { display: none; }
+
+.kw-cookie-text {
+  flex: 1 1 320px;
+  margin: 0;
+  font-size: var(--fs-xs);
+  line-height: 1.8;
+  color: var(--c-text-muted);
+}
+
+.kw-cookie-actions { display: flex; gap: 10px; }
+
+.kw-cookie-btn {
+  padding: 9px 18px;
+  background: var(--c-bg-2);
+  border: 1px solid var(--c-text);
+  box-shadow: 2px 2px 0 rgba(33, 29, 23, 0.2);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.kw-cookie-btn--accept {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: #FBF7EE;
+}
+
+.kw-cookie-btn:hover { box-shadow: 4px 4px 0 rgba(33, 29, 23, 0.24); }
+
+/* --------------------------------------------------------------------------
+   狭い画面
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  /* 強制改行を外し、3文が均等に流れるようにする */
+  .kw-hero-lead br { display: none; }
+  .kw-hero-seal { left: -36px; width: 32px; height: 32px; font-size: 14px; }
+  .kw-cta { padding: 15px 34px; }
+  .kw-records { gap: 16px 28px; }
+  .kw-step { padding-left: 44px; }
+  .kw-step::before { width: 28px; height: 28px; }
+  .kw-step::after { left: 14px; }
+  .kw-footer-bottom { justify-content: center; text-align: center; }
+}
