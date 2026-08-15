@@ -241,15 +241,6 @@ a:hover { color: var(--c-text); }
 .kw-cta:active { box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.46); }
 .kw-cta:focus-visible { outline: 2px solid var(--c-bg-2); outline-offset: 4px; }
 
-/* 紙面上に置く版 */
-.kw-cta--paper {
-  background: var(--c-bg-2);
-  border-color: var(--c-text);
-  color: var(--c-text);
-  box-shadow: var(--shadow-md);
-}
-.kw-cta--paper:hover { box-shadow: 7px 7px 0 rgba(33, 29, 23, 0.2); color: var(--c-text); }
-
 /* 言語切替 */
 .kw-lang {
   position: absolute;
@@ -498,68 +489,10 @@ a:hover { color: var(--c-text); }
 }
 
 /* --------------------------------------------------------------------------
-   制作者 — ここからポートフォリオへ渡る
-   -------------------------------------------------------------------------- */
-.kw-author {
-  display: grid;
-  gap: clamp(18px, 3vw, 26px);
-  max-width: 640px;
-  padding: clamp(28px, 5vw, 44px);
-  background: var(--c-bg-2);
-  border: 1px solid var(--c-border);
-  box-shadow: var(--shadow-lg);
-  text-align: center;
-  justify-items: center;
-}
-
-.kw-author-seal {
-  display: grid;
-  place-items: center;
-  width: 58px;
-  height: 58px;
-  background: var(--c-accent);
-  color: var(--c-bg-2);
-  font-family: var(--font-display);
-  font-size: 27px;
-  font-weight: 700;
-}
-
-.kw-author-name {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: var(--fs-xl);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--c-text);
-}
-
-.kw-author-role {
-  margin: 4px 0 0;
-  font-family: var(--font-en);
-  font-size: var(--fs-xs);
-  letter-spacing: 0.14em;
-  color: var(--c-text-muted);
-}
-
-.kw-author-text {
-  margin: 0;
-  font-size: var(--fs-sm);
-  line-height: 2;
-  color: var(--c-text-muted);
-}
-
-.kw-author-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-}
-
-/* --------------------------------------------------------------------------
    フッター
    -------------------------------------------------------------------------- */
 .kw-footer {
-  padding: clamp(48px, 8vw, 88px) 0 clamp(32px, 5vw, 56px);
+  padding: clamp(28px, 4vw, 40px) 0;
   background: var(--c-bg-3);
   border-top: 1px solid var(--c-border);
 }
@@ -571,9 +504,8 @@ a:hover { color: var(--c-text); }
   justify-content: space-between;
   gap: 14px;
   max-width: var(--wrap);
-  margin: clamp(36px, 6vw, 56px) auto 0;
-  padding: 20px clamp(18px, 5vw, 32px) 0;
-  border-top: 1px solid var(--c-border-2);
+  margin: 0 auto;
+  padding-inline: clamp(18px, 5vw, 32px);
 }
 
 .kw-footer-copy {
